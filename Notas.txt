@@ -1,5 +1,5 @@
  - Matriz para manejar los procesos (usuarios x recursos)
- - Cada proceso es de un usuario en concreto 
+ - Cada proceso es de un usuario en concreto. Se puede ejecutar un mismo programa por dos usuarios diferentes pero se crean dos procesos independientes cada uno perteneciente a cada uno.
  - Recursos de diferentes tipos (serialmente usuables(mas interesantes) y no)
 
  - Alojar un proceso en memoria, tenemos que simularlo - en principio lo suponemos y en una segunda instancia hay que hacerlo 
