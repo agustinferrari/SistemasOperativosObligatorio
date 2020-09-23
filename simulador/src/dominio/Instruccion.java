@@ -5,13 +5,13 @@ package dominio;
  *
  * @author ivanm
  */
-public class Intruccion {
+public class Instruccion {
     
     private char nombre;
     private int tiempoEjecucion;
     private Recurso recurso;
 
-    public Intruccion(char nombre, int tiempoEjecucion, Recurso recurso) {
+    public Instruccion(char nombre, int tiempoEjecucion, Recurso recurso) {
         this.nombre = nombre;
         this.tiempoEjecucion = tiempoEjecucion;
         this.recurso = recurso;

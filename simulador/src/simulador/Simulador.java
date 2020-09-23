@@ -1,62 +1,56 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package simulador;
 
+import dominio.Instruccion;
+import dominio.Proceso;
+import dominio.Recurso;
+import dominio.Sistema;
 import java.io.*;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-/**
- *
- * @author ivanm
- */
 public class Simulador {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // TODO code application logic here
-        String p1 = "ABCCA";
-        String p2 = "ABCDAB";
-        String p3 = "ABC";
         
-        Queue<String> listo = new PriorityQueue<String> ();
-        /*listo.add // push
-           listo.remove // pop
-        listo.isEmpty
-        
-        */
-        
-        listo.add(p1);
-        listo.add(p2);
-        listo.add(p3);
-        
-        ejecutar(listo);
-        
-
+        Sistema sistema = inicializar();
+        sistema.ejecutar();
+   
     }
 
-private static void ejecutar(Queue<String> listo){
-    int timeout = 10;
-    while(!listo.isEmpty()){
-        int t = 0;
-        String proceso = listo.remove();
-        while((t <= timeout) && (proceso.length() > 0)){
-            
-        }
-            
-        
-    }
+    
+    public static Sistema inicializar(){
+        Recurso r1 = new Recurso("Rec1", true);
+        Recurso r2 = new Recurso("Rec2", true);
+        Recurso r3 = new Recurso("Rec3", true);
 
-}
+        Instruccion i1 = new Instruccion('A', 5, r1);
+        Instruccion i2 = new Instruccion('B', 1, null);
+        Instruccion i3 = new Instruccion('C', 7, r1);
+        Instruccion i4 = new Instruccion('D', 3, r3);
+        Instruccion i5 = new Instruccion('E', 4, r2);
+
+        Proceso p1 = new Proceso("ABCCA");
+        Proceso p2 = new Proceso("BCAE");
+        Proceso p3 = new Proceso("EADD");
+        
+        Sistema sistema = new Sistema();
+        
+        sistema.agregarInstrucciones(i1);
+        sistema.agregarInstrucciones(i2);
+        sistema.agregarInstrucciones(i3);
+        sistema.agregarInstrucciones(i4);
+        sistema.agregarInstrucciones(i5);
+
+        sistema.agregarProcesosListos(p1);
+        sistema.agregarProcesosListos(p2);
+        sistema.agregarProcesosListos(p3);
+     
+        sistema.agregarRecurso(r1);
+        sistema.agregarRecurso(r2);
+        sistema.agregarRecurso(r3);
+
+        return sistema;
     
-    
-private static void log(String l){
-    System.out.println(l);
-}
-    
+    }
 }
