@@ -1,5 +1,21 @@
  - Matriz para manejar los procesos (usuarios x recursos)
- - Cada proceso es de un usuario en concreto. Se puede ejecutar un mismo programa por dos usuarios diferentes pero se crean dos procesos independientes cada uno perteneciente a cada uno.
+ - Cada proceso es de un usuario en concreto 
  - Recursos de diferentes tipos (serialmente usuables(mas interesantes) y no)
 
- - Alojar un proceso en memoria, tenemos que simularlo - en principio lo suponemos y en una segunda instancia hay que hacerlo 
+ - Alojar un proceso en memoria, tenemos que simularlo - en principio lo suponemos y en una segunda instancia hay que hacerlo
+
+
+Sacado de la clase 6 Nocturno
+Funciones del núcleo del Sistema Operativo
+	 Manejo de interrupciones
+	 Creación y destrucción de procesos
+	 Cambio de estados entre procesos
+	 Despacho
+	 Suspensión y reanudación
+	 Sincronización de procesos
+	 Comunicación entre procesos
+	 Gestión de PCB y RCS
+	 Apoyo a actividades de E/S
+	 Asignación y liberación de memoria, en particular el alojamiento de código en memoria.
+	 Gestión del file system
+	 Mecanismos para llamada y retorno desde procedimientos
