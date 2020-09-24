@@ -25,9 +25,12 @@ public class Instruccion {
         return tiempoEjecucion;
     }
 
-
     public Recurso getRecurso() {
         return recurso;
+    }
+    
+    public boolean tieneRecurso(){
+        return recurso != null;
     }
 
     

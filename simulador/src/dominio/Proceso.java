@@ -4,10 +4,13 @@ public class Proceso {
 
     private String instrucciones;
     private int posicion;
+    private Usuario usuario;
 
-    public Proceso(String instrucciones) {
+
+    public Proceso(String instrucciones, Usuario usuario) {
         this.instrucciones = instrucciones;
         this.posicion = 0;
+        this.usuario = usuario;
     }
 
     public boolean termino() {
@@ -30,9 +33,15 @@ public class Proceso {
         return posicion;
     }
     
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    
     public void avanzar (){
         this.posicion++;
     }
+    
+    
     
     
 

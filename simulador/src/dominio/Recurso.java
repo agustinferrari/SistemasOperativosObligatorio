@@ -3,15 +3,35 @@ package dominio;
 
 
 public class Recurso {
-    
-    private String nombre;
-    private boolean libre;
 
-    public Recurso(String nombre, boolean libre) {
+    private String nombre;
+    private int tiempoOcupado;
+
+    public Recurso(String nombre) {
         this.nombre = nombre;
-        this.libre = libre;
+        this.tiempoOcupado = 0;
     }
     
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public boolean isLibre() {
+        return this.tiempoOcupado == 0;
+    }
+    
+    public boolean avanzarUnTick(){
+        if(this.tiempoOcupado > 0){
+            this.tiempoOcupado--;
+            if(this.tiempoOcupado == 0)
+                return true;
+        }
+        return false;
+    }
+    
+    public void usar(int tiempo){
+        this.tiempoOcupado = tiempo;
+    }
     
     
 }
