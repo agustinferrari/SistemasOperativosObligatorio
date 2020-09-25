@@ -48,12 +48,12 @@ public class Sistema {
                 }
                 else{//Instruccion puramente de CPU
                     if (nuevaInst.getTiempoEjecucion() + t <= timeout) {
-                        log("Se ejecuto la instruccion: " + nuevaInst.getNombre() + " del Proceso " + proceso.getInstrucciones() + " Demoro: " + nuevaInst.getTiempoEjecucion());
+                        log("Se ejecuto la instruccion: " + nuevaInst + " del Proceso " + proceso + " Demoro: " + tiempoToString(nuevaInst.getTiempoEjecucion()));
                         proceso.avanzar();
                         t += nuevaInst.getTiempoEjecucion();
                         avanzarNTicks(nuevaInst.getTiempoEjecucion());
                     } else {
-                        log("Salio por TimeOut el proceso: " + proceso.getInstrucciones() + " en la instruccion Nro:" + proceso.getPosicion());
+                        log("Salio por TimeOut el proceso: " + proceso + " en la instruccion Nro:" + proceso.getPosicion());
                         avanzarNTicks(timeout - t);
                         t = 0;
                         perdioCPU = true;
@@ -62,7 +62,7 @@ public class Sistema {
                 }
             }
             if (proceso.termino()) {
-                log("Termino el proceso: " + proceso.getInstrucciones());
+                log("Termino el proceso: " + proceso);
             }
         }
         while (!this.procesosBloqueados.isEmpty()){
@@ -80,13 +80,13 @@ public class Sistema {
             recurso.usar(instruccion.getTiempoEjecucion());
         }
         else{
-            log("El usuario " + proceso.getUsuario().getNombre() + " no tiene permiso para correr " + instruccion.getNombre());
+            log("El usuario " + proceso.getUsuario() + " no tiene permiso para correr " + instruccion);
         }
     }
     
     private void usarRecurso(Recurso r, Instruccion i, Proceso p){
-        log("Se ejecuto el recurso: " + r.getNombre() + " con la instruccion " + i.getNombre() + 
-                " || Se bloquea el proceso " + p.getInstrucciones() + " por "+ i.getTiempoEjecucion() + " t");
+        log("Se ejecuto el recurso: " + r + " con la instruccion " + i + 
+                " || Se bloquea el proceso " + p + " por "+ tiempoToString(i.getTiempoEjecucion()) );
     }
 
     private void log(String l) {
@@ -126,6 +126,11 @@ public class Sistema {
         this.procesosBloqueados.remove(p);
         p.avanzar();
         this.procesosListos.add(p);
-        log("Se desperto el proceso " + p.getInstrucciones());
+        log("Se desperto el proceso " + p);
     }
+    
+    public String tiempoToString(int t){
+        return ("\u001B[31m" + t + "t" + "\u001B[0m");
+    }
+
 }

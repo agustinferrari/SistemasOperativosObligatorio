@@ -32,6 +32,10 @@ public class Instruccion {
     public boolean tieneRecurso(){
         return recurso != null;
     }
-
+    
+    @Override
+    public String toString(){
+        return ("\u001B[33m" + this.nombre + "\u001B[0m");
+    }
     
 }
