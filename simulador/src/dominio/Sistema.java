@@ -13,24 +13,40 @@ public class Sistema {
     private Queue<Proceso> procesosBloqueados;
     private List<Recurso> recursos;
 
+    public List<Recurso> getRecursos() {
+        return recursos;
+    }
+    
+    public HashMap<Character, Instruccion> getInstrucciones() {
+        return instrucciones;
+    }
+
     //Constructor
     public Sistema() {
-        this.instrucciones = new HashMap<Character, Instruccion>();
-        this.procesosListos = new LinkedList<Proceso>();
-        this.procesosBloqueados = new LinkedList<Proceso>();
-        this.recursos = new ArrayList<Recurso>();
+        instrucciones = new HashMap<Character, Instruccion>();
+        procesosListos = new LinkedList<Proceso>();
+        procesosBloqueados = new LinkedList<Proceso>();
+        recursos = new ArrayList<Recurso>();
     }
 
     public void agregarInstrucciones(Instruccion miInstruccion) {
-        this.instrucciones.put(miInstruccion.getNombre(), miInstruccion);
+        instrucciones.put(miInstruccion.getNombre(), miInstruccion);
     }
 
     public void agregarProcesosListos(Proceso miProceso) {
-        this.procesosListos.add(miProceso);
+        procesosListos.add(miProceso);
     }
 
-    public void agregarRecurso(Recurso miRecurso) {
-        this.recursos.add(miRecurso);
+    public boolean agregarRecurso(Recurso miRecurso) {
+        if(!recursos.contains(miRecurso))
+            recursos.add(miRecurso);
+        else
+            return false;
+        return true;
+    }
+    
+    public void borrarRecurso(Recurso miRecurso) {
+        recursos.remove(miRecurso);
     }
 
     public void ejecutar() {
@@ -76,7 +92,7 @@ public class Sistema {
         Recurso recurso = instruccion.getRecurso();
         if(proceso.getUsuario().tienePermiso(recurso)){ //Verificar si esta libre y ver que carajo hacemos si no xd
             usarRecurso(recurso, instruccion, proceso);
-            this.procesosBloqueados.add(proceso);
+            procesosBloqueados.add(proceso);
             recurso.usar(instruccion.getTiempoEjecucion());
         }
         else{
@@ -95,7 +111,7 @@ public class Sistema {
     
     private Instruccion conseguirSiguienteInstruccion(Proceso p){
         Character inst = p.getInstruccion();
-        return this.instrucciones.get(inst);
+        return instrucciones.get(inst);
     }
     
     private void avanzarNTicks(int tiempoAvanzado){
@@ -123,9 +139,9 @@ public class Sistema {
     
     
     private void despertarProceso(Proceso p){
-        this.procesosBloqueados.remove(p);
+        procesosBloqueados.remove(p);
         p.avanzar();
-        this.procesosListos.add(p);
+        procesosListos.add(p);
         log("Se desperto el proceso " + p);
     }
     

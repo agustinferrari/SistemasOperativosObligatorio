@@ -5,17 +5,19 @@ import dominio.Proceso;
 import dominio.Recurso;
 import dominio.Sistema;
 import dominio.Usuario;
-import java.io.*;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import interfaz.VentanaPrincipal;
+import java.awt.Dimension;
+
 
 public class Simulador {
 
     public static void main(String[] args) {
-        // TODO code application logic here
-        
-        Sistema sistema = inicializar();
-        sistema.ejecutar();
+        Sistema sistema = new Sistema();
+        VentanaPrincipal vent = new VentanaPrincipal(sistema);
+        vent.setMinimumSize(new Dimension(920, 600));
+        vent.setVisible(true);
+        //Sistema sistema = inicializar();
+        //sistema.ejecutar();
    
     }
 

@@ -37,6 +37,11 @@ public class Recurso {
     public String toString(){
         return ("\u001B[32m" + this.getNombre() + "\u001B[0m" ); // verde
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        return ((Recurso) o).getNombre().equals(this.nombre);
+    }
 }
 
 

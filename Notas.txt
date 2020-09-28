@@ -20,4 +20,4 @@ Funciones del núcleo del Sistema Operativo
 	 Gestión del file system
 	 Mecanismos para llamada y retorno desde procedimientos
 
-Agregar colores al log para leerlo facilmente
+Arreglar los colores del log, no se muestran en las ventanas y dificultan la lectura
