@@ -12,6 +12,7 @@ public class Sistema {
     private Queue<Proceso> procesosListos;
     private Queue<Proceso> procesosBloqueados;
     private List<Recurso> recursos;
+    private List<Usuario> usuarios;
 
     public List<Recurso> getRecursos() {
         return recursos;
@@ -20,6 +21,10 @@ public class Sistema {
     public HashMap<Character, Instruccion> getInstrucciones() {
         return instrucciones;
     }
+    
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
 
     //Constructor
     public Sistema() {
@@ -27,6 +32,7 @@ public class Sistema {
         procesosListos = new LinkedList<Proceso>();
         procesosBloqueados = new LinkedList<Proceso>();
         recursos = new ArrayList<Recurso>();
+        usuarios = new ArrayList<Usuario>();
     }
 
     public boolean agregarInstruccion(Instruccion miInstruccion) {
@@ -49,12 +55,32 @@ public class Sistema {
         return true;
     }
     
+    public boolean agregarUsuario(Usuario miUsuario) {
+        if(!usuarios.contains(miUsuario))
+            usuarios.add(miUsuario);
+        else
+            return false;
+        return true;
+    }
+    
     public void borrarRecurso(Recurso miRecurso) {
         recursos.remove(miRecurso);
     }
     
     public void borrarInstruccion(Instruccion miInstruccion) {
         instrucciones.remove(miInstruccion.getNombre());
+    }
+    
+    public void borrarUsuario(Usuario miUsuario) {
+        usuarios.remove(miUsuario);
+        for(Proceso p : procesosListos){
+            if(p.getUsuario().equals(miUsuario))
+                procesosListos.remove(p);
+        }
+        for(Proceso p : procesosBloqueados){
+            if(p.getUsuario().equals(miUsuario))
+                procesosBloqueados.remove(p);
+        }
     }
 
     public void ejecutar() {
