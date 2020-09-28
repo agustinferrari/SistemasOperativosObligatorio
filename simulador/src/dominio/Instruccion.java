@@ -35,7 +35,14 @@ public class Instruccion {
     
     @Override
     public String toString(){
+        return nombre + ", "+ tiempoEjecucion +"t, " + ((recurso!=null)?(recurso.toString()):" sin recurso asociado");
+    }
+    
+    /*
+    @Override
+    public String toString(){
         return ("\u001B[33m" + this.nombre + "\u001B[0m");
     }
+    */
     
 }

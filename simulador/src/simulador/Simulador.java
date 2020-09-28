@@ -45,11 +45,11 @@ public class Simulador {
         
         Sistema sistema = new Sistema();
         
-        sistema.agregarInstrucciones(i1);
-        sistema.agregarInstrucciones(i2);
-        sistema.agregarInstrucciones(i3);
-        sistema.agregarInstrucciones(i4);
-        sistema.agregarInstrucciones(i5);
+        sistema.agregarInstruccion(i1);
+        sistema.agregarInstruccion(i2);
+        sistema.agregarInstruccion(i3);
+        sistema.agregarInstruccion(i4);
+        sistema.agregarInstruccion(i5);
 
         sistema.agregarProcesosListos(p1);
         sistema.agregarProcesosListos(p2);

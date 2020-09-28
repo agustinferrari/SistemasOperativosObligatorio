@@ -27,7 +27,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jButton2 = new javax.swing.JButton();
         btnRecursos = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnInstrucciones = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
@@ -45,7 +45,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Instrucciones");
+        btnInstrucciones.setText("Instrucciones");
+        btnInstrucciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInstruccionesActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Correr Sistema");
 
@@ -71,7 +76,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jButton6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
+                    .addComponent(btnInstrucciones)
                     .addComponent(btnRecursos)
                     .addComponent(jButton2))
                 .addGap(91, 91, 91))
@@ -99,7 +104,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnRecursos)
                     .addComponent(jButton6))
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(btnInstrucciones)
                 .addGap(150, 150, 150)
                 .addComponent(jButton1)
                 .addGap(54, 54, 54))
@@ -114,13 +119,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         vent.setVisible(true);
     }//GEN-LAST:event_btnRecursosActionPerformed
 
+    private void btnInstruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstruccionesActionPerformed
+        VentanaInstruccion vent = VentanaInstruccion.getInstancia(sis);
+        vent.setMinimumSize(new Dimension(820, 378));
+        vent.setVisible(true);
+    }//GEN-LAST:event_btnInstruccionesActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInstrucciones;
     private javax.swing.JButton btnRecursos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;

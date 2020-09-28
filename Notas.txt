@@ -21,3 +21,5 @@ Funciones del núcleo del Sistema Operativo
 	 Mecanismos para llamada y retorno desde procedimientos
 
 Arreglar los colores del log, no se muestran en las ventanas y dificultan la lectura
+
+Que hacer si una instruccion usa un proceso que no existe

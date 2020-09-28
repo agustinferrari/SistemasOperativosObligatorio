@@ -29,8 +29,12 @@ public class Sistema {
         recursos = new ArrayList<Recurso>();
     }
 
-    public void agregarInstrucciones(Instruccion miInstruccion) {
-        instrucciones.put(miInstruccion.getNombre(), miInstruccion);
+    public boolean agregarInstruccion(Instruccion miInstruccion) {
+        if(!instrucciones.containsKey(miInstruccion.getNombre()))
+            instrucciones.put(miInstruccion.getNombre(), miInstruccion);
+        else
+            return false;
+        return true;
     }
 
     public void agregarProcesosListos(Proceso miProceso) {
@@ -47,6 +51,10 @@ public class Sistema {
     
     public void borrarRecurso(Recurso miRecurso) {
         recursos.remove(miRecurso);
+    }
+    
+    public void borrarInstruccion(Instruccion miInstruccion) {
+        instrucciones.remove(miInstruccion.getNombre());
     }
 
     public void ejecutar() {
