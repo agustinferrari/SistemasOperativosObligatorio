@@ -1,0 +1,15 @@
+- Recurso que se puede usar por muchos procesos? Ejemplo el WiFi
+
+
+- Importancia: Solo que el programa simule un Sistemas Operativo para el usuario,
+		O intentar que el codigo del simulador sea algo anolgo a como funciona un Sistema Opertivo
+
+- Como se mide el porcentaje de CPU
+
+- El usuario puede suspender un proceso
+
+- Conseguir input del usario mientras corre el programa
+
+
+ 
+		
