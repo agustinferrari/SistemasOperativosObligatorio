@@ -3,7 +3,7 @@
  - Recursos de diferentes tipos (serialmente usables(mas interesantes) y no)
 
  - Alojar un proceso en memoria, tenemos que simularlo - en principio lo suponemos y en una segunda instancia hay que hacerlo
-
+ - Documentar algunas cosas. Ejemplo: Agrego si permitimos si la siguiente instruccion supera el timeout, si la dejamos ejecutar y cortamos despues de ella o antes
 
 Sacado de la clase 6 Nocturno
 Funciones del núcleo del Sistema Operativo
