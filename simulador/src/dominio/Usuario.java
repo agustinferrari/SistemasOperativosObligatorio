@@ -40,7 +40,13 @@ public class Usuario {
         return recursosPermitidos;
     }
     
+    @Override
     public String toString(){
         return ("\u001B[36m" + this.getNombre() + "\u001B[0m"); // cyan
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        return ((Usuario) o).getNombre().equals(this.nombre);
     }
 }

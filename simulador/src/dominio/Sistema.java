@@ -25,6 +25,15 @@ public class Sistema {
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
+    
+    public List<Proceso> getProcesosListos(Usuario u) {
+        List<Proceso> listaProcesosListos= new ArrayList<Proceso>();
+         for(Proceso p : procesosListos){
+            if(p.getUsuario().equals(u))
+                listaProcesosListos.add(p);
+        }
+        return listaProcesosListos;
+    }
 
     //Constructor
     public Sistema() {

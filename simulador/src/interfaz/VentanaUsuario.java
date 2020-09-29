@@ -80,7 +80,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lstRecursos);
 
-        jLabel2.setText("Lista de Recursos");
+        jLabel2.setText("Permisos: lista de Recursos");
 
         lstUsuarios.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };

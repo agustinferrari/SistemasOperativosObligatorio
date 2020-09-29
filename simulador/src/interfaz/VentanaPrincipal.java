@@ -5,7 +5,10 @@
  */
 package interfaz;
 
+import dominio.Recurso;
 import dominio.Sistema;
+import dominio.Usuario;
+import java.awt.Color;
 import java.awt.Dimension;
 
 /**
@@ -19,6 +22,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal(Sistema pSistema) {
         initComponents();
         sis = pSistema;
+        listarUsuarios();
+    }
+    
+    private void listarUsuarios(){
+        lstUsuarios.setListData(sis.getUsuarios().toArray());
     }
 
     @SuppressWarnings("unchecked")
@@ -28,11 +36,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnUsuarios = new javax.swing.JButton();
         btnRecursos = new javax.swing.JButton();
         btnInstrucciones = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnCorrer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstUsuarios = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
+        lblMensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,18 +66,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Correr Sistema");
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        btnCorrer.setText("Correr Sistema");
+        btnCorrer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCorrerActionPerformed(evt);
+            }
         });
-        jScrollPane1.setViewportView(jList1);
+
+        lstUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lstUsuariosMouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstUsuarios);
 
         jLabel1.setText("Lista de usuarios");
 
         jButton6.setText("Abrir");
+
+        lblMensaje.setText("Mensaje");
+        lblMensaje.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,16 +106,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(229, 229, 229)
-                        .addComponent(jButton1))
+                        .addComponent(btnCorrer))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblMensaje)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,8 +132,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnInstrucciones)
                 .addGap(150, 150, 150)
-                .addComponent(jButton1)
-                .addGap(54, 54, 54))
+                .addComponent(btnCorrer)
+                .addGap(32, 32, 32)
+                .addComponent(lblMensaje)
+                .addContainerGap())
         );
 
         pack();
@@ -136,16 +159,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         vent.setVisible(true);
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
+    private void btnCorrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorrerActionPerformed
+        Usuario usuario = (Usuario) lstUsuarios.getSelectedValue();
+        if(usuario != null){
+            SesionUsuario vent = SesionUsuario.getInstancia(sis, usuario);
+            vent.setMinimumSize(new Dimension(820, 378));
+            vent.setVisible(true);
+            vent.toFront();
+        }
+        else{
+            lblMensaje.setText("Por favor selecciones un usuario para correr el sistema");
+            lstUsuarios.setForeground(Color.RED);
+        }
+    }//GEN-LAST:event_btnCorrerActionPerformed
+
+    private void lstUsuariosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstUsuariosMouseReleased
+        lstUsuarios.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lstUsuariosMouseReleased
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCorrer;
     private javax.swing.JButton btnInstrucciones;
     private javax.swing.JButton btnRecursos;
     private javax.swing.JButton btnUsuarios;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblMensaje;
+    private javax.swing.JList lstUsuarios;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,6 +13,10 @@ public class Simulador {
 
     public static void main(String[] args) {
         Sistema sistema = new Sistema();
+        /*Usuario u1 = new Usuario("Pepe");
+        Usuario u2 = new Usuario("Juan");
+        sistema.agregarUsuario(u2);
+        sistema.agregarUsuario(u1);*/
         VentanaPrincipal vent = new VentanaPrincipal(sistema);
         vent.setMinimumSize(new Dimension(920, 600));
         vent.setVisible(true);

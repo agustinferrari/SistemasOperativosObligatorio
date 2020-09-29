@@ -143,7 +143,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Lista de Recursos"/>
+        <Property name="text" type="java.lang.String" value="Permisos: lista de Recursos"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
