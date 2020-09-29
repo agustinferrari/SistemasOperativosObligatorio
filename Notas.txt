@@ -19,7 +19,3 @@ Funciones del núcleo del Sistema Operativo
 	 Asignación y liberación de memoria, en particular el alojamiento de código en memoria.
 	 Gestión del file system
 	 Mecanismos para llamada y retorno desde procedimientos
-
-Arreglar los colores del log, no se muestran en las ventanas y dificultan la lectura
-
-Que hacer si una instruccion usa un proceso que no existe
