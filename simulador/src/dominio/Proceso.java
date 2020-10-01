@@ -43,7 +43,8 @@ public class Proceso {
     
     @Override
     public String toString(){
-        return ( "\u001B[35m" + this.getInstrucciones()+  "\u001B[0m" ); //violeta
+        //return ( "\u001B[35m" + this.getInstrucciones()+  "\u001B[0m" ); //violeta
+        return this.getInstrucciones();
     }
     
     

@@ -5,3 +5,4 @@ Ivan
  
  General
  - [ ] ¿Que hacer si una instruccion usa un proceso que no existe?
+ - [ ] Cuando se cierren las ventanas y se vuelvan a abrir que se actualizen los datos

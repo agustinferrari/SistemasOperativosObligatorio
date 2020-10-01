@@ -13,6 +13,7 @@ public class Simulador {
 
     public static void main(String[] args) {
         Sistema sistema = new Sistema();
+        sistema.log("Log test sistema");
         /*Usuario u1 = new Usuario("Pepe");
         Usuario u2 = new Usuario("Juan");
         sistema.agregarUsuario(u2);

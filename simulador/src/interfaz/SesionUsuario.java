@@ -63,7 +63,7 @@ public class SesionUsuario extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblMensaje.setText("Mensaje");
 

@@ -42,7 +42,9 @@ public class Usuario {
     
     @Override
     public String toString(){
-        return ("\u001B[36m" + this.getNombre() + "\u001B[0m"); // cyan
+        //return ("\u001B[36m" + this.getNombre() + "\u001B[0m"); // cyan
+        return (this.getNombre()); 
+
     }
     
     @Override

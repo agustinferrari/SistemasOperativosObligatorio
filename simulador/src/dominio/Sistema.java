@@ -148,7 +148,7 @@ public class Sistema {
                 " || Se bloquea el proceso " + p + " por "+ tiempoToString(i.getTiempoEjecucion()) );
     }
 
-    private void log(String l) {
+    public void log(String l) {
         System.out.println("# " + l);
     }
     
