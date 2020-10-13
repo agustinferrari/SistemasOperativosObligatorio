@@ -6,3 +6,6 @@ Ivan
  General
  - [ ] ¿Que hacer si una instruccion usa un proceso que no existe?
  - [ ] Cuando se cierren las ventanas y se vuelvan a abrir que se actualizen los datos
+ - [ ] Se puede correrr el programa ciclo a ciclo tipo una manijita, no tiene porque moverse con el tiempo solo
+ - [ ] Instruccions de pedir recruso(bloquea proceso si esta en uso el recurso), instruccion de usar recurso(solo gasta ciclos), instruccions de devolver recurso
+     * Ejemplo: Instruccion pedir impresora(ahi se puede bloquear), instruccion usar impresora, instruccion devlolver impresora
