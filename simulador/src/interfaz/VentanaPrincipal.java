@@ -10,12 +10,14 @@ import dominio.Sistema;
 import dominio.Usuario;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author ivanm
  */
-public class VentanaPrincipal extends javax.swing.JFrame {
+public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
 
     Sistema sis;
 
@@ -43,7 +45,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         lblMensaje = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Principal");
 
         btnUsuarios.setText("Usuarios");
         btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -149,18 +152,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         VentanaRecurso vent = VentanaRecurso.getInstancia(sis);
         vent.setMinimumSize(new Dimension(820, 378));
         vent.setVisible(true);
+        this.sis.addObserver(vent);
     }//GEN-LAST:event_btnRecursosActionPerformed
 
     private void btnInstruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstruccionesActionPerformed
         VentanaInstruccion vent = VentanaInstruccion.getInstancia(sis);
         vent.setMinimumSize(new Dimension(820, 378));
         vent.setVisible(true);
+        this.sis.addObserver(vent);
     }//GEN-LAST:event_btnInstruccionesActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         VentanaUsuario vent = VentanaUsuario.getInstancia(sis);
         vent.setMinimumSize(new Dimension(820, 378));
         vent.setVisible(true);
+        this.sis.addObserver(vent);
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnCorrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorrerActionPerformed
@@ -194,4 +200,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblMensaje;
     private javax.swing.JList lstUsuarios;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        listarUsuarios();
+    }
 }

@@ -9,12 +9,11 @@ import dominio.Instruccion;
 import dominio.Recurso;
 import dominio.Sistema;
 import java.awt.Color;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.DefaultListSelectionModel;
 
-/**
- *
- * @author ivanm
- */
-public class VentanaInstruccion extends javax.swing.JFrame {
+public class VentanaInstruccion extends javax.swing.JFrame implements Observer  {
 
     Sistema sis;
     
@@ -23,6 +22,23 @@ public class VentanaInstruccion extends javax.swing.JFrame {
         sis = pSistema;
         listarRecursos();
         listarInstrucciones();
+        
+        
+                // permite seleccionar varios recursos solo haciendo click
+        lstRecursos.setSelectionModel(new DefaultListSelectionModel() {
+            @Override
+            public void setSelectionInterval(int index0, int index1) {
+                //sis.log("Se llama a setSelectionInterval");
+                if (super.isSelectedIndex(index0)) {
+                    //sis.log("Se deseleccion");
+                    super.removeSelectionInterval(index0, index1);
+                } else {
+                    super.addSelectionInterval(index0, index1);
+                    //sis.log("Se selecciono");
+                }
+            }
+        });
+        
     }
 
     //Patron singleton
@@ -55,6 +71,7 @@ public class VentanaInstruccion extends javax.swing.JFrame {
         lblMensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Instrucciones");
 
         jLabel1.setText("Nombre");
 
@@ -294,4 +311,10 @@ public class VentanaInstruccion extends javax.swing.JFrame {
     private javax.swing.JTextField tfNombre;
     private javax.swing.JTextField tfTiempo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        listarRecursos();
+        listarInstrucciones();
+    }
 }

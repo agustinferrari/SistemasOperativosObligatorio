@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Queue;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Observable;
 
-public class Sistema {
+public class Sistema extends Observable{
 
     private HashMap<Character, Instruccion> instrucciones;
     private Queue<Proceso> procesosListos;
@@ -54,6 +55,7 @@ public class Sistema {
 
     public void agregarProcesosListos(Proceso miProceso) {
         procesosListos.add(miProceso);
+        actualizarVentanas();
     }
 
     public boolean agregarRecurso(Recurso miRecurso) {
@@ -61,6 +63,8 @@ public class Sistema {
             recursos.add(miRecurso);
         else
             return false;
+        
+        actualizarVentanas();
         return true;
     }
     
@@ -69,15 +73,19 @@ public class Sistema {
             usuarios.add(miUsuario);
         else
             return false;
+        
+        actualizarVentanas();
         return true;
     }
     
     public void borrarRecurso(Recurso miRecurso) {
         recursos.remove(miRecurso);
+        actualizarVentanas();
     }
     
     public void borrarInstruccion(Instruccion miInstruccion) {
         instrucciones.remove(miInstruccion.getNombre());
+        actualizarVentanas();
     }
     
     public void borrarUsuario(Usuario miUsuario) {
@@ -90,6 +98,7 @@ public class Sistema {
             if(p.getUsuario().equals(miUsuario))
                 procesosBloqueados.remove(p);
         }
+        actualizarVentanas();
     }
 
     public void ejecutar() {
@@ -190,6 +199,12 @@ public class Sistema {
     
     public String tiempoToString(int t){
         return ("\u001B[31m" + t + "t" + "\u001B[0m");
+    }
+    
+        
+    public void actualizarVentanas() {
+        setChanged();
+        notifyObservers();
     }
 
 }

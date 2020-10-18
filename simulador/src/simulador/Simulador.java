@@ -7,11 +7,16 @@ import dominio.Sistema;
 import dominio.Usuario;
 import interfaz.VentanaPrincipal;
 import java.awt.Dimension;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 
 public class Simulador {
 
     public static void main(String[] args) {
+        
+        cambiarEstiloUIWindows();
+        
         Sistema sistema = new Sistema();
         sistema.log("Log test sistema");
         /*Usuario u1 = new Usuario("Pepe");
@@ -21,6 +26,7 @@ public class Simulador {
         VentanaPrincipal vent = new VentanaPrincipal(sistema);
         vent.setMinimumSize(new Dimension(920, 600));
         vent.setVisible(true);
+        sistema.addObserver(vent);
         //Sistema sistema = inicializar();
         //sistema.ejecutar();
    
@@ -67,4 +73,14 @@ public class Simulador {
         return sistema;
     
     }
+    
+    
+     private static void cambiarEstiloUIWindows() {
+        try {
+            UIManager.setLookAndFeel(
+                    UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
+
+        }
+     }
 }

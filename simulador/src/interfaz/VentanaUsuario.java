@@ -10,12 +10,14 @@ import dominio.Sistema;
 import dominio.Usuario;
 import java.awt.Color;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultListSelectionModel;
 
 
 
-public class VentanaUsuario extends javax.swing.JFrame {
+public class VentanaUsuario extends javax.swing.JFrame implements Observer{
 
    
     Sistema sis;
@@ -26,17 +28,18 @@ public class VentanaUsuario extends javax.swing.JFrame {
         listarRecursos();
         listarUsuarios();
         sis.log("Se abre ventana usuario");
+        
         // permite seleccionar varios recursos solo haciendo click
         lstRecursos.setSelectionModel(new DefaultListSelectionModel() {
             @Override
             public void setSelectionInterval(int index0, int index1) {
-                sis.log("Se llama a setSelectionInterval");
+                //sis.log("Se llama a setSelectionInterval");
                 if (super.isSelectedIndex(index0)) {
-                    sis.log("Se deseleccion");
+                    //sis.log("Se deseleccion");
                     super.removeSelectionInterval(index0, index1);
                 } else {
                     super.addSelectionInterval(index0, index1);
-                    sis.log("Se selecciono");
+                    //sis.log("Se selecciono");
                 }
             }
         });
@@ -75,6 +78,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         lblMensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Usuarios");
 
         tfNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -279,4 +283,10 @@ public class VentanaUsuario extends javax.swing.JFrame {
     private javax.swing.JList lstUsuarios;
     private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        listarRecursos();
+        listarUsuarios();
+    }
 }

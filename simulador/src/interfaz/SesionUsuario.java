@@ -11,8 +11,10 @@ import dominio.Usuario;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class SesionUsuario extends javax.swing.JFrame {
+public class SesionUsuario extends javax.swing.JFrame implements Observer{
 
     Sistema sis;
     Usuario user;
@@ -64,6 +66,7 @@ public class SesionUsuario extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Usuario: //todo");
 
         lblMensaje.setText("Mensaje");
 
@@ -174,4 +177,9 @@ public class SesionUsuario extends javax.swing.JFrame {
     private javax.swing.JList lstProcesos;
     private javax.swing.JTextField tfProceso;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        listarProceso();
+    }
 }

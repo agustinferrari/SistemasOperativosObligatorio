@@ -8,12 +8,14 @@ package interfaz;
 import dominio.Recurso;
 import dominio.Sistema;
 import java.awt.Color;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author ivanm
  */
-public class VentanaRecurso extends javax.swing.JFrame {
+public class VentanaRecurso extends javax.swing.JFrame implements Observer{
 
     Sistema sis;
     
@@ -47,6 +49,7 @@ public class VentanaRecurso extends javax.swing.JFrame {
         lblMensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Recursos");
 
         btnBorrarRecurso.setText("Borrar Recurso");
         btnBorrarRecurso.addActionListener(new java.awt.event.ActionListener() {
@@ -200,15 +203,6 @@ public class VentanaRecurso extends javax.swing.JFrame {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBorrarRecurso;
@@ -219,4 +213,10 @@ public class VentanaRecurso extends javax.swing.JFrame {
     private javax.swing.JList lstRecursos;
     private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        listarRecursos();
+    }
+
 }
