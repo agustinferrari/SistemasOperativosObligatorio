@@ -8,7 +8,7 @@
 
 - El usuario puede suspender un proceso
 
-- Conseguir input del usario mientras corre el programa
+- Conseguir input del usario mientras corre el programa 
 
 
  
