@@ -5,6 +5,7 @@
 
  - Alojar un proceso en memoria, tenemos que simularlo - en principio lo suponemos y en una segunda instancia hay que hacerlo
  - Documentar algunas cosas. Ejemplo: Agrego si permitimos si la siguiente instruccion supera el timeout, si la dejamos ejecutar y cortamos despues de ella o antes
+ - "Podemos tener otros recursos, que no son RSR ni CPU ni memoria, pero su gestión es relativamente sencilla" tipo el wifi que lo pueden usar mas de un proceso a la vez, solo tendria que controlar los permisos y llevar la lista de los procesos que estan usando (igual tengo que hacer el pedir/devolver)
 
 Sacado de la clase 6 Nocturno
 Funciones del núcleo del Sistema Operativo
