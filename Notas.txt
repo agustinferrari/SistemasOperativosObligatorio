@@ -10,6 +10,7 @@
  - se pueden crear variables (ver clase18 27/10)
  - "dejen bien delimitado el mundo de la simulacion( ABC etc) y el mundo de las herramientas de sincronizacion de las que disponemos de nuestro entorno con el cual desarrollamos el simulador"  
  - Habria que implementar un cobegin/coen/ o fork y join ver clase18 27/10
+ - cola de prioridad de multiple niveles. Le da mas seguido proridad a los procesos con mayor proridades pero tambien le da cpu a los otros cada tanto lo vamos a dar mas adelante, esta en el libro 
  
 Sacado de la clase 6 Nocturno  
 Funciones del núcleo del Sistema Operativo
