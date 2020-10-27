@@ -10,3 +10,4 @@ Ivan
  - [ ] Instruccions de pedir recruso(bloquea proceso si esta en uso el recurso), instruccion de usar recurso(solo gasta ciclos), instruccions de devolver recurso
      * Ejemplo: Instruccion pedir impresora(ahi se puede bloquear), instruccion usar impresora, instruccion devlolver impresora
  - [ ] Documentación - ver final de la letra
+ - [ ] Cobegin/coedn o fork y join ver clase 18
