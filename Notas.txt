@@ -12,6 +12,8 @@
  - Habria que implementar un cobegin/coen/ o fork y join ver clase18 27/10
  - cola de prioridad de multiple niveles. Le da mas seguido proridad a los procesos con mayor proridades pero tambien le da cpu a los otros cada tanto lo vamos a dar mas adelante, esta en el libro 
  
+ ![clase 19](https://cdn.discordapp.com/attachments/757729676201558126/773177199213281280/unknown.png)  
+ 
 Sacado de la clase 6 Nocturno  
 Funciones del núcleo del Sistema Operativo
 	 Manejo de interrupciones
