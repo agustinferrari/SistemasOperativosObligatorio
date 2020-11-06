@@ -102,7 +102,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
         lblMensaje.setText("Mensaje");
         lblMensaje.setToolTipText("");
 
-        jLabel2.setText("Timout: ");
+        jLabel2.setText("Timeout: ");
 
         timeout.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         timeout.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -207,17 +207,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
         sis.log("Timout: " + valorTimeout);
         sis.setTimeout(valorTimeout);
 
-        Usuario usuario = (Usuario) lstUsuarios.getSelectedValue();
-        if(usuario != null){
-            SesionUsuario vent = SesionUsuario.getInstancia(sis, usuario);
-            vent.setMinimumSize(new Dimension(820, 378));
-            vent.setVisible(true);
-            vent.toFront();
-        }
-        else{
-            lblMensaje.setText("Por favor selecciones un usuario para correr el sistema");
-            lstUsuarios.setForeground(Color.RED);
-        }
+        sis.ejecutar();
     }//GEN-LAST:event_btnCorrerActionPerformed
 
     private void lstUsuariosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstUsuariosMouseReleased

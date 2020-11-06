@@ -183,7 +183,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Timout: "/>
+        <Property name="text" type="java.lang.String" value="Timeout: "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="timeout">
