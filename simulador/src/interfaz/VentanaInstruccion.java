@@ -23,22 +23,6 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
         listarRecursos();
         listarInstrucciones();
         
-        
-                // permite seleccionar varios recursos solo haciendo click
-        lstRecursos.setSelectionModel(new DefaultListSelectionModel() {
-            @Override
-            public void setSelectionInterval(int index0, int index1) {
-                //sis.log("Se llama a setSelectionInterval");
-                if (super.isSelectedIndex(index0)) {
-                    //sis.log("Se deseleccion");
-                    super.removeSelectionInterval(index0, index1);
-                } else {
-                    super.addSelectionInterval(index0, index1);
-                    //sis.log("Se selecciono");
-                }
-            }
-        });
-        
     }
 
     //Patron singleton
@@ -97,6 +81,7 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
             }
         });
 
+        lstRecursos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(lstRecursos);
 
         jLabel3.setText("Recursos");

@@ -10,8 +10,11 @@ import dominio.Sistema;
 import dominio.Usuario;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.text.ParseException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,6 +28,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
         initComponents();
         sis = pSistema;
         listarUsuarios();
+        timeout.setValue(sis.getTimeout());
     }
     
     private void listarUsuarios(){
@@ -42,8 +46,10 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
         jScrollPane1 = new javax.swing.JScrollPane();
         lstUsuarios = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        abrirSesion = new javax.swing.JButton();
         lblMensaje = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        timeout = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
@@ -76,6 +82,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
             }
         });
 
+        lstUsuarios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lstUsuariosMouseReleased(evt);
@@ -85,10 +92,24 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
 
         jLabel1.setText("Lista de usuarios");
 
-        jButton6.setText("Abrir");
+        abrirSesion.setText("Abrir");
+        abrirSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirSesionActionPerformed(evt);
+            }
+        });
 
         lblMensaje.setText("Mensaje");
         lblMensaje.setToolTipText("");
+
+        jLabel2.setText("Timout: ");
+
+        timeout.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        timeout.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                timeoutPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,14 +122,18 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
                         .addComponent(jLabel1)
                         .addGap(0, 490, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(timeout, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblMensaje)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
+                    .addComponent(abrirSesion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnInstrucciones, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
@@ -116,7 +141,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
                     .addComponent(btnRecursos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(162, 162, 162))
             .addGroup(layout.createSequentialGroup()
-                .addGap(229, 229, 229)
+                .addGap(202, 202, 202)
                 .addComponent(btnCorrer, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -137,12 +162,20 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInstrucciones, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
-                .addGap(69, 69, 69)
+                    .addComponent(abrirSesion))
+                .addGap(36, 36, 36)
                 .addComponent(btnCorrer, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(lblMensaje)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(lblMensaje)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(timeout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24))))
         );
 
         pack();
@@ -170,6 +203,10 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnCorrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorrerActionPerformed
+         int valorTimeout = (Integer) timeout.getValue();
+        sis.log("Timout: " + valorTimeout);
+        sis.setTimeout(valorTimeout);
+
         Usuario usuario = (Usuario) lstUsuarios.getSelectedValue();
         if(usuario != null){
             SesionUsuario vent = SesionUsuario.getInstancia(sis, usuario);
@@ -187,18 +224,51 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
         lstUsuarios.setForeground(Color.BLACK);
     }//GEN-LAST:event_lstUsuariosMouseReleased
 
+    private void abrirSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirSesionActionPerformed
+        
+        Usuario u = (Usuario) lstUsuarios.getSelectedValue();
+        
+          if(u != null){
+            SesionUsuario vent = SesionUsuario.getInstancia(sis,u);
+            vent.setMinimumSize(new Dimension(820, 378));
+            vent.setVisible(true);
+            this.sis.addObserver(vent);
+            vent.toFront();
+        }
+        else{
+            lblMensaje.setText("Por favor selecciones un usuario para correr el sistema");
+            lstUsuarios.setForeground(Color.RED);
+        }
+        
+    }//GEN-LAST:event_abrirSesionActionPerformed
+
+    private void timeoutPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_timeoutPropertyChange
+       /* try{
+            timeout.commitEdit();
+        } catch (ParseException ex) {
+            //Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            int valorTimeout = Integer) timeout.getValue()
+            sis.log("Timout: " + valorTimeout));
+            sis.setTimeout(();
+        } */
+        
+    }//GEN-LAST:event_timeoutPropertyChange
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton abrirSesion;
     private javax.swing.JButton btnCorrer;
     private javax.swing.JButton btnInstrucciones;
     private javax.swing.JButton btnRecursos;
     private javax.swing.JButton btnUsuarios;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblMensaje;
     private javax.swing.JList lstUsuarios;
+    private javax.swing.JSpinner timeout;
     // End of variables declaration//GEN-END:variables
 
     @Override

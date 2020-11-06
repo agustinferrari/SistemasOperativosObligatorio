@@ -14,6 +14,7 @@ public class Sistema extends Observable{
     private Queue<Proceso> procesosBloqueados;
     private List<Recurso> recursos;
     private List<Usuario> usuarios;
+    private int timeout;
 
     public List<Recurso> getRecursos() {
         return recursos;
@@ -43,6 +44,7 @@ public class Sistema extends Observable{
         procesosBloqueados = new LinkedList<Proceso>();
         recursos = new ArrayList<Recurso>();
         usuarios = new ArrayList<Usuario>();
+        timeout = 10;
     }
 
     public boolean agregarInstruccion(Instruccion miInstruccion) {
@@ -101,14 +103,26 @@ public class Sistema extends Observable{
         actualizarVentanas();
     }
 
+    public int getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+        // puede ser que precise usar commitEdit
+        //https://stackoverflow.com/questions/15400781/how-to-get-int-value-from-spinner
+    }
+
+    
+    
+    // ---------------EJECUTAR --------------
     public void ejecutar() {
-        int timeout = 10;
         while (!this.procesosListos.isEmpty()) {
             int t = 0;
             boolean perdioCPU = false;
             Proceso proceso = this.procesosListos.remove();
             //falta poder agregar procesos como quiere Ivan
-            while ((t <= timeout) && (!proceso.termino() && !perdioCPU)) {
+            while ((t <= this.timeout) && (!proceso.termino() && !perdioCPU)) {
                 Instruccion nuevaInst = conseguirSiguienteInstruccion(proceso);
                 if(nuevaInst.tieneRecurso()){
                     ejecutarProcesoConRecurso(proceso, nuevaInst);

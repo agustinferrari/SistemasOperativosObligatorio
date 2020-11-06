@@ -24,6 +24,9 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer{
         sis = pSistema;
         user = pUsuario;
         listarProceso();
+        
+        this.setTitle("Usuario: " + pUsuario.getNombre());
+        
     }
 
     public Sistema getSis() {
