@@ -4,10 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Queue;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Observable;
 
-public class Sistema extends Observable{
+public class Sistema extends Observable {
 
     private HashMap<Character, Instruccion> instrucciones;
     private Queue<Proceso> procesosListos;
@@ -19,22 +20,27 @@ public class Sistema extends Observable{
     public List<Recurso> getRecursos() {
         return recursos;
     }
-    
+
     public HashMap<Character, Instruccion> getInstrucciones() {
         return instrucciones;
     }
-    
+
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
-    
-    public List<Proceso> getProcesosListos(Usuario u) {
-        List<Proceso> listaProcesosListos= new ArrayList<Proceso>();
-         for(Proceso p : procesosListos){
-            if(p.getUsuario().equals(u))
+
+    public List<Proceso> getProcesosListosDelUsuario(Usuario u) {
+        List<Proceso> listaProcesosListos = new ArrayList<Proceso>();
+        for (Proceso p : procesosListos) {
+            if (p.getUsuario().equals(u)) {
                 listaProcesosListos.add(p);
+            }
         }
         return listaProcesosListos;
+    }
+
+    public List<Proceso> getProcesosListos(){
+        return (List<Proceso>) this.procesosListos;
     }
 
     //Constructor
@@ -48,10 +54,11 @@ public class Sistema extends Observable{
     }
 
     public boolean agregarInstruccion(Instruccion miInstruccion) {
-        if(!instrucciones.containsKey(miInstruccion.getNombre()))
+        if (!instrucciones.containsKey(miInstruccion.getNombre())) {
             instrucciones.put(miInstruccion.getNombre(), miInstruccion);
-        else
+        } else {
             return false;
+        }
         return true;
     }
 
@@ -61,44 +68,48 @@ public class Sistema extends Observable{
     }
 
     public boolean agregarRecurso(Recurso miRecurso) {
-        if(!recursos.contains(miRecurso))
+        if (!recursos.contains(miRecurso)) {
             recursos.add(miRecurso);
-        else
+        } else {
             return false;
-        
+        }
+
         actualizarVentanas();
         return true;
     }
-    
+
     public boolean agregarUsuario(Usuario miUsuario) {
-        if(!usuarios.contains(miUsuario))
+        if (!usuarios.contains(miUsuario)) {
             usuarios.add(miUsuario);
-        else
+        } else {
             return false;
-        
+        }
+
         actualizarVentanas();
         return true;
     }
-    
+
     public void borrarRecurso(Recurso miRecurso) {
         recursos.remove(miRecurso);
         actualizarVentanas();
     }
-    
+
     public void borrarInstruccion(Instruccion miInstruccion) {
         instrucciones.remove(miInstruccion.getNombre());
         actualizarVentanas();
     }
-    
+
     public void borrarUsuario(Usuario miUsuario) {
         usuarios.remove(miUsuario);
-        for(Proceso p : procesosListos){
-            if(p.getUsuario().equals(miUsuario))
+        for (Proceso p : procesosListos) {
+            if (p.getUsuario().equals(miUsuario)) {
                 procesosListos.remove(p);
+            }
         }
-        for(Proceso p : procesosBloqueados){
-            if(p.getUsuario().equals(miUsuario))
+        for (Proceso p : procesosBloqueados) {
+            if (p.getUsuario().equals(miUsuario)) {
                 procesosBloqueados.remove(p);
+            }
         }
         actualizarVentanas();
     }
@@ -109,12 +120,8 @@ public class Sistema extends Observable{
 
     public void setTimeout(int timeout) {
         this.timeout = timeout;
-        // puede ser que precise usar commitEdit
-        //https://stackoverflow.com/questions/15400781/how-to-get-int-value-from-spinner
     }
 
-    
-    
     // ---------------EJECUTAR --------------
     public void ejecutar() {
         while (!this.procesosListos.isEmpty()) {
@@ -124,11 +131,10 @@ public class Sistema extends Observable{
             //falta poder agregar procesos como quiere Ivan
             while ((t <= this.timeout) && (!proceso.termino() && !perdioCPU)) {
                 Instruccion nuevaInst = conseguirSiguienteInstruccion(proceso);
-                if(nuevaInst.tieneRecurso()){
+                if (nuevaInst.tieneRecurso()) {
                     ejecutarProcesoConRecurso(proceso, nuevaInst);
                     perdioCPU = true;
-                }
-                else{//Instruccion puramente de CPU
+                } else {//Instruccion puramente de CPU
                     if (nuevaInst.getTiempoEjecucion() + t <= timeout) {
                         log("Se ejecuto la instruccion: " + nuevaInst + " del Proceso " + proceso + " Demoro: " + tiempoToString(nuevaInst.getTiempoEjecucion()));
                         proceso.avanzar();
@@ -145,77 +151,81 @@ public class Sistema extends Observable{
             }
             if (proceso.termino()) {
                 log("Termino el proceso: " + proceso);
+                this.actualizarVentanas();
             }
         }
-        while (!this.procesosBloqueados.isEmpty()){
+        while (!this.procesosBloqueados.isEmpty()) {
             avanzarUnTick();
             ejecutar();
         }
-        
+
     }
-    
-    private void ejecutarProcesoConRecurso(Proceso proceso, Instruccion instruccion){
+
+    private void ejecutarProcesoConRecurso(Proceso proceso, Instruccion instruccion) {
         Recurso recurso = instruccion.getRecurso();
-        if(proceso.getUsuario().tienePermiso(recurso)){ //Verificar si esta libre y ver que carajo hacemos si no xd
+        if (proceso.getUsuario().tienePermiso(recurso)) { //Verificar si esta libre y ver que carajo hacemos si no xd
             usarRecurso(recurso, instruccion, proceso);
             procesosBloqueados.add(proceso);
             recurso.usar(instruccion.getTiempoEjecucion());
-        }
-        else{
+        } else {
             log("El usuario " + proceso.getUsuario() + " no tiene permiso para correr " + instruccion);
         }
     }
-    
-    private void usarRecurso(Recurso r, Instruccion i, Proceso p){
-        log("Se ejecuto el recurso: " + r + " con la instruccion " + i + 
-                " || Se bloquea el proceso " + p + " por "+ tiempoToString(i.getTiempoEjecucion()) );
+
+    private void usarRecurso(Recurso r, Instruccion i, Proceso p) {
+        log("Se ejecuto el recurso: " + r + " con la instruccion " + i
+                + " || Se bloquea el proceso " + p + " por " + tiempoToString(i.getTiempoEjecucion()));
     }
 
     public void log(String l) {
         System.out.println("# " + l);
     }
-    
-    private Instruccion conseguirSiguienteInstruccion(Proceso p){
+
+    private Instruccion conseguirSiguienteInstruccion(Proceso p) {
         Character inst = p.getInstruccion();
         return instrucciones.get(inst);
     }
-    
-    private void avanzarNTicks(int tiempoAvanzado){
-        for(int i = 0; i<tiempoAvanzado; i++){
+
+    private void avanzarNTicks(int tiempoAvanzado) {
+        for (int i = 0; i < tiempoAvanzado; i++) {
             avanzarUnTick();
         }
     }
-    
-    private void avanzarUnTick(){
-        for(Recurso r : this.recursos){
+
+    private void avanzarUnTick() {
+        for (Recurso r : this.recursos) {
             boolean liberado = r.avanzarUnTick();
-            if(liberado){
-                for(Proceso p : this.procesosBloqueados){
-                    if(ProcesoBloqueadoPor(p, r))
+            if (liberado) {
+                Iterator<Proceso> bloqueados = procesosBloqueados.iterator();
+                while (bloqueados.hasNext()) {
+                    Proceso p = bloqueados.next();
+                    if (ProcesoBloqueadoPor(p, r)) {
+                        bloqueados.remove();
                         despertarProceso(p);
+                    }
                 }
+
             }
         }
     }
-    
-    public boolean ProcesoBloqueadoPor(Proceso p,Recurso r){
+
+    public boolean ProcesoBloqueadoPor(Proceso p, Recurso r) {
         Instruccion i = conseguirSiguienteInstruccion(p);
         return i.getRecurso().equals(r);
     }
-    
-    
-    private void despertarProceso(Proceso p){
-        procesosBloqueados.remove(p);
+
+    private void despertarProceso(Proceso p) {
+        // https://stackoverflow.com/questions/1655362/concurrentmodificationexception-despite-using-synchronized
+        //procesosBloqueados.remove(p);
         p.avanzar();
         procesosListos.add(p);
         log("Se desperto el proceso " + p);
     }
-    
-    public String tiempoToString(int t){
+
+    public String tiempoToString(int t) {
         return ("\u001B[31m" + t + "t" + "\u001B[0m");
     }
-    
-        
+
     public void actualizarVentanas() {
         setChanged();
         notifyObservers();

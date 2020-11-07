@@ -17,7 +17,9 @@ public class Simulador {
         
         cambiarEstiloUIWindows();
         
-        Sistema sistema = new Sistema();
+        //Sistema sistema = new Sistema();
+        Sistema sistema = inicializar();
+        
         sistema.log("Log test sistema");
         /*Usuario u1 = new Usuario("Pepe");
         Usuario u2 = new Usuario("Juan");
@@ -27,7 +29,6 @@ public class Simulador {
         vent.setMinimumSize(new Dimension(920, 600));
         vent.setVisible(true);
         sistema.addObserver(vent);
-        //Sistema sistema = inicializar();
         //sistema.ejecutar();
    
     }
@@ -49,12 +50,19 @@ public class Simulador {
         Usuario u2 = new Usuario("Juan");
         
         u1.agregarPermiso(r1);
+        u2.agregarPermiso(r1);
+        u2.agregarPermiso(r2);
+
 
         Proceso p1 = new Proceso("1B441", u1);
         Proceso p2 = new Proceso("B412", u2);
         Proceso p3 = new Proceso("2133", u1);
         
         Sistema sistema = new Sistema();
+        
+        sistema.agregarUsuario(u1);
+        sistema.agregarUsuario(u2);
+        
         
         sistema.agregarInstruccion(i1);
         sistema.agregarInstruccion(i2);
