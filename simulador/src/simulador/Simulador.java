@@ -7,6 +7,7 @@ import dominio.Sistema;
 import dominio.Usuario;
 import interfaz.VentanaPrincipal;
 import java.awt.Dimension;
+import java.io.File;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -20,6 +21,8 @@ public class Simulador {
         //Sistema sistema = new Sistema();
         Sistema sistema = inicializar();
         
+        //borrar si existe archivo Log.txt
+        borrarArchivoLog();
         sistema.log("Log test sistema");
         /*Usuario u1 = new Usuario("Pepe");
         Usuario u2 = new Usuario("Juan");
@@ -33,7 +36,17 @@ public class Simulador {
    
     }
 
-    
+    private static void borrarArchivoLog(){
+        try{
+         File f = new File("Log.txt");
+         f.delete();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+       
+
+    }
     public static Sistema inicializar(){
         Recurso r1 = new Recurso("Rec1");
         Recurso r2 = new Recurso("Rec2");

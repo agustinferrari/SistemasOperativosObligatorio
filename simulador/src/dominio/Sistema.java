@@ -1,5 +1,9 @@
 package dominio;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Queue;
@@ -179,6 +183,20 @@ public class Sistema extends Observable {
 
     public void log(String l) {
         System.out.println("# " + l);
+        File flog = new File("Log.txt");
+        
+        try{
+            if(!flog.exists()){
+             flog.createNewFile();
+             }
+            FileWriter f = new FileWriter(flog, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(f);
+            bufferedWriter.write("# " + l + "\n");
+            bufferedWriter.close();
+        }
+        catch(IOException e){
+               System.out.println("Ocurrió un error en el log.");
+        } 
     }
 
     private Instruccion conseguirSiguienteInstruccion(Proceso p) {
