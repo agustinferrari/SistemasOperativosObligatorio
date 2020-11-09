@@ -15,8 +15,9 @@
  ![clase 19](https://media.discordapp.net/attachments/757729676201558126/773177199213281280/unknown.png)  
  
  ![clase 20](https://media.discordapp.net/attachments/764514461158473759/775320461713866752/unknown.png?width=773&height=681)
-  - al tiempo del "timeout" se le llama quantum de tiempo
-  
+  - el tiempo que pasa hasta que ocurre el "timeout" se le llama quantum
+   - es una caracteristica global del sistema. No la define el usuario. Habria que aclarar en la documentacion que dejamos cambiar el quantum
+   - hay que documentar tambien, cuando se esta terminando el quantum, si dejamos pasar un ultimo proceso o si lo paramos antes
 Sacado de la clase 6 Nocturno  
 Funciones del núcleo del Sistema Operativo
 	 Manejo de interrupciones
