@@ -173,6 +173,7 @@ public class Sistema extends Observable {
             recurso.usar(instruccion.getTiempoEjecucion());
         } else {
             log("El usuario " + proceso.getUsuario() + " no tiene permiso para correr " + instruccion);
+            this.actualizarVentanas();
         }
     }
 

@@ -1,1 +1,26 @@
 # Log test sistema
+# Timout: 10
+# Se ejecuto el recurso: Rec1 con la instruccion 1, 5t, Rec1 || Se bloquea el proceso 1B441 por [31m5t[0m
+# Se ejecuto la instruccion: B, 1t,  sin recurso asociado del Proceso B412 Demoro: [31m1t[0m
+# Se ejecuto el recurso: Rec1 con la instruccion 4, 7t, Rec1 || Se bloquea el proceso B412 por [31m7t[0m
+# El usuario Pepe no tiene permiso para correr 2, 4t, Rec2
+# Se desperto el proceso 1B441
+# Se desperto el proceso B412
+# Se ejecuto la instruccion: B, 1t,  sin recurso asociado del Proceso 1B441 Demoro: [31m1t[0m
+# Se ejecuto el recurso: Rec1 con la instruccion 4, 7t, Rec1 || Se bloquea el proceso 1B441 por [31m7t[0m
+# Se ejecuto el recurso: Rec1 con la instruccion 1, 5t, Rec1 || Se bloquea el proceso B412 por [31m5t[0m
+# Se desperto el proceso 1B441
+# Se desperto el proceso B412
+# Se ejecuto el recurso: Rec1 con la instruccion 4, 7t, Rec1 || Se bloquea el proceso 1B441 por [31m7t[0m
+# Se ejecuto el recurso: Rec2 con la instruccion 2, 4t, Rec2 || Se bloquea el proceso B412 por [31m4t[0m
+# Se desperto el proceso B412
+# Termino el proceso: B412
+# Se desperto el proceso 1B441
+# Se ejecuto el recurso: Rec1 con la instruccion 1, 5t, Rec1 || Se bloquea el proceso 1B441 por [31m5t[0m
+# Se desperto el proceso 1B441
+# Termino el proceso: 1B441
+# Timout: 10
+# Se ejecuto el recurso: Rec1 con la instruccion 1, 5t, Rec1 || Se bloquea el proceso 1B23 por [31m5t[0m
+# Se desperto el proceso 1B23
+# Se ejecuto la instruccion: B, 1t,  sin recurso asociado del Proceso 1B23 Demoro: [31m1t[0m
+# El usuario Pepe no tiene permiso para correr 2, 4t, Rec2
