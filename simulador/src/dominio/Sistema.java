@@ -127,9 +127,9 @@ public class Sistema extends Observable {
     }
 
     // ---------------EJECUTAR --------------
-    public void ejecutar() {
-        while (!this.procesosListos.isEmpty()) {
-            int t = 0;
+    public void ejecutar(int ticks, boolean hastaFinalizar) {
+        int t = 0;
+        while (!this.procesosListos.isEmpty() && (t < ticks || hastaFinalizar)) {
             boolean perdioCPU = false;
             Proceso proceso = this.procesosListos.remove();
             //falta poder agregar procesos como quiere Ivan
@@ -160,7 +160,8 @@ public class Sistema extends Observable {
         }
         while (!this.procesosBloqueados.isEmpty()) {
             avanzarUnTick();
-            ejecutar();
+            t++;
+            ejecutar(t, hastaFinalizar);
         }
 
     }
