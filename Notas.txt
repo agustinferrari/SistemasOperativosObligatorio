@@ -18,6 +18,13 @@
   - el tiempo que pasa hasta que ocurre el "timeout" se le llama quantum
    - es una caracteristica global del sistema. No la define el usuario. Habria que aclarar en la documentacion que dejamos cambiar el quantum
    - hay que documentar tambien, cuando se esta terminando el quantum, si dejamos pasar un ultimo proceso o si lo paramos antes
+
+ - Un proceso no puede participar de la ejecucion si no esta en memoria
+ - Al terminar de ejecutar un proceso libera memoria
+
+- no solo el pedirRecurso te pasa a la lista de bloqueado, usar el recurso tambien. 
+- tendriamos que usar el metodo de reduccion (clase 19) para saber que proceso esta en deadlock, asi saber cual matar
+
 Sacado de la clase 6 Nocturno  
 Funciones del núcleo del Sistema Operativo
 	 Manejo de interrupciones
