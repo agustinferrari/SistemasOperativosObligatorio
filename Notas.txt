@@ -24,6 +24,10 @@
 
 - no solo el pedirRecurso te pasa a la lista de bloqueado, usar el recurso tambien. 
 - tendriamos que usar el metodo de reduccion (clase 19) para saber que proceso esta en deadlock, asi saber cual matar
+ - los que no tienen recursos los reducis
+ - los que tienen solo un recurso y no piden nada los reducis
+ - los que solo estan pidiendo un recurso tambien los reducis
+ - etc
 
 Sacado de la clase 6 Nocturno  
 Funciones del núcleo del Sistema Operativo
