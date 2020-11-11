@@ -20,6 +20,7 @@ public class Sistema extends Observable {
     private List<Recurso> recursos;
     private List<Usuario> usuarios;
     private int timeout;
+    private int tiempoDesdeComienzo; 
 
     public List<Recurso> getRecursos() {
         return recursos;
@@ -55,6 +56,7 @@ public class Sistema extends Observable {
         recursos = new ArrayList<Recurso>();
         usuarios = new ArrayList<Usuario>();
         timeout = 10;
+        tiempoDesdeComienzo = 0;
     }
 
     public boolean agregarInstruccion(Instruccion miInstruccion) {
@@ -126,10 +128,22 @@ public class Sistema extends Observable {
         this.timeout = timeout;
     }
 
+    public int getTiempoDesdeComienzo() {
+        return tiempoDesdeComienzo;
+    }
+
+    public void setTiempoDesdeComienzo(int tiempoDesdeComienzo) {
+        this.tiempoDesdeComienzo = tiempoDesdeComienzo;
+    }
+    
+    
+    
     // ---------------EJECUTAR --------------
     public void ejecutar(int ticks, boolean hastaFinalizar) {
-        int t = 0;
-        while (!this.procesosListos.isEmpty() && (t < ticks || hastaFinalizar)) {
+        int tiempoFinal = this.getTiempoDesdeComienzo() + ticks;
+        //log(tiempoFinal + "");
+        while (!this.procesosListos.isEmpty() && ( (this.getTiempoDesdeComienzo() < tiempoFinal ) || hastaFinalizar)) {
+            int t = 0;
             boolean perdioCPU = false;
             Proceso proceso = this.procesosListos.remove();
             //falta poder agregar procesos como quiere Ivan
@@ -139,7 +153,7 @@ public class Sistema extends Observable {
                     ejecutarProcesoConRecurso(proceso, nuevaInst);
                     perdioCPU = true;
                 } else {//Instruccion puramente de CPU
-                    if (nuevaInst.getTiempoEjecucion() + t <= timeout) {
+                    if (t + nuevaInst.getTiempoEjecucion() <= timeout) {
                         log("Se ejecuto la instruccion: " + nuevaInst + " del Proceso " + proceso + " Demoro: " + tiempoToString(nuevaInst.getTiempoEjecucion()));
                         proceso.avanzar();
                         t += nuevaInst.getTiempoEjecucion();
@@ -160,8 +174,7 @@ public class Sistema extends Observable {
         }
         while (!this.procesosBloqueados.isEmpty()) {
             avanzarUnTick();
-            t++;
-            ejecutar(t, hastaFinalizar);
+            ejecutar(tiempoFinal - this.getTiempoDesdeComienzo(), hastaFinalizar);
         }
 
     }
@@ -227,6 +240,7 @@ public class Sistema extends Observable {
 
             }
         }
+        this.setTiempoDesdeComienzo(tiempoDesdeComienzo + 1);
     }
 
     public boolean ProcesoBloqueadoPor(Proceso p, Recurso r) {

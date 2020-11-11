@@ -61,11 +61,17 @@ public class Simulador {
         
         Usuario u1 = new Usuario("Pepe");
         Usuario u2 = new Usuario("Juan");
+        Usuario admin = new Usuario("admin");
         
         u1.agregarPermiso(r1);
         u2.agregarPermiso(r1);
         u2.agregarPermiso(r2);
+        
+        admin.agregarPermiso(r1);
+        admin.agregarPermiso(r2);
+        admin.agregarPermiso(r3);
 
+        
 
         Proceso p1 = new Proceso("1B441", u1);
         Proceso p2 = new Proceso("B412", u2);
@@ -75,7 +81,7 @@ public class Simulador {
         
         sistema.agregarUsuario(u1);
         sistema.agregarUsuario(u2);
-        
+        sistema.agregarUsuario(admin);
         
         sistema.agregarInstruccion(i1);
         sistema.agregarInstruccion(i2);
