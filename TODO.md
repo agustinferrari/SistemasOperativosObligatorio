@@ -15,3 +15,4 @@ Ivan
  - [ ] Permitir al usuario chequear por Deadlocks
  - [ ] Permitir al usuario matar procesos 
  - [ ] Guardar los programas y pocesos a parte, tipo, poder poner en ejecucion un mismo programa que ya esta guardado
+ - [ ] Ver donde asignar el proceso y el tema de la lista de bloqueados
