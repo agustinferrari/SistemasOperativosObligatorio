@@ -140,6 +140,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
 
         jLabel5.setText("Cuantos ticks avanzar:");
 
+        hastaFinalizar.setSelected(true);
         hastaFinalizar.setText("Correr hasta finalizar");
         hastaFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -299,7 +300,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
 
     private void btnCorrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorrerActionPerformed
          int valorTimeout = (Integer) timeout.getValue();
-        sis.log("Timout: " + valorTimeout);
+        sis.log("Quantum: " + valorTimeout);
         sis.setTimeout(valorTimeout);
         
 

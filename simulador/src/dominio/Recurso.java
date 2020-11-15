@@ -1,15 +1,22 @@
 
 package dominio;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
 
 public class Recurso {
 
     private String nombre;
+    private Boolean estaOcupado;
+    private Queue<Proceso> colaDeProcesos;
     private int tiempoOcupado;
 
     public Recurso(String nombre) {
         this.nombre = nombre;
-        this.tiempoOcupado = 0;
+        this.estaOcupado = false;
+        colaDeProcesos = new LinkedList<Proceso>();
     }
     
     public String getNombre() {
@@ -17,7 +24,15 @@ public class Recurso {
     }
 
     public boolean isLibre() {
-        return this.tiempoOcupado == 0;
+        return !this.estaOcupado;
+    }
+    
+    public void ocupar() {
+        this.estaOcupado = true;
+    }
+    
+    void desocupar() {
+        this.estaOcupado = false;
     }
     
     public boolean avanzarUnTick(){
@@ -29,8 +44,16 @@ public class Recurso {
         return false;
     }
     
-    public void usar(int tiempo){
+    public void esperar(int tiempo){
         this.tiempoOcupado = tiempo;
+    }
+
+    public void agregarProcesoACola(Proceso p){
+        this.colaDeProcesos.add(p);
+    }
+    
+    public Proceso proximoProcesoEsperando(){
+        return this.colaDeProcesos.poll();
     }
     
 
@@ -46,6 +69,8 @@ public class Recurso {
     public boolean equals(Object o) {
         return ((Recurso) o).getNombre().equals(this.nombre);
     }
+
+    
 }
 
 

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Queue;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -20,7 +21,7 @@ public class Sistema extends Observable {
     private List<Recurso> recursos;
     private List<Usuario> usuarios;
     private int timeout;
-    private int tiempoDesdeComienzo; 
+    private int tiempoDesdeComienzo;
 
     public List<Recurso> getRecursos() {
         return recursos;
@@ -44,7 +45,7 @@ public class Sistema extends Observable {
         return listaProcesosListos;
     }
 
-    public List<Proceso> getProcesosListos(){
+    public List<Proceso> getProcesosListos() {
         return (List<Proceso>) this.procesosListos;
     }
 
@@ -76,8 +77,8 @@ public class Sistema extends Observable {
     public boolean agregarRecurso(Recurso miRecurso) {
         if (!recursos.contains(miRecurso)) {
             recursos.add(miRecurso);
-            Instruccion instruccionPedir = new Instruccion("P"+miRecurso.getNombre(), 0, null);
-            Instruccion instruccionDevolver = new Instruccion("D"+miRecurso.getNombre(), 0, miRecurso);
+            Instruccion instruccionPedir = new Instruccion("P" + miRecurso.getNombre(), 0, miRecurso);
+            Instruccion instruccionDevolver = new Instruccion("D" + miRecurso.getNombre(), 0, miRecurso);
             agregarInstruccion(instruccionPedir);
             agregarInstruccion(instruccionDevolver);
         } else {
@@ -138,35 +139,35 @@ public class Sistema extends Observable {
     public void setTiempoDesdeComienzo(int tiempoDesdeComienzo) {
         this.tiempoDesdeComienzo = tiempoDesdeComienzo;
     }
-    
-    
-    
+
     // ---------------EJECUTAR --------------
     public void ejecutar(int ticks, boolean hastaFinalizar) {
         int tiempoFinal = this.getTiempoDesdeComienzo() + ticks;
         //log(tiempoFinal + "");
-        while (!this.procesosListos.isEmpty() && ( (this.getTiempoDesdeComienzo() < tiempoFinal ) || hastaFinalizar)) {
+        while (!this.procesosListos.isEmpty() && ((this.tiempoDesdeComienzo < tiempoFinal) || hastaFinalizar)) {
             int t = 0;
             boolean perdioCPU = false;
             Proceso proceso = this.procesosListos.remove();
             //falta poder agregar procesos como quiere Ivan
             while ((t <= this.timeout) && (!proceso.termino() && !perdioCPU)) {
                 Instruccion nuevaInst = conseguirSiguienteInstruccion(proceso);
-                if (nuevaInst.tieneRecurso()) {
-                    ejecutarProcesoConRecurso(proceso, nuevaInst);
-                    perdioCPU = true;
-                } else {//Instruccion puramente de CPU
-                    if (t + nuevaInst.getTiempoEjecucion() <= timeout) {
-                        log("Se ejecuto la instruccion: " + nuevaInst + " del Proceso " + proceso + " Demoro: " + tiempoToString(nuevaInst.getTiempoEjecucion()));
-                        proceso.avanzar();
-                        t += nuevaInst.getTiempoEjecucion();
-                        avanzarNTicks(nuevaInst.getTiempoEjecucion());
-                    } else {
-                        log("Salio por TimeOut el proceso: " + proceso + " en la instruccion Nro:" + proceso.getPosicion());
-                        avanzarNTicks(timeout - t);
-                        t = 0;
+                if (!pideODevuelveRecurso(nuevaInst, proceso)) {
+                    if (nuevaInst.tieneRecurso()) {
+                        ejecutarProcesoConRecurso(proceso, nuevaInst);
                         perdioCPU = true;
-                        this.procesosListos.add(proceso);
+                    } else {//Instruccion puramente de CPU
+                        if (t + nuevaInst.getTiempoEjecucion() <= timeout) {
+                            log("Se ejecuto la instruccion: " + nuevaInst + " del Proceso " + proceso + " Demoro: " + tiempoToString(nuevaInst.getTiempoEjecucion()));
+                            proceso.avanzar();
+                            t += nuevaInst.getTiempoEjecucion();
+                            avanzarNTicks(nuevaInst.getTiempoEjecucion());
+                        } else {
+                            log("Salio por TimeOut el proceso: " + proceso + " en la instruccion Nro:" + proceso.getPosicion());
+                            avanzarNTicks(timeout - t);
+                            t = 0;
+                            perdioCPU = true;
+                            this.procesosListos.add(proceso);
+                        }
                     }
                 }
             }
@@ -179,17 +180,20 @@ public class Sistema extends Observable {
             avanzarUnTick();
             ejecutar(tiempoFinal - this.getTiempoDesdeComienzo(), hastaFinalizar);
         }
-
     }
 
     private void ejecutarProcesoConRecurso(Proceso proceso, Instruccion instruccion) {
         Recurso recurso = instruccion.getRecurso();
         if (proceso.getUsuario().tienePermiso(recurso)) { //Verificar si esta libre y ver que carajo hacemos si no xd
-            usarRecurso(recurso, instruccion, proceso);
-            procesosBloqueados.add(proceso);
-            recurso.usar(instruccion.getTiempoEjecucion());
+            if (proceso.tieneRecurso(recurso)) {
+                usarRecurso(recurso, instruccion, proceso);
+                recurso.esperar(instruccion.getTiempoEjecucion());
+                this.procesosBloqueados.add(proceso);
+            } else {
+                log("El proceso " + Arrays.toString(proceso.getInstrucciones()) + " no tiene permiso para usar " + recurso.getNombre());
+            }
         } else {
-            log("El usuario " + proceso.getUsuario() + " no tiene permiso para correr " + instruccion);
+            log("El usuario " + proceso.getUsuario() + " no tiene permiso para usar " + recurso.getNombre());
             this.actualizarVentanas();
         }
     }
@@ -202,19 +206,18 @@ public class Sistema extends Observable {
     public void log(String l) {
         System.out.println("# " + l);
         File flog = new File("Log.txt");
-        
-        try{
-            if(!flog.exists()){
-             flog.createNewFile();
-             }
+
+        try {
+            if (!flog.exists()) {
+                flog.createNewFile();
+            }
             FileWriter f = new FileWriter(flog, true);
             BufferedWriter bufferedWriter = new BufferedWriter(f);
             bufferedWriter.write("# " + l + "\n");
             bufferedWriter.close();
+        } catch (IOException e) {
+            System.out.println("Ocurrió un error en el log.");
         }
-        catch(IOException e){
-               System.out.println("Ocurrió un error en el log.");
-        } 
     }
 
     private Instruccion conseguirSiguienteInstruccion(Proceso p) {
@@ -265,6 +268,42 @@ public class Sistema extends Observable {
     public void actualizarVentanas() {
         setChanged();
         notifyObservers();
+    }
+
+    private boolean pideODevuelveRecurso(Instruccion i, Proceso p) {
+        Recurso recursoPedido = i.pideRecurso();
+        Recurso recursoDevuelto = i.devuelveRecurso();
+        if (recursoPedido != null) {
+            log("El proceso " + Arrays.toString(p.getInstrucciones()) + " pide el recurso " + recursoPedido.getNombre());
+            if(recursoPedido.isLibre()){
+                recursoPedido.ocupar();
+                p.agregarRecurso(recursoPedido);
+                log("El recurso " + recursoPedido.getNombre() + " es asignado al proceso " + Arrays.toString(p.getInstrucciones()));
+            }
+            else{
+                log("El recurso " + recursoPedido.getNombre() + " estaba bloqueado, se bloque el proceso " + Arrays.toString(p.getInstrucciones()));
+                this.procesosBloqueados.add(p);
+                recursoPedido.agregarProcesoACola(p);
+            }
+            p.avanzar();
+            return true;
+        }
+        else if (recursoDevuelto != null){
+            log("El proceso " + Arrays.toString(p.getInstrucciones()) + " devuelve el recurso " + recursoDevuelto.getNombre());
+            p.borrarRecurso(recursoDevuelto);
+            p.avanzar();
+            Proceso proximo = recursoDevuelto.proximoProcesoEsperando();
+            if(proximo != null){
+                log("El recurso " + recursoPedido.getNombre() + " es asignado al proceso " + Arrays.toString(proximo.getInstrucciones()));
+                proximo.agregarRecurso(recursoDevuelto);
+            }
+            else{
+                log("El recurso se libera");
+                recursoDevuelto.desocupar();
+            }
+            return true;
+        }
+        return false;
     }
 
 }

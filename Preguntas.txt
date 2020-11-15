@@ -10,6 +10,8 @@
 
 - Conseguir input del usario mientras corre el programa 
 
+- que hacen cuando se pide un recurso y esta libre, mandar a la lista de bloqueados o no
+
 
  
 		

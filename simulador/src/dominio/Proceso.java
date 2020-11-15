@@ -54,6 +54,9 @@ public class Proceso {
         recursosActuales.add(miRecurso);
     }
     
+    public boolean tieneRecurso(Recurso miRecurso){
+        return this.recursosActuales.contains(miRecurso);
+    }
     @Override
     public String toString(){
         //return ( "\u001B[35m" + this.getInstrucciones()+  "\u001B[0m" ); //violeta

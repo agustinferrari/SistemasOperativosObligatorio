@@ -33,6 +33,20 @@ public class Instruccion {
         return recurso != null;
     }
     
+    public Recurso pideRecurso(){
+        if(this.nombre.charAt(0)=='P'){
+            return this.recurso;
+        }
+        return null;
+    }
+    
+    public Recurso devuelveRecurso(){
+        if(this.nombre.charAt(0)=='D'){
+            return this.recurso;
+        }
+        return null;
+    }
+    
     @Override
     public String toString(){
         return nombre + ", "+ tiempoEjecucion +"t, " + ((recurso!=null)?(recurso.toString()):" sin recurso asociado");
