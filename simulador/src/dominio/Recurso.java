@@ -33,6 +33,8 @@ public class Recurso {
         this.tiempoOcupado = tiempo;
     }
     
+
+    
     @Override
     public String toString(){
         //return ("\u001B[32m" + this.getNombre() + "\u001B[0m" ); // verde

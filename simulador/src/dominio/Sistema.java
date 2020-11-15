@@ -14,7 +14,7 @@ import java.util.Observable;
 
 public class Sistema extends Observable {
 
-    private HashMap<Character, Instruccion> instrucciones;
+    private HashMap<String, Instruccion> instrucciones;
     private Queue<Proceso> procesosListos;
     private Queue<Proceso> procesosBloqueados;
     private List<Recurso> recursos;
@@ -26,7 +26,7 @@ public class Sistema extends Observable {
         return recursos;
     }
 
-    public HashMap<Character, Instruccion> getInstrucciones() {
+    public HashMap<String, Instruccion> getInstrucciones() {
         return instrucciones;
     }
 
@@ -50,7 +50,7 @@ public class Sistema extends Observable {
 
     //Constructor
     public Sistema() {
-        instrucciones = new HashMap<Character, Instruccion>();
+        instrucciones = new HashMap<String, Instruccion>();
         procesosListos = new LinkedList<Proceso>();
         procesosBloqueados = new LinkedList<Proceso>();
         recursos = new ArrayList<Recurso>();
@@ -76,10 +76,13 @@ public class Sistema extends Observable {
     public boolean agregarRecurso(Recurso miRecurso) {
         if (!recursos.contains(miRecurso)) {
             recursos.add(miRecurso);
+            Instruccion instruccionPedir = new Instruccion("P"+miRecurso.getNombre(), 0, null);
+            Instruccion instruccionDevolver = new Instruccion("D"+miRecurso.getNombre(), 0, miRecurso);
+            agregarInstruccion(instruccionPedir);
+            agregarInstruccion(instruccionDevolver);
         } else {
             return false;
         }
-
         actualizarVentanas();
         return true;
     }
@@ -215,7 +218,7 @@ public class Sistema extends Observable {
     }
 
     private Instruccion conseguirSiguienteInstruccion(Proceso p) {
-        Character inst = p.getInstruccion();
+        String inst = p.getInstruccion();
         return instrucciones.get(inst);
     }
 
@@ -237,7 +240,6 @@ public class Sistema extends Observable {
                         despertarProceso(p);
                     }
                 }
-
             }
         }
         this.setTiempoDesdeComienzo(tiempoDesdeComienzo + 1);

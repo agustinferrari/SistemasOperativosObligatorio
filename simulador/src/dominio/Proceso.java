@@ -1,31 +1,36 @@
 package dominio;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Proceso {
 
-    private String instrucciones;
+    private String[] instrucciones;
     private int posicion;
     private Usuario usuario;
+    private ArrayList<Recurso> recursosActuales;
 
 
     public Proceso(String instrucciones, Usuario usuario) {
-        this.instrucciones = instrucciones;
+        this.instrucciones = instrucciones.split(" ");
         this.posicion = 0;
         this.usuario = usuario;
+        this.recursosActuales = new ArrayList<Recurso>();
     }
 
     public boolean termino() {
-        return (this.posicion == this.instrucciones.length());
+        return (this.posicion == this.instrucciones.length);
     }
 
-    public Character getInstruccion() {
+    public String getInstruccion() {
         if (!termino()) {
-            Character r = this.instrucciones.charAt(posicion);
+            String r = this.instrucciones[posicion];
             return r;
         }
         return null;
     }
 
-    public String getInstrucciones() {
+    public String[] getInstrucciones() {
         return instrucciones;
     }
 
@@ -41,10 +46,18 @@ public class Proceso {
         this.posicion++;
     }
     
+    public void borrarRecurso(Recurso miRecurso) {
+        recursosActuales.remove(miRecurso);
+    }
+    
+    public void agregarRecurso(Recurso miRecurso) {
+        recursosActuales.add(miRecurso);
+    }
+    
     @Override
     public String toString(){
         //return ( "\u001B[35m" + this.getInstrucciones()+  "\u001B[0m" ); //violeta
-        return this.getInstrucciones();
+        return Arrays.toString(this.getInstrucciones());
     }
     
     

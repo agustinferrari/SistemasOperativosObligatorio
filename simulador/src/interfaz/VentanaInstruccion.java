@@ -191,7 +191,7 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
         int tiempo = PedirNumero(tfTiempo.getText(), 1, 999999);
         Recurso recurso = (Recurso) lstRecursos.getSelectedValue();
         if(!faltanDatos(nombre, tiempo)){
-            Instruccion i = new Instruccion(nombre.charAt(0), tiempo, recurso);
+            Instruccion i = new Instruccion(nombre, tiempo, recurso);
             if(sis.agregarInstruccion(i)){
                 lblMensaje.setText("Instruccion agregada exitosamente!");
                 listarInstrucciones();

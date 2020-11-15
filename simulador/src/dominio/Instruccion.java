@@ -7,17 +7,17 @@ package dominio;
  */
 public class Instruccion {
     
-    private char nombre;
+    private String nombre;
     private int tiempoEjecucion;
     private Recurso recurso;
 
-    public Instruccion(char nombre, int tiempoEjecucion, Recurso recurso) {
+    public Instruccion(String nombre, int tiempoEjecucion, Recurso recurso) {
         this.nombre = nombre;
         this.tiempoEjecucion = tiempoEjecucion;
         this.recurso = recurso;
     }
 
-    public char getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
