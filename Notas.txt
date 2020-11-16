@@ -29,6 +29,7 @@
  - los que solo estan pidiendo un recurso tambien los reducis
  - etc
 
+- instrucciones con tiempo aleatorio tanto las de los recursos como las de solo CPU
 Sacado de la clase 6 Nocturno  
 Funciones del núcleo del Sistema Operativo
 	 Manejo de interrupciones
