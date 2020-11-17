@@ -42,6 +42,8 @@
 - Simluar la memoria, solo las particiones fijas, lo preguntaron la clase 17/11 a las 12:20 aprox al final de la clase
  -  "Alojamiento del código.  Estamos simulando. Vamos a simular que alojamos el código. Van a tener que elegir algún esquema de alojamiento de memoria. Por ejemplo multiprogramación con particiones fijas." clase 23 M4D
 
+-"Respecto a los deadlocks: recomiendo usar algoritmo de detección. El algoritmo de búsqueda del ciclo en el grado puede ser bajado de algún lado, sólo declaren eso en el informe." clase 24 M4A 
+
 Sacado de la clase 6 Nocturno  
 Funciones del núcleo del Sistema Operativo
 	 Manejo de interrupciones
