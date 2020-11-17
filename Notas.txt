@@ -40,6 +40,7 @@
  - lo vamos a correr mas nosotros que el
 
 - Simluar la memoria, solo las particiones fijas, lo preguntaron la clase 17/11 a las 12:20 aprox al final de la clase
+ -  "Alojamiento del código.  Estamos simulando. Vamos a simular que alojamos el código. Van a tener que elegir algún esquema de alojamiento de memoria. Por ejemplo multiprogramación con particiones fijas." clase 23 M4D
 
 Sacado de la clase 6 Nocturno  
 Funciones del núcleo del Sistema Operativo
