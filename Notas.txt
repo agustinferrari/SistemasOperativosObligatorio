@@ -39,6 +39,8 @@
  - que pasa si es tal cosa
  - lo vamos a correr mas nosotros que el
 
+- Simluar la memoria, solo las particiones fijas, lo preguntaron la clase 17/11 a las 12:20 aprox al final de la clase
+
 Sacado de la clase 6 Nocturno  
 Funciones del núcleo del Sistema Operativo
 	 Manejo de interrupciones
