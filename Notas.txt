@@ -30,6 +30,15 @@
  - etc
 
 - instrucciones con tiempo aleatorio tanto las de los recursos como las de solo CPU
+
+- Agregar codigo relevante a la documentacion. Y hacer algunos comentarios? clase 17/11 10:30 aprox
+- Agregar un READM con instrucciones basicas de como hacer un proceso y como ejecutar el simluador
+- Pruebas - MUY IMPORTANTE. El profe solo lo va a ejecutar para ver que anda, los datos los tenemos que hacer nosotros
+ - Lo genero con esto y esto
+ - Mira como genere un deadlock
+ - que pasa si es tal cosa
+ - lo vamos a correr mas nosotros que el
+
 Sacado de la clase 6 Nocturno  
 Funciones del núcleo del Sistema Operativo
 	 Manejo de interrupciones
