@@ -18,6 +18,7 @@ public class Sistema extends Observable {
     private HashMap<String, Instruccion> instrucciones;
     private Queue<Proceso> procesosListos;
     private Queue<Proceso> procesosBloqueados;
+    private Queue<Proceso> procesosSuspendidos;
     private List<Recurso> recursos;
     private List<Usuario> usuarios;
     private Proceso[] memoria;
@@ -53,15 +54,20 @@ public class Sistema extends Observable {
     public List<Proceso> getProcesosBloqueados() {
         return (List<Proceso>) this.procesosBloqueados;
     }
+    
+   public List<Proceso> getProcesosSuspendidos() {
+        return (List<Proceso>) this.procesosSuspendidos;
+    }
 
     //Constructor
     public Sistema() {
         instrucciones = new HashMap<String, Instruccion>();
         procesosListos = new LinkedList<Proceso>();
         procesosBloqueados = new LinkedList<Proceso>();
+        procesosSuspendidos = new LinkedList<Proceso>();
         recursos = new ArrayList<Recurso>();
         usuarios = new ArrayList<Usuario>();
-        memoria = new Proceso[15];
+        memoria = new Proceso[32];
         timeout = 10;
     }
 
@@ -100,9 +106,13 @@ public class Sistema extends Observable {
     }
 
     public void agregarProcesosListos(Proceso miProceso) {
-        //if (guardarEnMemoria(miProceso)) {
+        if (guardarEnMemoria(miProceso)) {
             procesosListos.add(miProceso);
-        //}
+        }
+        else{
+            procesosSuspendidos.add(miProceso);
+            log("El proceso " + Arrays.toString(miProceso.getInstrucciones()) + " se suspende, no hay lugar suficiente para alojarlo en memoria");
+        }
         actualizarVentanas();
     }
 
@@ -197,6 +207,7 @@ public class Sistema extends Observable {
             }
             if (proceso.termino()) {
                 log("Termino el proceso: " + proceso);
+                devolverMemoria(proceso);
                 devolverTodosLosRecursos(proceso);
                 this.actualizarVentanas();
             }
@@ -222,6 +233,7 @@ public class Sistema extends Observable {
             }
         } else {
             log("El usuario " + proceso.getUsuario() + " no tiene permiso para usar " + recurso.getNombre() + ", se termina el proceso " + Arrays.toString(proceso.getInstrucciones()));
+            devolverMemoria(proceso);
             devolverTodosLosRecursos(proceso);
         }
         this.actualizarVentanas();
@@ -357,6 +369,24 @@ public class Sistema extends Observable {
             }
         }
         this.actualizarVentanas();
+    }
+    
+    @SuppressWarnings("empty-statement")
+    private void devolverMemoria(Proceso p) {
+        int espacioNecesario = p.getEspacioEnMemoria();
+        int i = -1;
+        while(this.memoria[++i] == null || !this.memoria[i].equals(p));
+        while(espacioNecesario-- != 0)
+            this.memoria[i++] = null;
+        log("Se libera "+ espacioNecesario + " KB de memoria");
+        for(Proceso pSuspendido : this.procesosSuspendidos){
+            if(guardarEnMemoria(pSuspendido)){
+                this.procesosSuspendidos.remove(pSuspendido);
+                this.procesosListos.add(pSuspendido);
+                log("El proceso " + Arrays.toString(pSuspendido.getInstrucciones()) + " se resume, alojando " + pSuspendido.getEspacioEnMemoria() + " KB en memoria");
+            }
+        }
+        this.actualizarVentanas();  
     }
 
 }
