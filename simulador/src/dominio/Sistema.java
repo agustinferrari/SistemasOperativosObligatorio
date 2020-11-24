@@ -83,8 +83,8 @@ public class Sistema extends Observable {
     public boolean agregarRecurso(Recurso miRecurso) {
         if (!recursos.contains(miRecurso)) {
             recursos.add(miRecurso);
-            Instruccion instruccionPedir = new Instruccion("P" + miRecurso.getNombre(), 0, miRecurso);
-            Instruccion instruccionDevolver = new Instruccion("D" + miRecurso.getNombre(), 0, miRecurso);
+            Instruccion instruccionPedir = new Instruccion("P" + miRecurso.getNombre(), 0,0, miRecurso);
+            Instruccion instruccionDevolver = new Instruccion("D" + miRecurso.getNombre(), 0,0, miRecurso);
             agregarInstruccion(instruccionPedir);
             agregarInstruccion(instruccionDevolver);
         } else {
@@ -153,11 +153,12 @@ public class Sistema extends Observable {
                         ejecutarProcesoConRecurso(proceso, nuevaInst);
                         perdioCPU = true;
                     } else {//Instruccion puramente de CPU
-                        if (t + nuevaInst.getTiempoEjecucion() <= timeout) {
+                        if (t + nuevaInst.getTiempoEjecucionMax()<= timeout) {
                             log("Se ejecuto la instruccion: " + nuevaInst + " del Proceso " + proceso + " Demoro: " + tiempoToString(nuevaInst.getTiempoEjecucion()));
                             proceso.avanzar();
-                            t += nuevaInst.getTiempoEjecucion();
-                            avanzarNTicks(nuevaInst.getTiempoEjecucion());
+                            int tInstruccion = nuevaInst.getTiempoEjecucion();
+                            t += tInstruccion;
+                            avanzarNTicks(tInstruccion);
                         } else {
                             log("Salio por TimeOut el proceso: " + proceso + " en la instruccion Nro:" + proceso.getPosicion());
                             avanzarNTicks(timeout - t);
