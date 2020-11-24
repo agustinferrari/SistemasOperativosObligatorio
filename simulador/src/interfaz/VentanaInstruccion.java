@@ -9,19 +9,30 @@ import dominio.Instruccion;
 import dominio.Recurso;
 import dominio.Sistema;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.ListSelectionModel;
 
 public class VentanaInstruccion extends javax.swing.JFrame implements Observer  {
 
     Sistema sis;
+    private ModeloTblInstruccion modeloInstruccion;
+    private ListSelectionModel lsmInstruccion;
     
     public VentanaInstruccion(Sistema pSistema) {
         initComponents();
         sis = pSistema;
         listarRecursos();
-        listarInstrucciones();
+        this.modeloInstruccion = new ModeloTblInstruccion();
+        this.tblInstrucciones.setModel(modeloInstruccion);
+        this.lsmInstruccion = this.tblInstrucciones.getSelectionModel();
+        //this.lsmInstruccion.addListSelectionListener(new ListenerLocal());
+        this.tblInstrucciones.setSelectionModel(lsmInstruccion);
+        this.listarInstrucciones();
+        
+        
         
     }
 
@@ -42,8 +53,6 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         btnAgregar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lstInstrucciones = new javax.swing.JList();
         tfNombre = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstRecursos = new javax.swing.JList();
@@ -53,6 +62,8 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
         btnBorrar = new javax.swing.JButton();
         lblMensaje = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblInstrucciones = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Instrucciones");
@@ -66,13 +77,6 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
                 btnAgregarActionPerformed(evt);
             }
         });
-
-        lstInstrucciones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                lstInstruccionesMouseReleased(evt);
-            }
-        });
-        jScrollPane1.setViewportView(lstInstrucciones);
 
         tfNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -105,6 +109,19 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("Instrucciones");
 
+        tblInstrucciones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblInstrucciones);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,14 +144,14 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
                             .addComponent(btnAgregar)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnBorrar)
                         .addGap(266, 266, 266))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(114, 114, 114))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(225, 225, 225)
                 .addComponent(jLabel5)
@@ -150,26 +167,26 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(tfTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar)
-                    .addComponent(btnBorrar))
-                .addGap(69, 69, 69)
-                .addComponent(lblMensaje)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAgregar)
+                            .addComponent(btnBorrar))
+                        .addGap(69, 69, 69)
+                        .addComponent(lblMensaje))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -199,7 +216,8 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        Instruccion i = (Instruccion) lstInstrucciones.getSelectedValue();
+        int idIntstruccion = tblInstrucciones.getSelectedRow();
+        Instruccion i = (Instruccion) sis.getInstrucciones().values().toArray()[idIntstruccion];
         if(i != null){
             sis.borrarInstruccion(i);
             lblMensaje.setText("La instruccion "+ i.toString() + " fue eliminada del sistema exitosamente!" );
@@ -207,7 +225,7 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
             limpiar();
         }
         else{
-            lstInstrucciones.setForeground(Color.RED);
+            tblInstrucciones.setForeground(Color.RED);
             lblMensaje.setText("Error: Debe seleccionar la instruccion a eliminar" );
         }
     }//GEN-LAST:event_btnBorrarActionPerformed
@@ -221,17 +239,14 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
         tfTiempo.setForeground(Color.BLACK);
     }//GEN-LAST:event_tfTiempoKeyTyped
 
-    private void lstInstruccionesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstInstruccionesMouseReleased
-        lstInstrucciones.setForeground(Color.BLACK);
-    }//GEN-LAST:event_lstInstruccionesMouseReleased
-
     //AUX
     private void listarRecursos(){
         this.lstRecursos.setListData(sis.getRecursos().toArray());
     }
     
     private void listarInstrucciones(){
-        lstInstrucciones.setListData(sis.getInstrucciones().values().toArray());
+        this.modeloInstruccion.setDatos(new ArrayList(sis.getInstrucciones().values()));
+        this.modeloInstruccion.fireTableDataChanged();
     }
     
     private void limpiar(){
@@ -239,7 +254,7 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
         tfTiempo.setText("");
         tfNombre.setForeground(Color.BLACK);
         tfTiempo.setForeground(Color.BLACK);
-        lstInstrucciones.setForeground(Color.BLACK);
+        tblInstrucciones.setForeground(Color.BLACK);
     }
     
     private boolean faltanDatos(String nombre, int tiempo) {
@@ -287,8 +302,8 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer  
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblMensaje;
-    private javax.swing.JList lstInstrucciones;
     private javax.swing.JList lstRecursos;
+    private javax.swing.JTable tblInstrucciones;
     private javax.swing.JTextField tfNombre;
     private javax.swing.JTextField tfTiempo;
     // End of variables declaration//GEN-END:variables

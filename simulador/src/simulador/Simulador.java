@@ -52,11 +52,11 @@ public class Simulador {
         Instruccion ir1p = new Instruccion("PRec1", 0, r1);
         Instruccion ir1d = new Instruccion("DRec1", 0, r1);
         Recurso r2 = new Recurso("Rec2");
-        Instruccion ir2p = new Instruccion("PRec2", 0, r1);
-        Instruccion ir2d = new Instruccion("DRec2", 0, r1);
+        Instruccion ir2p = new Instruccion("PRec2", 0, r2);
+        Instruccion ir2d = new Instruccion("DRec2", 0, r2);
         Recurso r3 = new Recurso("Rec3");
-        Instruccion ir3p = new Instruccion("PRec3", 0, r1);
-        Instruccion ir3d = new Instruccion("DRec3", 0, r1);
+        Instruccion ir3p = new Instruccion("PRec3", 0, r3);
+        Instruccion ir3d = new Instruccion("DRec3", 0, r3);
 
         Instruccion i1 = new Instruccion("1", 5, r1);
         Instruccion i2 = new Instruccion("B", 1, null);
