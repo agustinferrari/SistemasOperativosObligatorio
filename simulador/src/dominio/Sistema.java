@@ -22,6 +22,7 @@ public class Sistema extends Observable {
     private List<Usuario> usuarios;
     private int timeout;
     private int tiempoDesdeComienzo;
+    boolean perdioCPU;
 
     public List<Recurso> getRecursos() {
         return recursos;
@@ -151,7 +152,7 @@ public class Sistema extends Observable {
         //log(tiempoFinal + "");
         while (!this.procesosListos.isEmpty() && ((this.tiempoDesdeComienzo < tiempoFinal) || hastaFinalizar)) {
             int t = 0;
-            boolean perdioCPU = false;
+            perdioCPU = false;
             Proceso proceso = this.procesosListos.remove();
             //falta poder agregar procesos como quiere Ivan
             while ((t <= this.timeout) && (!proceso.termino() && !perdioCPU)) {
@@ -204,7 +205,7 @@ public class Sistema extends Observable {
     }
 
     private void usarRecurso(Recurso r, Instruccion i, Proceso p) {
-        log("Se ejecuto el recurso: " + r + " con la instruccion " + i
+        log("Se utiliza el recurso " + r + " con la instruccion " + i
                 + " || Se bloquea el proceso " + p + " por " + tiempoToString(i.getTiempoEjecucion()));
     }
 
@@ -255,7 +256,8 @@ public class Sistema extends Observable {
 
     public boolean ProcesoBloqueadoPor(Proceso p, Recurso r) {
         Instruccion i = conseguirSiguienteInstruccion(p);
-        return i.getRecurso().equals(r);
+        
+        return (i.getRecurso()== null)?false:i.getRecurso().equals(r);
     }
 
     private void despertarProceso(Proceso p) {
@@ -286,9 +288,10 @@ public class Sistema extends Observable {
                 log("El recurso " + recursoPedido.getNombre() + " es asignado al proceso " + Arrays.toString(p.getInstrucciones()));
             }
             else{
-                log("El recurso " + recursoPedido.getNombre() + " esta ocupado, se bloque el proceso " + Arrays.toString(p.getInstrucciones()));
+                log("El recurso " + recursoPedido.getNombre() + " esta ocupado, se bloquea el proceso " + Arrays.toString(p.getInstrucciones()));
                 this.procesosBloqueados.add(p);
                 recursoPedido.agregarProcesoACola(p);
+                this.perdioCPU = true;
             }
             p.avanzar();
             return true;
@@ -299,7 +302,7 @@ public class Sistema extends Observable {
             p.avanzar();
             Proceso proximo = recursoDevuelto.proximoProcesoEsperando();
             if(proximo != null){
-                log("El recurso " + recursoPedido.getNombre() + " es asignado al proceso " + Arrays.toString(proximo.getInstrucciones()));
+                log("El recurso " + recursoDevuelto.getNombre() + " es asignado al proceso " + Arrays.toString(proximo.getInstrucciones()));
                 proximo.agregarRecurso(recursoDevuelto);
             }
             else{
