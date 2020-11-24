@@ -378,7 +378,7 @@ public class Sistema extends Observable {
         while(this.memoria[++i] == null || !this.memoria[i].equals(p));
         while(espacioNecesario-- != 0)
             this.memoria[i++] = null;
-        log("Se libera "+ espacioNecesario + " KB de memoria");
+        log("Se libera "+ p.getEspacioEnMemoria() + " KB de memoria");
         for(Proceso pSuspendido : this.procesosSuspendidos){
             if(guardarEnMemoria(pSuspendido)){
                 this.procesosSuspendidos.remove(pSuspendido);
