@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
 public class ModeloTblInstruccion extends AbstractTableModel {
 
     private static final int CANT_COLS = 3;
-    private static final String[] NOM_COLS = {"Nombre", "Tiempo de ejecucion (t)", "Recurso asociado"};
+    private static final String[] NOM_COLS = {"Nombre", "Rango de tiempo posible (t)", "Recurso asociado"};
     private List<Instruccion> Instrucciones;
 
     @Override
@@ -36,7 +36,7 @@ public class ModeloTblInstruccion extends AbstractTableModel {
             case 0:
                 return inst.getNombre();
             case 1:
-                return inst.getTiempoEjecucion();
+                return "[" +inst.getTiempoEjecucionMin() + "," + inst.getTiempoEjecucionMax() + "]";
             case 2:
                 
                 return (inst.getRecurso()!=null)?inst.getRecurso().getNombre():null;
@@ -50,7 +50,7 @@ public class ModeloTblInstruccion extends AbstractTableModel {
             case 0:
                 return String.class;
             case 1:
-                return int.class;
+                return String.class;
             case 2:
                 return String.class;
         }
