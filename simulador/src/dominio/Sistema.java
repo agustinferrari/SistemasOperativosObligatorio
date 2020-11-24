@@ -137,25 +137,16 @@ public class Sistema extends Observable {
     public void setTimeout(int timeout) {
         this.timeout = timeout;
     }
-
-    public int getTiempoDesdeComienzo() {
-        return tiempoDesdeComienzo;
-    }
-
-    public void setTiempoDesdeComienzo(int tiempoDesdeComienzo) {
-        this.tiempoDesdeComienzo = tiempoDesdeComienzo;
-    }
+    
 
     // ---------------EJECUTAR --------------
-    public void ejecutar(int ticks, boolean hastaFinalizar) {
-        int tiempoFinal = this.getTiempoDesdeComienzo() + ticks;
-        //log(tiempoFinal + "");
-        while (!this.procesosListos.isEmpty() && ((this.tiempoDesdeComienzo < tiempoFinal) || hastaFinalizar)) {
+    public void ejecutar(int cantidadCiclos) {
+        while (!this.procesosListos.isEmpty() && (cantidadCiclos > 0 ||  cantidadCiclos == -1)) {
             int t = 0;
             perdioCPU = false;
             Proceso proceso = this.procesosListos.remove();
             //falta poder agregar procesos como quiere Ivan
-            while ((t <= this.timeout) && (!proceso.termino() && !perdioCPU)) {
+            while (((t <= this.timeout) && (!proceso.termino() && !perdioCPU))) {
                 Instruccion nuevaInst = conseguirSiguienteInstruccion(proceso);
                 if (!pideODevuelveRecurso(nuevaInst, proceso)) {
                     if (nuevaInst.tieneRecurso()) {
@@ -182,10 +173,12 @@ public class Sistema extends Observable {
                 devolverTodosLosRecursos(proceso);
                 this.actualizarVentanas();
             }
+            if(cantidadCiclos > 0)
+                cantidadCiclos--;
         }
-        while (!this.procesosBloqueados.isEmpty()) {
+        while (!this.procesosBloqueados.isEmpty() && this.procesosListos.isEmpty()) {
             avanzarUnTick();
-            ejecutar(tiempoFinal - this.getTiempoDesdeComienzo(), hastaFinalizar);
+            ejecutar(cantidadCiclos);
         }
     }
 
@@ -253,7 +246,6 @@ public class Sistema extends Observable {
                 }
             }
         }
-        this.setTiempoDesdeComienzo(tiempoDesdeComienzo + 1);
     }
 
     public boolean ProcesoBloqueadoPor(Proceso p, Recurso r) {

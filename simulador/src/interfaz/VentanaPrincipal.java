@@ -326,12 +326,10 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnCorrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorrerActionPerformed
-         int valorTimeout = (Integer) timeout.getValue();
-        sis.log("Quantum: " + valorTimeout);
+        int valorTimeout = (Integer) timeout.getValue();
+        //sis.log("Quantum: " + valorTimeout);
         sis.setTimeout(valorTimeout);
-        
-
-        sis.ejecutar( ((Integer) ticks.getValue()) * valorTimeout, hastaFinalizar.isSelected());
+        sis.ejecutar((hastaFinalizar.isSelected())?-1:(Integer) ticks.getValue());
     }//GEN-LAST:event_btnCorrerActionPerformed
 
     private void abrirSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirSesionActionPerformed
