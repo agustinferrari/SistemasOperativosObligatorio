@@ -199,7 +199,8 @@ public class Sistema extends Observable {
                 log("El proceso " + Arrays.toString(proceso.getInstrucciones()) + " no tiene permiso para usar " + recurso.getNombre());
             }
         } else {
-            log("El usuario " + proceso.getUsuario() + " no tiene permiso para usar " + recurso.getNombre());
+            log("El usuario " + proceso.getUsuario() + " no tiene permiso para usar " + recurso.getNombre() + ", se termina el proceso " + Arrays.toString(proceso.getInstrucciones()));
+            devolverTodosLosRecursos(proceso);
             this.actualizarVentanas();
         }
     }
@@ -256,8 +257,10 @@ public class Sistema extends Observable {
 
     public boolean ProcesoBloqueadoPor(Proceso p, Recurso r) {
         Instruccion i = conseguirSiguienteInstruccion(p);
-        
-        return (i.getRecurso()== null)?false:i.getRecurso().equals(r);
+        if(i.pideRecurso() == null && i.devuelveRecurso() == null){
+            return (i.getRecurso()== null)?false:i.getRecurso().equals(r);
+        }
+        return false;
     }
 
     private void despertarProceso(Proceso p) {
@@ -304,6 +307,9 @@ public class Sistema extends Observable {
             if(proximo != null){
                 log("El recurso " + recursoDevuelto.getNombre() + " es asignado al proceso " + Arrays.toString(proximo.getInstrucciones()));
                 proximo.agregarRecurso(recursoDevuelto);
+                this.procesosBloqueados.remove(proximo);
+                this.procesosListos.add(proximo);
+                log("Se despierta el proceso " + proximo);
             }
             else{
                 log("El recurso se libera");
@@ -312,6 +318,24 @@ public class Sistema extends Observable {
             return true;
         }
         return false;
+    }
+    
+    private void devolverTodosLosRecursos(Proceso p){
+        ArrayList<Recurso> recursosADevolver = p.getRecursosActuales();
+        for(Recurso recursoDevuelto : recursosADevolver){
+            log("El proceso " + Arrays.toString(p.getInstrucciones()) + " devuelve el recurso " + recursoDevuelto.getNombre());
+            Proceso proximo = recursoDevuelto.proximoProcesoEsperando();
+            if(proximo != null){
+                log("El recurso " + recursoDevuelto.getNombre() + " es asignado al proceso " + Arrays.toString(proximo.getInstrucciones()));
+                proximo.agregarRecurso(recursoDevuelto);
+                this.procesosBloqueados.remove(proximo);
+                this.procesosListos.add(proximo);
+            }
+            else{
+                log("El recurso se libera");
+                recursoDevuelto.desocupar();
+            }
+        }
     }
 
 }

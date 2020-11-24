@@ -38,9 +38,9 @@ public class Recurso {
     public boolean avanzarUnTick(){
         if(this.tiempoOcupado > 0){
             this.tiempoOcupado--;
-            if(this.tiempoOcupado == 0)
-                return true;
         }
+        if(this.tiempoOcupado == 0)
+                return true;
         return false;
     }
     
