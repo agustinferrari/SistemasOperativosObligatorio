@@ -1,16 +1,2 @@
 # Log test sistema
 # Quantum: 10
-# El proceso [PRec1, 1, B, 4, 4, 1, DRec1] pide el recurso Rec1
-# El recurso Rec1 es asignado al proceso [PRec1, 1, B, 4, 4, 1, DRec1]
-# Se ejecuto el recurso: Rec1 con la instruccion 1, 5t, Rec1 || Se bloquea el proceso [PRec1, 1, B, 4, 4, 1, DRec1] por [31m5t[0m
-# Se desperto el proceso [PRec1, 1, B, 4, 4, 1, DRec1]
-# Se ejecuto la instruccion: B, 1t,  sin recurso asociado del Proceso [PRec1, 1, B, 4, 4, 1, DRec1] Demoro: [31m1t[0m
-# Se ejecuto el recurso: Rec1 con la instruccion 4, 7t, Rec1 || Se bloquea el proceso [PRec1, 1, B, 4, 4, 1, DRec1] por [31m7t[0m
-# Se desperto el proceso [PRec1, 1, B, 4, 4, 1, DRec1]
-# Se ejecuto el recurso: Rec1 con la instruccion 4, 7t, Rec1 || Se bloquea el proceso [PRec1, 1, B, 4, 4, 1, DRec1] por [31m7t[0m
-# Se desperto el proceso [PRec1, 1, B, 4, 4, 1, DRec1]
-# Se ejecuto el recurso: Rec1 con la instruccion 1, 5t, Rec1 || Se bloquea el proceso [PRec1, 1, B, 4, 4, 1, DRec1] por [31m5t[0m
-# Se desperto el proceso [PRec1, 1, B, 4, 4, 1, DRec1]
-# El proceso [PRec1, 1, B, 4, 4, 1, DRec1] devuelve el recurso Rec1
-# El recurso se libera
-# Termino el proceso: [PRec1, 1, B, 4, 4, 1, DRec1]

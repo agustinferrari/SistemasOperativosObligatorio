@@ -48,7 +48,12 @@ public class Sistema extends Observable {
     public List<Proceso> getProcesosListos() {
         return (List<Proceso>) this.procesosListos;
     }
+    
+    public List<Proceso> getProcesosBloqueados() {
+        return (List<Proceso>) this.procesosBloqueados;
+    }
 
+    
     //Constructor
     public Sistema() {
         instrucciones = new HashMap<String, Instruccion>();
@@ -262,7 +267,7 @@ public class Sistema extends Observable {
     }
 
     public String tiempoToString(int t) {
-        return ("\u001B[31m" + t + "t" + "\u001B[0m");
+        return ( t  + "t");
     }
 
     public void actualizarVentanas() {
@@ -281,7 +286,7 @@ public class Sistema extends Observable {
                 log("El recurso " + recursoPedido.getNombre() + " es asignado al proceso " + Arrays.toString(p.getInstrucciones()));
             }
             else{
-                log("El recurso " + recursoPedido.getNombre() + " estaba bloqueado, se bloque el proceso " + Arrays.toString(p.getInstrucciones()));
+                log("El recurso " + recursoPedido.getNombre() + " esta ocupado, se bloque el proceso " + Arrays.toString(p.getInstrucciones()));
                 this.procesosBloqueados.add(p);
                 recursoPedido.agregarProcesoACola(p);
             }

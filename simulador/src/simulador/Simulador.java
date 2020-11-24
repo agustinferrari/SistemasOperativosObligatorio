@@ -19,7 +19,7 @@ public class Simulador {
         cambiarEstiloUIWindows();
         
         //Sistema sistema = new Sistema();
-        Sistema sistema = inicializar2();
+        Sistema sistema = inicializar();
         
         //borrar si existe archivo Log.txt
         borrarArchivoLog();
@@ -79,9 +79,9 @@ public class Simulador {
 
         
 
-        Proceso p1 = new Proceso("1 B 4 4 1", u1);
-        Proceso p2 = new Proceso("B 4 1 2", u2);
-        Proceso p3 = new Proceso("2 1 3 3", u1);
+        Proceso p1 = new Proceso("PRec1 1 B 4 4 1 DRec1", u1);
+        Proceso p2 = new Proceso("PRec1 B 4 1 DRec1 PRec2 2 DRec2", u2);
+        Proceso p3 = new Proceso("PRec2 PRec1 PRec3 2 1 3 3 DRec1 DRec2 DRec3", u1);
         
         Sistema sistema = new Sistema();
         
