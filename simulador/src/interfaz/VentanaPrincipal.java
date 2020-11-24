@@ -23,7 +23,7 @@ import javax.swing.ListSelectionModel;
  *
  * @author ivanm
  */
-public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
+public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
 
     Sistema sis;
     private ModeloTblMemoria modeloMemoria;
@@ -42,25 +42,31 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
         listarUsuarios();
         listarProcesos();
         listarProcesosSuspendidos();
+
+        lstUsuarios.setCellRenderer(new Colores());
+        lstProcesos.setCellRenderer(new Colores());
+        lstBloqueados.setCellRenderer(new Colores());
+        lstSuspendidos.setCellRenderer(new Colores());
+        tblMemoria.getColumnModel().getColumn(0).setCellRenderer(new ColoresMemoria());
     }
-    
-    private void listarUsuarios(){
+
+    private void listarUsuarios() {
         lstUsuarios.setListData(sis.getUsuarios().toArray());
     }
-    
-    private void listarProcesos(){
+
+    private void listarProcesos() {
         lstProcesos.setListData(sis.getProcesosListos().toArray());
     }
-    
-    private void listarProcesosBloqueados(){
+
+    private void listarProcesosBloqueados() {
         lstBloqueados.setListData(sis.getProcesosBloqueados().toArray());
     }
-    
-     private void listarProcesosSuspendidos(){
+
+    private void listarProcesosSuspendidos() {
         lstSuspendidos.setListData(sis.getProcesosSuspendidos().toArray());
     }
-    
-    private void mostrarMemoria(){
+
+    private void mostrarMemoria() {
         this.modeloMemoria.setDatos(Arrays.asList((sis.getMemoria())));
         this.modeloMemoria.fireTableDataChanged();
     }
@@ -404,17 +410,16 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnCorrerActionPerformed
 
     private void abrirSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirSesionActionPerformed
-  
+
         Usuario u = (Usuario) lstUsuarios.getSelectedValue();
-        
-          if(u != null){
-            SesionUsuario vent = SesionUsuario.getInstancia(sis,u);
+
+        if (u != null) {
+            SesionUsuario vent = SesionUsuario.getInstancia(sis, u);
             vent.setMinimumSize(new Dimension(820, 378));
             vent.setVisible(true);
             this.sis.addObserver(vent);
             vent.toFront();
-        }
-        else{
+        } else {
             lblMensaje.setText("Por favor selecciones un usuario para correr el sistema");
             lstUsuarios.setForeground(Color.RED);
         }
@@ -425,17 +430,16 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_lstUsuariosMouseReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       VentanaLog vent = VentanaLog.getInstancia(sis);
-       vent.setMinimumSize(new Dimension(820, 378));
-       vent.setVisible(true);
-       sis.addObserver(vent);
+        VentanaLog vent = VentanaLog.getInstancia(sis);
+        vent.setMinimumSize(new Dimension(820, 378));
+        vent.setVisible(true);
+        sis.addObserver(vent);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void hastaFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hastaFinalizarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_hastaFinalizarActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirSesion;
