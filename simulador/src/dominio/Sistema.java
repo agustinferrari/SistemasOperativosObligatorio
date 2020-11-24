@@ -100,9 +100,9 @@ public class Sistema extends Observable {
     }
 
     public void agregarProcesosListos(Proceso miProceso) {
-        if (guardarEnMemoria(miProceso)) {
+        //if (guardarEnMemoria(miProceso)) {
             procesosListos.add(miProceso);
-        }
+        //}
         actualizarVentanas();
     }
 
@@ -190,6 +190,7 @@ public class Sistema extends Observable {
                             t = 0;
                             perdioCPU = true;
                             this.procesosListos.add(proceso);
+                            this.actualizarVentanas();
                         }
                     }
                 }
@@ -203,7 +204,7 @@ public class Sistema extends Observable {
                 cantidadCiclos--;
             }
         }
-        while (!this.procesosBloqueados.isEmpty() && this.procesosListos.isEmpty()) {
+        while (!this.procesosBloqueados.isEmpty() && this.procesosListos.isEmpty() && (cantidadCiclos > 0 || cantidadCiclos == -1)) {
             avanzarUnTick();
             ejecutar(cantidadCiclos);
         }
@@ -222,8 +223,8 @@ public class Sistema extends Observable {
         } else {
             log("El usuario " + proceso.getUsuario() + " no tiene permiso para usar " + recurso.getNombre() + ", se termina el proceso " + Arrays.toString(proceso.getInstrucciones()));
             devolverTodosLosRecursos(proceso);
-            this.actualizarVentanas();
         }
+        this.actualizarVentanas();
     }
 
     private void usarRecurso(Recurso r, Instruccion i, Proceso p) {
@@ -273,6 +274,7 @@ public class Sistema extends Observable {
                 }
             }
         }
+        this.actualizarVentanas();
     }
 
     public boolean ProcesoBloqueadoPor(Proceso p, Recurso r) {
@@ -289,6 +291,7 @@ public class Sistema extends Observable {
         p.avanzar();
         procesosListos.add(p);
         log("Se desperto el proceso " + p);
+        this.actualizarVentanas();
     }
 
     public String tiempoToString(int t) {
@@ -353,6 +356,7 @@ public class Sistema extends Observable {
                 recursoDevuelto.desocupar();
             }
         }
+        this.actualizarVentanas();
     }
 
 }

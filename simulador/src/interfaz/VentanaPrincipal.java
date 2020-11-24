@@ -51,7 +51,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
     }
     
     private void listarProcesosBloqueados(){
-        lstProcesos.setListData(sis.getProcesosBloqueados().toArray());
+        lstBloqueados.setListData(sis.getProcesosBloqueados().toArray());
     }
     
     private void mostrarMemoria(){
@@ -388,7 +388,6 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer{
             lblMensaje.setText("Por favor selecciones un usuario para correr el sistema");
             lstUsuarios.setForeground(Color.RED);
         }
-        
     }//GEN-LAST:event_abrirSesionActionPerformed
 
     private void lstUsuariosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstUsuariosMouseReleased
