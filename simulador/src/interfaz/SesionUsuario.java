@@ -14,20 +14,20 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class SesionUsuario extends javax.swing.JFrame implements Observer{
+public class SesionUsuario extends javax.swing.JFrame implements Observer {
 
     Sistema sis;
     Usuario user;
-    
+
     public SesionUsuario(Sistema pSistema, Usuario pUsuario) {
         initComponents();
         sis = pSistema;
         user = pUsuario;
         listarProceso();
         listarRecursos();
-        
+
         this.setTitle("Usuario: " + pUsuario.getNombre());
-        
+
     }
 
     public Sistema getSis() {
@@ -37,16 +37,17 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer{
     public Usuario getUser() {
         return user;
     }
-    
+
     //Patron singleton
     private static List<SesionUsuario> instancias = null;
     private static SesionUsuario instanciaActual = null;
-    
-    public static SesionUsuario getInstancia(Sistema pSistema, Usuario pUsuario){
-        if(instancias == null)
+
+    public static SesionUsuario getInstancia(Sistema pSistema, Usuario pUsuario) {
+        if (instancias == null) {
             instancias = new ArrayList<SesionUsuario>();
-        for(SesionUsuario s : instancias){
-            if(s.getUser().equals(pUsuario)){
+        }
+        for (SesionUsuario s : instancias) {
+            if (s.getUser().equals(pUsuario)) {
                 instanciaActual = s;
                 return s;
             }
@@ -55,7 +56,6 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer{
         instancias.add(instanciaActual);
         return instanciaActual;
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -72,16 +72,29 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer{
         lstRecursos = new javax.swing.JList();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        tfEspacioNecesario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Usuario: //todo");
         setResizable(false);
+        getContentPane().setLayout(null);
 
         lblMensaje.setText("Mensaje");
+        getContentPane().add(lblMensaje);
+        lblMensaje.setBounds(370, 390, 48, 16);
 
         jScrollPane1.setViewportView(lstProcesos);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(40, 50, 164, 224);
+        getContentPane().add(tfProceso);
+        tfProceso.setBounds(40, 330, 153, 24);
+
         jLabel2.setText("Agregar Proceso");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(40, 290, 97, 16);
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -89,73 +102,36 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer{
                 btnAgregarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAgregar);
+        btnAgregar.setBounds(210, 390, 89, 32);
 
         jLabel3.setText("Lista Procesos Listos");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(40, 30, 124, 16);
 
         jScrollPane2.setViewportView(lstRecursos);
 
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(230, 50, 184, 221);
+
         jLabel4.setText("Lista Recursos");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(230, 30, 86, 16);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("Sesion");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(210, 10, 40, 17);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 498, Short.MAX_VALUE)
-                        .addComponent(lblMensaje))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(86, 86, 86)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfProceso, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(243, 243, 243)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(105, 105, 105)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfProceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregar))
-                .addGap(55, 55, 55)
-                .addComponent(lblMensaje)
-                .addContainerGap())
-        );
+        jLabel5.setText("Nombre");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(40, 310, 45, 16);
+
+        jLabel6.setText("Espacio en memoria");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(40, 360, 116, 16);
+        getContentPane().add(tfEspacioNecesario);
+        tfEspacioNecesario.setBounds(40, 390, 153, 24);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -163,42 +139,59 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer{
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         limpiarMensajes();
         String nombre = tfProceso.getText();
-        if(!faltanDatos(nombre)){
-            Proceso p = new Proceso(nombre, user, 0);//TODO
+        int espacioNecesario = PedirNumero(tfEspacioNecesario.getText(), 1, 32);
+        if (!faltanDatos(nombre, espacioNecesario)) {
+            Proceso p = new Proceso(nombre, user, espacioNecesario);//TODO
             sis.agregarProcesosListos(p);
             lblMensaje.setText("Proceso agregado exitosamente!");
             listarProceso();
             limpiar();
-        }
-        else{
+        } else {
             lblMensaje.setText("Error: el codigo del programa no debe ser vacio");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     //AUX
-    private void listarProceso(){
+    private void listarProceso() {
         lstProcesos.setListData(sis.getProcesosListosDelUsuario(user).toArray());
     }
-    private void listarRecursos(){
+
+    private void listarRecursos() {
         lstRecursos.setListData(user.getRecursosPermitidos().toArray());
     }
-    
-    private void limpiar(){
+
+    private void limpiar() {
         tfProceso.setText("");
         tfProceso.setForeground(Color.BLACK);
     }
-    
-    private boolean faltanDatos(String procesoString) {
+
+    private boolean faltanDatos(String procesoString, int espacio) {
         boolean ret = false;
         if (procesoString.equals("")) {
             tfProceso.setForeground(Color.RED);
             ret = true;
         }
+        if (espacio == -1) {
+            tfEspacioNecesario.setForeground(Color.RED);
+            ret = true;
+        }
         return ret;
     }
-    
-     private void limpiarMensajes() {
+
+    private void limpiarMensajes() {
         lblMensaje.setText("");
+    }
+
+    public static int PedirNumero(String texto, int min, int max) { //Funcion generica que verifica si el numero ingresado es valido
+        int numeroIngresado = -1;
+        try {
+            numeroIngresado = Integer.parseInt(texto);
+            if (numeroIngresado < min || numeroIngresado > max) {
+                numeroIngresado = -1;
+            }
+        } catch (NumberFormatException e) {
+        }
+        return numeroIngresado;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -207,11 +200,14 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer{
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblMensaje;
     private javax.swing.JList lstProcesos;
     private javax.swing.JList lstRecursos;
+    private javax.swing.JTextField tfEspacioNecesario;
     private javax.swing.JTextField tfProceso;
     // End of variables declaration//GEN-END:variables
 

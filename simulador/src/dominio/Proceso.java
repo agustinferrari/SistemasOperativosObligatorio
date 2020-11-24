@@ -24,7 +24,7 @@ public class Proceso {
     }
 
     public int getEspacioEnMemoria() {
-        return espacioEnMemoria;
+        return this.espacioEnMemoria;
     }
 
     public String getInstruccion() {
