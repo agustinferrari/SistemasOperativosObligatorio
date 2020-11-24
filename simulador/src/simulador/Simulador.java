@@ -74,9 +74,9 @@ public class Simulador {
         admin.agregarPermiso(r2);
         admin.agregarPermiso(r3);
 
-        Proceso p1 = new Proceso("PRec1 1 B 4 4 1 DRec1", u1);
-        Proceso p2 = new Proceso("PRec1 B 4 1 DRec1 PRec2 2 DRec2", u2);
-        Proceso p3 = new Proceso("PRec2 PRec1 PRec3 2 1 3 3 DRec1 DRec2 DRec3", u1);
+        Proceso p1 = new Proceso("PRec1 1 B 4 4 1 DRec1", u1, 8);
+        Proceso p2 = new Proceso("PRec1 B 4 1 DRec1 PRec2 2 DRec2", u2,6);
+        Proceso p3 = new Proceso("PRec2 PRec1 PRec3 2 1 3 3 DRec1 DRec2 DRec3", u1,5);
 
         Sistema sistema = new Sistema();
 
@@ -121,7 +121,7 @@ public class Simulador {
 
         u1.agregarPermiso(r1);
 
-        Proceso p1 = new Proceso("PRec1 1 B 4 4 1 DRec1", u1);
+        Proceso p1 = new Proceso("PRec1 1 B 4 4 1 DRec1", u1, 5);
 
         Sistema sistema = new Sistema();
 

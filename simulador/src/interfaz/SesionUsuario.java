@@ -164,7 +164,7 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer{
         limpiarMensajes();
         String nombre = tfProceso.getText();
         if(!faltanDatos(nombre)){
-            Proceso p = new Proceso(nombre, user);
+            Proceso p = new Proceso(nombre, user, 0);//TODO
             sis.agregarProcesosListos(p);
             lblMensaje.setText("Proceso agregado exitosamente!");
             listarProceso();
