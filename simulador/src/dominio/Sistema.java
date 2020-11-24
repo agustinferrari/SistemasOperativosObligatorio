@@ -331,6 +331,7 @@ public class Sistema extends Observable {
                 proximo.agregarRecurso(recursoDevuelto);
                 this.procesosBloqueados.remove(proximo);
                 this.procesosListos.add(proximo);
+                log("Se despierta el proceso " + proximo);
             }
             else{
                 log("El recurso se libera");
