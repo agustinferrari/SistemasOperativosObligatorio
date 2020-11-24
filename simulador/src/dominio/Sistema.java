@@ -299,7 +299,7 @@ public class Sistema extends Observable {
             p.avanzar();
             Proceso proximo = recursoDevuelto.proximoProcesoEsperando();
             if(proximo != null){
-                log("El recurso " + recursoPedido.getNombre() + " es asignado al proceso " + Arrays.toString(proximo.getInstrucciones()));
+                log("El recurso " + recursoDevuelto.getNombre() + " es asignado al proceso " + Arrays.toString(proximo.getInstrucciones()));
                 proximo.agregarRecurso(recursoDevuelto);
             }
             else{
