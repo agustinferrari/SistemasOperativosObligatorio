@@ -179,6 +179,7 @@ public class Sistema extends Observable {
             }
             if (proceso.termino()) {
                 log("Termino el proceso: " + proceso);
+                devolverTodosLosRecursos(proceso);
                 this.actualizarVentanas();
             }
         }
