@@ -1,1 +1,18 @@
 # Log test sistema
+# El proceso [PRec1, 1, B, 4, 4, 1, DRec1] pide el recurso Rec1
+# El recurso Rec1 es asignado al proceso [PRec1, 1, B, 4, 4, 1, DRec1]
+# Se utiliza el recurso Rec1 con la instruccion 1, min:5 max: 7t, Rec1 || Se bloquea el proceso [PRec1, 1, B, 4, 4, 1, DRec1] por 5t
+# El proceso [PRec1, B, 4, 1, DRec1, PRec2, 2, DRec2] pide el recurso Rec1
+# El recurso Rec1 esta ocupado, se bloquea el proceso [PRec1, B, 4, 1, DRec1, PRec2, 2, DRec2]
+# El proceso [PRec2, PRec1, PRec3, 2, 1, 3, 3, DRec1, DRec2, DRec3] pide el recurso Rec2
+# El recurso Rec2 es asignado al proceso [PRec2, PRec1, PRec3, 2, 1, 3, 3, DRec1, DRec2, DRec3]
+# El proceso [PRec2, PRec1, PRec3, 2, 1, 3, 3, DRec1, DRec2, DRec3] pide el recurso Rec1
+# El recurso Rec1 esta ocupado, se bloquea el proceso [PRec2, PRec1, PRec3, 2, 1, 3, 3, DRec1, DRec2, DRec3]
+# Se desperto el proceso [PRec1, 1, B, 4, 4, 1, DRec1]
+# Se ejecuto la instruccion: B, min:1 max: 3t,  sin recurso asociado del Proceso [PRec1, 1, B, 4, 4, 1, DRec1] Demoro: 3t
+# Se utiliza el recurso Rec1 con la instruccion 4, min:7 max: 10t, Rec1 || Se bloquea el proceso [PRec1, 1, B, 4, 4, 1, DRec1] por 7t
+# Se desperto el proceso [PRec1, 1, B, 4, 4, 1, DRec1]
+# Se utiliza el recurso Rec1 con la instruccion 4, min:7 max: 10t, Rec1 || Se bloquea el proceso [PRec1, 1, B, 4, 4, 1, DRec1] por 9t
+# Se desperto el proceso [PRec1, 1, B, 4, 4, 1, DRec1]
+# Se utiliza el recurso Rec1 con la instruccion 1, min:5 max: 7t, Rec1 || Se bloquea el proceso [PRec1, 1, B, 4, 4, 1, DRec1] por 7t
+# Se desperto el proceso [PRec1, 1, B, 4, 4, 1, DRec1]
