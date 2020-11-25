@@ -4,6 +4,9 @@ package interfaz;
 import dominio.Proceso;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -22,6 +25,8 @@ public class Colores implements ListCellRenderer{
         label.setText(p.toString());
         return label;
     }
+    
+    
     
     
 }

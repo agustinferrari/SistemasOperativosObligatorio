@@ -3,7 +3,11 @@ package dominio;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
+import utlilidades.GeneradorColor;
+
 
 public class Proceso {
 
@@ -20,10 +24,11 @@ public class Proceso {
         this.usuario = usuario;
         this.espacioEnMemoria = espacioNecesario;
         this.recursosActuales = new ArrayList<Recurso>();
-        this.color = this.getColorRandom();
+        this.color = GeneradorColor.getColorRandom();
     }
 
-    private Color getColorRandom() {
+    
+    /*private Color getColorRandom() {
         int R = (int) (Math.random() * 256);
         int G = (int) (Math.random() * 256);
         int B = (int) (Math.random() * 256);
@@ -37,7 +42,7 @@ public class Proceso {
         randomColor = Color.getHSBColor(hue, saturation, luminance);
         
         return randomColor;
-    }
+    }*/
 
     public Color getColor() {
         return color;
