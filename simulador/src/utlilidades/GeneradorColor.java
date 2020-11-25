@@ -12,22 +12,15 @@ import java.util.Random;
 
 public class GeneradorColor {
     private static String[] mColors = {
-            "#e6194B", 
-            "#3cb44b", 
-            "#ffe119", 
-            "#4363d8", 
-            "#f58231", 
-            "#911eb4", 
-            "#42d4f4", 
-            "#bfef45", 
-            "#fabed4",  
-            "#9A6324", 
-            "#fffac8", 
-            "#800000", 
-            "#aaffc3", 
-            "#808000", 
-            "#000075", 
-            "#a9a9a9"
+            "#006400", 
+            "#00008b",  
+            "#ff0000", 
+            "#ffff00", 
+            "#deb887", 
+            "#00ff00", 
+            "#00ffff", 
+            "#ff00ff",  
+            "#6495ed"
     };
     
     public static ArrayList<String> colores;
