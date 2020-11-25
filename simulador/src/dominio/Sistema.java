@@ -243,6 +243,7 @@ public class Sistema extends Observable {
         } catch (StackOverflowError e) {
             this.log("Deadlock");
             for (Proceso proceso : this.procesosBloqueados) {
+                this.log("Se mata el proceso " + proceso);
                 devolverTodosLosRecursos(proceso);
                 devolverMemoria(proceso);
             }
