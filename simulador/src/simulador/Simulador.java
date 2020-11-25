@@ -15,7 +15,7 @@ public class Simulador {
 
     public static void main(String[] args) {
 
-        cambiarEstiloUIWindows();
+       // cambiarEstiloUIWindows();
 
         //Sistema sistema = new Sistema();
 //        Sistema sistema = inicializar();
