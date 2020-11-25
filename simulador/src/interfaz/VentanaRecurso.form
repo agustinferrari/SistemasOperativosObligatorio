@@ -41,8 +41,6 @@
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="tfNombre" min="-2" pref="159" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="lblMensaje" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -52,6 +50,10 @@
                   </Group>
               </Group>
               <EmptySpace pref="31" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Component id="lblMensaje" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -68,13 +70,14 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblMensaje" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnAgregar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="btnBorrarRecurso" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblMensaje" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -135,9 +138,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMensaje">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Mensaje"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>

@@ -105,8 +105,6 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer {
             }
         });
 
-        lblMensaje.setText("Mensaje");
-
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("Instrucciones");
 

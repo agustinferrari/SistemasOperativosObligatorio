@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Observable;
 
 public class Sistema extends Observable {
@@ -240,7 +241,6 @@ public class Sistema extends Observable {
             this.procesosBloqueados.removeAll(this.procesosBloqueados);
             this.actualizarVentanas();
         }
-
     }
 
     private void ejecutarProcesoConRecurso(Proceso proceso, Instruccion instruccion) {
@@ -415,6 +415,16 @@ public class Sistema extends Observable {
         }
         this.actualizarVentanas();
 
+    }
+
+    public int getMaximaInstruccion() {
+        int max = 0;
+        for (Map.Entry<String, Instruccion> entry : this.instrucciones.entrySet()) {
+            Instruccion valor = entry.getValue();
+            if(max < valor.getTiempoEjecucionMax())
+                max = valor.getTiempoEjecucionMax();
+        }
+        return max;
     }
 
 }

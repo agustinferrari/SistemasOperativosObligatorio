@@ -182,9 +182,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMensaje">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Mensaje"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
