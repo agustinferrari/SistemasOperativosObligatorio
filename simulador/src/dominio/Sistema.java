@@ -54,8 +54,8 @@ public class Sistema extends Observable {
     public List<Proceso> getProcesosBloqueados() {
         return (List<Proceso>) this.procesosBloqueados;
     }
-    
-   public List<Proceso> getProcesosSuspendidos() {
+
+    public List<Proceso> getProcesosSuspendidos() {
         return (List<Proceso>) this.procesosSuspendidos;
     }
 
@@ -108,8 +108,7 @@ public class Sistema extends Observable {
     public void agregarProcesosListos(Proceso miProceso) {
         if (guardarEnMemoria(miProceso)) {
             procesosListos.add(miProceso);
-        }
-        else{
+        } else {
             procesosSuspendidos.add(miProceso);
             log("El proceso " + Arrays.toString(miProceso.getInstrucciones()) + " se suspende, no hay lugar suficiente para alojarlo en memoria");
         }
@@ -215,10 +214,22 @@ public class Sistema extends Observable {
                 cantidadCiclos--;
             }
         }
-        while (!this.procesosBloqueados.isEmpty() && this.procesosListos.isEmpty() && (cantidadCiclos > 0 || cantidadCiclos == -1)) {
-            avanzarUnTick();
-            ejecutar(cantidadCiclos);
+
+        try {
+            while (!this.procesosBloqueados.isEmpty() && this.procesosListos.isEmpty() && (cantidadCiclos > 0 || cantidadCiclos == -1)) {
+                avanzarUnTick();
+                ejecutar(cantidadCiclos);
+            }
+        } catch (StackOverflowError e) {
+            this.log("Deadlock");
+            for (Proceso proceso : this.procesosBloqueados) {
+                devolverTodosLosRecursos(proceso);
+                devolverMemoria(proceso);
+            }
+            this.procesosBloqueados.removeAll(this.procesosBloqueados);
+            this.actualizarVentanas();
         }
+
     }
 
     private void ejecutarProcesoConRecurso(Proceso proceso, Instruccion instruccion) {
@@ -357,12 +368,13 @@ public class Sistema extends Observable {
         for (Recurso recursoDevuelto : recursosADevolver) {
             log("El proceso " + Arrays.toString(p.getInstrucciones()) + " devuelve el recurso " + recursoDevuelto.getNombre());
             Proceso proximo = recursoDevuelto.proximoProcesoEsperando();
-            if (proximo != null) {
+            if (proximo != null && this.procesosBloqueados.contains(proximo)) {
                 log("El recurso " + recursoDevuelto.getNombre() + " es asignado al proceso " + Arrays.toString(proximo.getInstrucciones()));
                 proximo.agregarRecurso(recursoDevuelto);
                 this.procesosBloqueados.remove(proximo);
                 this.procesosListos.add(proximo);
                 log("Se despierta el proceso " + proximo);
+
             } else {
                 log("El recurso se libera");
                 recursoDevuelto.desocupar();
@@ -370,23 +382,24 @@ public class Sistema extends Observable {
         }
         this.actualizarVentanas();
     }
-    
+
     @SuppressWarnings("empty-statement")
     private void devolverMemoria(Proceso p) {
         int espacioNecesario = p.getEspacioEnMemoria();
         int i = -1;
-        while(this.memoria[++i] == null || !this.memoria[i].equals(p));
-        while(espacioNecesario-- != 0)
+        while (this.memoria[++i] == null || !this.memoria[i].equals(p));
+        while (espacioNecesario-- != 0) {
             this.memoria[i++] = null;
-        log("Se libera "+ p.getEspacioEnMemoria() + " KB de memoria");
-        for(Proceso pSuspendido : this.procesosSuspendidos){
-            if(guardarEnMemoria(pSuspendido)){
+        }
+        log("Se libera " + p.getEspacioEnMemoria() + " KB de memoria");
+        for (Proceso pSuspendido : this.procesosSuspendidos) {
+            if (guardarEnMemoria(pSuspendido)) {
                 this.procesosSuspendidos.remove(pSuspendido);
                 this.procesosListos.add(pSuspendido);
                 log("El proceso " + Arrays.toString(pSuspendido.getInstrucciones()) + " se resume, alojando " + pSuspendido.getEspacioEnMemoria() + " KB en memoria");
             }
         }
-        this.actualizarVentanas();  
+        this.actualizarVentanas();
     }
 
 }
