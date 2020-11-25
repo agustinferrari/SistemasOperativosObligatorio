@@ -43,7 +43,7 @@ public class Prueba {
         admin.agregarPermiso(r3);
 
         Proceso p1 = new Proceso("PRec1 A B D D A DRec1", u1, 8);
-        Proceso p2 = new Proceso("PRec1 B D A DRec1 PRec2 2 DRec2", u2, 6);
+        Proceso p2 = new Proceso("PRec1 B D A DRec1 PRec2 C DRec2", u2, 6);
         Proceso p3 = new Proceso("PRec2 PRec1 PRec3 C A E E DRec1 DRec2 DRec3", u1, 5);
 
         Sistema sistema = new Sistema();

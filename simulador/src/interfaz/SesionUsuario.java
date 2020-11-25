@@ -79,22 +79,10 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Usuario: //todo");
         setResizable(false);
-        getContentPane().setLayout(null);
-
-        lblMensaje.setText("Mensaje");
-        getContentPane().add(lblMensaje);
-        lblMensaje.setBounds(370, 390, 48, 16);
 
         jScrollPane1.setViewportView(lstProcesos);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(40, 50, 164, 224);
-        getContentPane().add(tfProceso);
-        tfProceso.setBounds(40, 330, 153, 24);
-
         jLabel2.setText("Agregar Proceso");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(40, 290, 97, 16);
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -102,36 +90,91 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer {
                 btnAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregar);
-        btnAgregar.setBounds(210, 390, 89, 32);
 
         jLabel3.setText("Lista Procesos Listos");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(40, 30, 124, 16);
 
         jScrollPane2.setViewportView(lstRecursos);
 
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(230, 50, 184, 221);
-
         jLabel4.setText("Lista Recursos");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(230, 30, 86, 16);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Sesion");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(210, 10, 40, 17);
 
         jLabel5.setText("Nombre");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(40, 310, 45, 16);
 
         jLabel6.setText("Espacio en memoria");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(40, 360, 116, 16);
-        getContentPane().add(tfEspacioNecesario);
-        tfEspacioNecesario.setBounds(40, 390, 153, 24);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(tfProceso, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tfEspacioNecesario, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(17, 17, 17)
+                                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(67, 67, 67)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblMensaje)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 40, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16)
+                .addComponent(jLabel2)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel5)
+                .addGap(4, 4, 4)
+                .addComponent(tfProceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel6)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfEspacioNecesario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAgregar)
+                        .addComponent(lblMensaje))))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -147,7 +190,7 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer {
             listarProceso();
             limpiar();
         } else {
-            lblMensaje.setText("Error: el codigo del programa no debe ser vacio");
+            lblMensaje.setText("Error: el codigo del programa no debe ser vacio y el espacio en memoria debe ser menor a 32 KB");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -163,6 +206,7 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer {
     private void limpiar() {
         tfProceso.setText("");
         tfProceso.setForeground(Color.BLACK);
+        tfEspacioNecesario.setForeground(Color.BLACK);
     }
 
     private boolean faltanDatos(String procesoString, int espacio) {

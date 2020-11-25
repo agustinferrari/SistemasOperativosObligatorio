@@ -24,7 +24,8 @@ public class Sistema extends Observable {
     private Proceso[] memoria;
     private Usuario admin;
     private int timeout;
-    boolean perdioCPU;
+    private boolean perdioCPU;
+    private int numeroLinea;
 
     public List<Recurso> getRecursos() {
         return recursos;
@@ -62,17 +63,18 @@ public class Sistema extends Observable {
 
     //Constructor
     public Sistema() {
-        instrucciones = new HashMap<String, Instruccion>();
-        procesosListos = new LinkedList<Proceso>();
-        procesosBloqueados = new LinkedList<Proceso>();
-        procesosSuspendidos = new LinkedList<Proceso>();
-        recursos = new ArrayList<Recurso>();
-        usuarios = new ArrayList<Usuario>();
-        memoria = new Proceso[32];
-        timeout = 10;
+        this.instrucciones = new HashMap<String, Instruccion>();
+        this.procesosListos = new LinkedList<Proceso>();
+        this.procesosBloqueados = new LinkedList<Proceso>();
+        this.procesosSuspendidos = new LinkedList<Proceso>();
+        this.recursos = new ArrayList<Recurso>();
+        this.usuarios = new ArrayList<Usuario>();
+        this.memoria = new Proceso[32];
+        this.timeout = 10;
         Usuario admin = new Usuario("admin");
         this.admin = admin;
         this.agregarUsuario(admin);
+        this.numeroLinea = 0;
     }
 
     private boolean guardarEnMemoria(Proceso p) {
@@ -156,9 +158,10 @@ public class Sistema extends Observable {
     }
 
     public void borrarUsuario(Usuario miUsuario) {
-        if(miUsuario.equals(this.admin))
+        if (miUsuario.equals(this.admin)) {
             return;
-        
+        }
+
         usuarios.remove(miUsuario);
         for (Proceso p : procesosListos) {
             if (p.getUsuario().equals(miUsuario)) {
@@ -249,6 +252,8 @@ public class Sistema extends Observable {
                 this.procesosBloqueados.add(proceso);
             } else {
                 log("El proceso " + Arrays.toString(proceso.getInstrucciones()) + " no tiene permiso para usar " + recurso.getNombre());
+                devolverMemoria(proceso);
+                devolverTodosLosRecursos(proceso);
             }
         } else {
             log("El usuario " + proceso.getUsuario() + " no tiene permiso para usar " + recurso.getNombre() + ", se termina el proceso " + Arrays.toString(proceso.getInstrucciones()));
@@ -264,7 +269,8 @@ public class Sistema extends Observable {
     }
 
     public void log(String l) {
-        System.out.println("# " + l);
+        System.out.println("# [" + this.numeroLinea + "] " + l);
+        this.numeroLinea++;
         File flog = new File("Log.txt");
 
         try {
@@ -311,7 +317,7 @@ public class Sistema extends Observable {
     public boolean ProcesoBloqueadoPor(Proceso p, Recurso r) {
         Instruccion i = conseguirSiguienteInstruccion(p);
         if (i.pideRecurso() == null && i.devuelveRecurso() == null) {
-            return (i.getRecurso() == null) ? false : i.getRecurso().equals(r);
+            return (i.getRecurso() == null) ? false : i.getRecurso().equals(r) && p.tieneRecurso(r);
         }
         return false;
     }
@@ -408,6 +414,7 @@ public class Sistema extends Observable {
             }
         }
         this.actualizarVentanas();
+
     }
 
 }
