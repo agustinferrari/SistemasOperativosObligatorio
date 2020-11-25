@@ -1,6 +1,7 @@
 
 package interfaz;
 
+import dominio.Proceso;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
@@ -13,18 +14,12 @@ public class Colores implements ListCellRenderer{
     @Override
     public Component getListCellRendererComponent(JList jlist, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         JLabel  label = (JLabel) (new DefaultListCellRenderer()).getListCellRendererComponent(jlist, value, index, isSelected, cellHasFocus);
-        String texto = value.toString();
-        Color color;
+       
         
-        if(texto.contains("+")) {
-            color = Color.GREEN;
-        } else if(texto.contains("*"))  {
-            color = Color.RED;
-        } else {
-            color = Color.YELLOW;
-        }
+        Proceso p = (Proceso) value;
         
-        label.setBackground(color);
+        label.setBackground(p.getColor());
+        label.setText(p.toString());
         return label;
     }
     

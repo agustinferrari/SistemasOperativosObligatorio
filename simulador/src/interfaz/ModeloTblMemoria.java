@@ -35,7 +35,8 @@ public class ModeloTblMemoria extends AbstractTableModel {
         Proceso inst = Procesos.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return (inst == null)?" ":Arrays.toString(inst.getInstrucciones());
+                return inst;
+//                return (inst == null)?" ":Arrays.toString(inst.getInstrucciones());
         }
         return null;
     }
@@ -44,7 +45,7 @@ public class ModeloTblMemoria extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return String.class;
+                return Proceso.class;
         }
         return null;
     }

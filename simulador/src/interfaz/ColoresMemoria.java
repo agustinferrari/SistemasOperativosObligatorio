@@ -1,33 +1,34 @@
-
 package interfaz;
 
+import dominio.Proceso;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 
+public class ColoresMemoria extends JLabel implements TableCellRenderer {///extends DefaultTableCellRenderer {
 
-public class ColoresMemoria extends DefaultTableCellRenderer {
-
-//    @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, int index, boolean isSelected, boolean hasFocus, int row, int col) {
-        JLabel  label =  (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
-
-        String texto = value.toString();
-        Color color;
-        
-        if(texto.contains("+")) {
-            color = Color.GREEN;
-        } else if(texto.contains("*"))  {
-            color = Color.RED;
-        } else {
-            color = Color.BLUE;
-        }
-        
-        label.setBackground(color);
-        return label;
+    public ColoresMemoria() {
+        super.setOpaque(true);
     }
-    
-    
+
+    @Override
+    public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
+
+        if (o == null) {
+            super.setBackground(Color.WHITE);
+            super.setText(" ");
+            return this;
+        }
+        String texto = o.toString();
+        Proceso p = (Proceso) o;
+
+
+        
+        super.setBackground(p.getColor());
+        super.setText(texto);
+        return this;
+    }
 }

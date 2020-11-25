@@ -180,7 +180,7 @@ public class Sistema extends Observable {
             int t = 0;
             perdioCPU = false;
             Proceso proceso = this.procesosListos.remove();
-            //falta poder agregar procesos como quiere Ivan
+            this.log("-------------- El Proceso " + proceso + " entro a ejecución -------------- ");
             while (((t <= this.timeout) && (!proceso.termino() && !perdioCPU))) {
                 Instruccion nuevaInst = conseguirSiguienteInstruccion(proceso);
                 if (!pideODevuelveRecurso(nuevaInst, proceso)) {

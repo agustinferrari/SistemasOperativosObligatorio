@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import dominio.Proceso;
 import dominio.Recurso;
 import dominio.Sistema;
 import dominio.Usuario;
@@ -43,11 +44,11 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
         listarProcesos();
         listarProcesosSuspendidos();
 
-        lstUsuarios.setCellRenderer(new Colores());
+        
         lstProcesos.setCellRenderer(new Colores());
         lstBloqueados.setCellRenderer(new Colores());
         lstSuspendidos.setCellRenderer(new Colores());
-        tblMemoria.getColumnModel().getColumn(0).setCellRenderer(new ColoresMemoria());
+        tblMemoria.setDefaultRenderer(Proceso.class, new ColoresMemoria());
     }
 
     private void listarUsuarios() {

@@ -1,2 +1,1 @@
 # Log test sistema
-# Se abre ventana usuario
