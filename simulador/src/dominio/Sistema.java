@@ -218,7 +218,8 @@ public class Sistema extends Observable {
                     }
                 }
                 else{
-                    log("Instruccion " + proceso.getInstruccion() + "invalida, se mata el proceso " + proceso);
+                    log("Instruccion " + proceso.getInstruccion() + " invalida, se mata el proceso " + proceso);
+                    perdioCPU = true;
                     devolverMemoria(proceso);
                     devolverTodosLosRecursos(proceso);
                     this.actualizarVentanas();
