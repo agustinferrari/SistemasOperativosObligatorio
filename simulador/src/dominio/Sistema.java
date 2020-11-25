@@ -194,26 +194,34 @@ public class Sistema extends Observable {
             this.log("-------------- El Proceso " + proceso + " entro a ejecución -------------- ");
             while (((t <= this.timeout) && (!proceso.termino() && !perdioCPU))) {
                 Instruccion nuevaInst = conseguirSiguienteInstruccion(proceso);
-                if (!pideODevuelveRecurso(nuevaInst, proceso)) {
-                    if (nuevaInst.tieneRecurso()) {
-                        ejecutarProcesoConRecurso(proceso, nuevaInst);
-                        perdioCPU = true;
-                    } else {//Instruccion puramente de CPU
-                        if (t + nuevaInst.getTiempoEjecucionMax() <= timeout) {
-                            log("Se ejecuto la instruccion: " + nuevaInst + " del Proceso " + proceso + " Demoro: " + tiempoToString(nuevaInst.getTiempoEjecucion()));
-                            proceso.avanzar();
-                            int tInstruccion = nuevaInst.getTiempoEjecucion();
-                            t += tInstruccion;
-                            avanzarNTicks(tInstruccion);
-                        } else {
-                            log("Salio por TimeOut el proceso: " + proceso + " en la instruccion Nro:" + proceso.getPosicion());
-                            avanzarNTicks(timeout - t);
-                            t = 0;
+                if (nuevaInst != null) {
+                    if (!pideODevuelveRecurso(nuevaInst, proceso)) {
+                        if (nuevaInst.tieneRecurso()) {
+                            ejecutarProcesoConRecurso(proceso, nuevaInst);
                             perdioCPU = true;
-                            this.procesosListos.add(proceso);
-                            this.actualizarVentanas();
+                        } else {//Instruccion puramente de CPU
+                            if (t + nuevaInst.getTiempoEjecucionMax() <= timeout) {
+                                log("Se ejecuto la instruccion: " + nuevaInst + " del Proceso " + proceso + " Demoro: " + tiempoToString(nuevaInst.getTiempoEjecucion()));
+                                proceso.avanzar();
+                                int tInstruccion = nuevaInst.getTiempoEjecucion();
+                                t += tInstruccion;
+                                avanzarNTicks(tInstruccion);
+                            } else {
+                                log("Salio por TimeOut el proceso: " + proceso + " en la instruccion Nro:" + proceso.getPosicion());
+                                avanzarNTicks(timeout - t);
+                                t = 0;
+                                perdioCPU = true;
+                                this.procesosListos.add(proceso);
+                                this.actualizarVentanas();
+                            }
                         }
                     }
+                }
+                else{
+                    log("Instruccion " + proceso.getInstruccion() + "invalida, se mata el proceso " + proceso);
+                    devolverMemoria(proceso);
+                    devolverTodosLosRecursos(proceso);
+                    this.actualizarVentanas();
                 }
             }
             if (proceso.termino()) {
@@ -256,7 +264,7 @@ public class Sistema extends Observable {
                 devolverTodosLosRecursos(proceso);
             }
         } else {
-            log("El usuario " + proceso.getUsuario() + " no tiene permiso para usar " + recurso.getNombre() + ", se termina el proceso " + Arrays.toString(proceso.getInstrucciones()));
+            log("El usuario " + proceso.getUsuario() + " no tiene permiso para usar " + recurso.getNombre() + ", se mata el proceso " + Arrays.toString(proceso.getInstrucciones()));
             devolverMemoria(proceso);
             devolverTodosLosRecursos(proceso);
         }
@@ -279,7 +287,7 @@ public class Sistema extends Observable {
             }
             FileWriter f = new FileWriter(flog, true);
             BufferedWriter bufferedWriter = new BufferedWriter(f);
-            bufferedWriter.write("# " + l + "\n");
+            bufferedWriter.write("# [" + this.numeroLinea + "] " + l + "\n");
             bufferedWriter.close();
         } catch (IOException e) {
             System.out.println("Ocurrió un error en el log.");
@@ -421,8 +429,9 @@ public class Sistema extends Observable {
         int max = 0;
         for (Map.Entry<String, Instruccion> entry : this.instrucciones.entrySet()) {
             Instruccion valor = entry.getValue();
-            if(max < valor.getTiempoEjecucionMax())
+            if (max < valor.getTiempoEjecucionMax()) {
                 max = valor.getTiempoEjecucionMax();
+            }
         }
         return max;
     }
