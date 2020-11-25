@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 public class ModeloTblMemoria extends AbstractTableModel {
 
     private static final int CANT_COLS = 1;
-    private static final String[] NOM_COLS = {"Nombre de proceso"};
+    private static final String[] NOM_COLS = {"Memoria (32 KB)"};
     private List<Proceso> Procesos;
 
     @Override

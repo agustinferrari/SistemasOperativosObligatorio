@@ -22,6 +22,7 @@ public class Sistema extends Observable {
     private List<Recurso> recursos;
     private List<Usuario> usuarios;
     private Proceso[] memoria;
+    private Usuario admin;
     private int timeout;
     boolean perdioCPU;
 
@@ -69,6 +70,9 @@ public class Sistema extends Observable {
         usuarios = new ArrayList<Usuario>();
         memoria = new Proceso[32];
         timeout = 10;
+        Usuario admin = new Usuario("admin");
+        this.admin = admin;
+        this.agregarUsuario(admin);
     }
 
     private boolean guardarEnMemoria(Proceso p) {
@@ -122,6 +126,7 @@ public class Sistema extends Observable {
             Instruccion instruccionDevolver = new Instruccion("D" + miRecurso.getNombre(), 0, 0, miRecurso);
             agregarInstruccion(instruccionPedir);
             agregarInstruccion(instruccionDevolver);
+            this.admin.agregarPermiso(miRecurso);
         } else {
             return false;
         }
@@ -151,6 +156,9 @@ public class Sistema extends Observable {
     }
 
     public void borrarUsuario(Usuario miUsuario) {
+        if(miUsuario.equals(this.admin))
+            return;
+        
         usuarios.remove(miUsuario);
         for (Proceso p : procesosListos) {
             if (p.getUsuario().equals(miUsuario)) {

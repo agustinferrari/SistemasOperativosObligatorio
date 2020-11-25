@@ -169,7 +169,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
             }
         });
 
-        jLabel3.setText("Lista procesos listos");
+        jLabel3.setText("Procesos listos");
 
         lstUsuarios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -254,7 +254,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        jLabel7.setText("Lista procesos bloqueados");
+        jLabel7.setText("Procesos bloqueados");
 
         lstBloqueados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(lstBloqueados);
@@ -275,7 +275,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
         lstSuspendidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane6.setViewportView(lstSuspendidos);
 
-        jLabel8.setText("Lista procesos suspendidos");
+        jLabel8.setText("Procesos en espera por memoria");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

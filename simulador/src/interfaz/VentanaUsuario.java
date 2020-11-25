@@ -15,20 +15,17 @@ import java.util.Observer;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultListSelectionModel;
 
+public class VentanaUsuario extends javax.swing.JFrame implements Observer {
 
-
-public class VentanaUsuario extends javax.swing.JFrame implements Observer{
-
-   
     Sistema sis;
-    
+
     public VentanaUsuario(Sistema pSistema) {
         initComponents();
         sis = pSistema;
         listarRecursos();
         listarUsuarios();
         sis.log("Se abre ventana usuario");
-        
+
         // permite seleccionar varios recursos solo haciendo click
         lstRecursos.setSelectionModel(new DefaultListSelectionModel() {
             @Override
@@ -43,23 +40,19 @@ public class VentanaUsuario extends javax.swing.JFrame implements Observer{
                 }
             }
         });
-        
-        
-        
-        
+
     }
-    
+
     //Patron singleton
     private static VentanaUsuario instancia = null;
 
     // si no existe la crea
     public static VentanaUsuario getInstancia(Sistema pSistema) {
-        if (instancia == null)
+        if (instancia == null) {
             instancia = new VentanaUsuario(pSistema);
+        }
         return instancia;
     }
-   
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -197,19 +190,23 @@ public class VentanaUsuario extends javax.swing.JFrame implements Observer{
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         Usuario u = (Usuario) lstUsuarios.getSelectedValue();
-        if(u != null){
+        if (u != null) {
+            if (u.getNombre().equals("admin")) {
+                lblMensaje.setText("Error: No se puede eliminar el usuario admin");
+            }else{
             int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog (null, "Al eliminar este usuario se destruirán todos los procesos asociados, ¿deseas continuar?","Warning",dialogButton);
-            if(dialogResult == JOptionPane.YES_OPTION){
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Al eliminar este usuario se destruirán todos los procesos asociados, ¿deseas continuar?", "Warning", dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION) {
                 sis.borrarUsuario(u);
-                lblMensaje.setText("El usuario "+ u.toString() + " fue eliminado del sistema exitosamente!" );
+                lblMensaje.setText("El usuario " + u.toString() + " fue eliminado del sistema exitosamente!");
                 listarUsuarios();
                 limpiar();
-                }
-        }
-        else{
+            }
+            }
+            
+        } else {
             lstUsuarios.setForeground(Color.RED);
-            lblMensaje.setText("Error: Debe seleccionar la instruccion a eliminar" );
+            lblMensaje.setText("Error: Debe seleccionar el usuario a eliminar");
         }
     }//GEN-LAST:event_btnBorrarActionPerformed
 
@@ -217,19 +214,17 @@ public class VentanaUsuario extends javax.swing.JFrame implements Observer{
         limpiarMensajes();
         String nombre = tfNombre.getText();
         List<Recurso> recursos = (List<Recurso>) lstRecursos.getSelectedValuesList();
-        if(!faltanDatos(nombre)){
+        if (!faltanDatos(nombre)) {
             Usuario u = new Usuario(nombre, recursos);
-            if(sis.agregarUsuario(u)){
+            if (sis.agregarUsuario(u)) {
                 lblMensaje.setText("Usuario agregado exitosamente!");
                 listarUsuarios();
                 limpiar();
-            }
-            else{
+            } else {
                 lblMensaje.setText("Error: Ya existe una instruccion con el nombre ingresado");
                 tfNombre.setForeground(Color.RED);
             }
-        }
-        else{
+        } else {
             lblMensaje.setText("Error: verifique que los campos no están vacíos y sean validos");
         }
     }//GEN-LAST:event_btnCrearActionPerformed
@@ -243,20 +238,20 @@ public class VentanaUsuario extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_lstRecursosMouseReleased
 
     //AUX
-    private void listarRecursos(){
+    private void listarRecursos() {
         this.lstRecursos.setListData(sis.getRecursos().toArray());
     }
-    
-    private void listarUsuarios(){
+
+    private void listarUsuarios() {
         lstUsuarios.setListData(sis.getUsuarios().toArray());
     }
-    
-    private void limpiar(){
+
+    private void limpiar() {
         tfNombre.setText("");
         tfNombre.setForeground(Color.BLACK);
         lstRecursos.setForeground(Color.BLACK);
     }
-    
+
     private boolean faltanDatos(String nombre) {
         boolean ret = false;
         if (nombre.equals("")) {
@@ -265,12 +260,12 @@ public class VentanaUsuario extends javax.swing.JFrame implements Observer{
         }
         return ret;
     }
-    
-     private void limpiarMensajes() {
+
+    private void limpiarMensajes() {
         lblMensaje.setText("");
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnCrear;

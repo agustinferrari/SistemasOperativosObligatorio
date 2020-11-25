@@ -28,7 +28,7 @@ public class ColoresMemoria extends JLabel implements TableCellRenderer {///exte
 
         
         super.setBackground(p.getColor());
-        super.setText(texto);
+        //super.setText(texto);
         return this;
     }
 }

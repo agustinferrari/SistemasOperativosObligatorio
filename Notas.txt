@@ -1,12 +1,9 @@
- - Matriz para manejar los procesos (usuarios x recursos)
- - Cada proceso es de un usuario en concreto 
- - Recursos de diferentes tipos (serialmente usables(mas interesantes) y no)
- - Los recursos pueden tener una componente aleatoria para calcular su tiempo de bloqueado
 
- - Alojar un proceso en memoria, tenemos que simularlo - en principio lo suponemos y en una segunda instancia hay que hacerlo
+
+ - Recursos de diferentes tipos (serialmente usables(mas interesantes) y no)
+
  - Documentar algunas cosas. Ejemplo: Agrego si permitimos si la siguiente instruccion supera el timeout, si la dejamos ejecutar y cortamos despues de ella o antes
  - "Podemos tener otros recursos, que no son RSR ni CPU ni memoria, pero su gestión es relativamente sencilla" tipo el wifi que lo pueden usar mas de un proceso a la vez, solo tendria que controlar los permisos y llevar la lista de los procesos que estan usando (igual tengo que hacer el pedir/devolver)
- - Podemos guardar los procesos en una lista de PCBs, para cada uno podemos guardar datos, como ser que recursos tiene, en que estado esta, por que recursos espera, que zonas de memoria tiene, etc
  - se pueden crear variables (ver clase18 27/10)
  - "dejen bien delimitado el mundo de la simulacion( ABC etc) y el mundo de las herramientas de sincronizacion de las que disponemos de nuestro entorno con el cual desarrollamos el simulador"  
  - Habria que implementar un cobegin/coen/ o fork y join ver clase18 27/10
@@ -19,8 +16,6 @@
    - es una caracteristica global del sistema. No la define el usuario. Habria que aclarar en la documentacion que dejamos cambiar el quantum
    - hay que documentar tambien, cuando se esta terminando el quantum, si dejamos pasar un ultimo proceso o si lo paramos antes
 
- - Un proceso no puede participar de la ejecucion si no esta en memoria
- - Al terminar de ejecutar un proceso libera memoria
 
 - no solo el pedirRecurso te pasa a la lista de bloqueado, usar el recurso tambien. 
 - tendriamos que usar el metodo de reduccion (clase 19) para saber que proceso esta en deadlock, asi saber cual matar
@@ -28,8 +23,6 @@
  - los que tienen solo un recurso y no piden nada los reducis
  - los que solo estan pidiendo un recurso tambien los reducis
  - etc
-
-- instrucciones con tiempo aleatorio tanto las de los recursos como las de solo CPU
 
 - Agregar codigo relevante a la documentacion. Y hacer algunos comentarios? clase 17/11 10:30 aprox
 - Agregar un READM con instrucciones basicas de como hacer un proceso y como ejecutar el simluador
@@ -48,7 +41,7 @@ Sacado de la clase 6 Nocturno
 Funciones del núcleo del Sistema Operativo
 	 Manejo de interrupciones
 	 Creación y destrucción de procesos
-	 Cambio de estados entre procesos
+	 Cambio de estados entre proceso
 	 Despacho
 	 Suspensión y reanudación
 	 Sincronización de procesos
