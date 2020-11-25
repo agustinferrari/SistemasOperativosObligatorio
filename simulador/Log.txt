@@ -7,13 +7,13 @@
 # [7] Se desperto el proceso [PRec1, A, B, C, C, A, DRec1]
 # [8] -------------- El Proceso [PRec1, A, B, C, C, A, DRec1] entro a ejecución -------------- 
 # [9] Se ejecuto la instruccion: B, min:1 max: 9t,  sin recurso asociado del Proceso [PRec1, A, B, C, C, A, DRec1] Demoro: 6t
-# [10] Se utiliza el recurso Rec1 con la instruccion C, min:7 max: 14t, Rec1 || Se bloquea el proceso [PRec1, A, B, C, C, A, DRec1] por 10t
+# [10] Se utiliza el recurso Rec1 con la instruccion C, min:7 max: 14t, Rec1 || Se bloquea el proceso [PRec1, A, B, C, C, A, DRec1] por 12t
 # [11] Se desperto el proceso [PRec1, A, B, C, C, A, DRec1]
 # [12] -------------- El Proceso [PRec1, A, B, C, C, A, DRec1] entro a ejecución -------------- 
-# [13] Se utiliza el recurso Rec1 con la instruccion C, min:7 max: 14t, Rec1 || Se bloquea el proceso [PRec1, A, B, C, C, A, DRec1] por 13t
+# [13] Se utiliza el recurso Rec1 con la instruccion C, min:7 max: 14t, Rec1 || Se bloquea el proceso [PRec1, A, B, C, C, A, DRec1] por 8t
 # [14] Se desperto el proceso [PRec1, A, B, C, C, A, DRec1]
 # [15] -------------- El Proceso [PRec1, A, B, C, C, A, DRec1] entro a ejecución -------------- 
-# [16] Se utiliza el recurso Rec1 con la instruccion A, min:5 max: 8t, Rec1 || Se bloquea el proceso [PRec1, A, B, C, C, A, DRec1] por 8t
+# [16] Se utiliza el recurso Rec1 con la instruccion A, min:5 max: 8t, Rec1 || Se bloquea el proceso [PRec1, A, B, C, C, A, DRec1] por 5t
 # [17] Se desperto el proceso [PRec1, A, B, C, C, A, DRec1]
 # [18] -------------- El Proceso [PRec1, A, B, C, C, A, DRec1] entro a ejecución -------------- 
 # [19] El proceso [PRec1, A, B, C, C, A, DRec1] devuelve el recurso Rec1

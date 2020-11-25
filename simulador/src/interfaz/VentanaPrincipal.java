@@ -444,7 +444,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
         VentanaLog vent = VentanaLog.getInstancia(sis);
         vent.setMinimumSize(new Dimension(820, 378));
         vent.setVisible(true);
-        sis.addObserver(vent);
+//        sis.addObserver(vent);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCorrer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorrer1ActionPerformed

@@ -21,8 +21,10 @@ public class VentanaLog extends javax.swing.JFrame implements Observer{
 
    private Sistema sis;
    
-    public VentanaLog(Sistema pSistema) {
+    public VentanaLog(Sistema miSistema) {
         initComponents();
+        sis = miSistema;
+        sis.addObserver(this);
         metodoEscribirLog();
     }
 
@@ -38,6 +40,11 @@ public class VentanaLog extends javax.swing.JFrame implements Observer{
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -70,14 +77,19 @@ public class VentanaLog extends javax.swing.JFrame implements Observer{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        borrar();
+    }//GEN-LAST:event_formWindowClosing
+
     
 //Patron singleton
     private static VentanaLog instancia = null;
 
     // si no existe la crea
     public static VentanaLog getInstancia(Sistema pSistema) {
-        if (instancia == null)
+        if (instancia == null){
             instancia = new VentanaLog(pSistema);
+        }
         return instancia;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -90,27 +102,27 @@ public class VentanaLog extends javax.swing.JFrame implements Observer{
 private void metodoEscribirLog (){
   BufferedReader buff = null;
   try {
+       borrar();
        buff = new BufferedReader(new FileReader("Log.txt"));
        String str;
        while ((str = buff.readLine()) != null) {
        textLog.append(str + "\n");
    }
  } catch (IOException e) {
-      sis.log("Aca es donde se cae linea 102 ventanaLog");
+//      sis.log("Aca es donde se cae linea 102 ventanaLog");
   } finally {
     try { in.close(); } catch (Exception ex) {sis.log("Se cae en escribir"); }
     }
 }
 
-private void borrar(){
-    textLog.removeAll();
+private  void borrar(){
+    textLog.selectAll();
+    textLog.replaceSelection("");
 }
     @Override
    public void update(Observable o, Object o1) {
       borrar();
       metodoEscribirLog();
-      //sis.log("Funciona el update");
     }
-
 
 }
