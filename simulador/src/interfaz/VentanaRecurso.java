@@ -10,28 +10,30 @@ import dominio.Sistema;
 import java.awt.Color;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ivanm
  */
-public class VentanaRecurso extends javax.swing.JFrame implements Observer{
+public class VentanaRecurso extends javax.swing.JFrame implements Observer {
 
     Sistema sis;
-    
+
     public VentanaRecurso(Sistema pSistema) {
         initComponents();
         sis = pSistema;
         listarRecursos();
     }
-    
+
     //Patron singleton
     private static VentanaRecurso instancia = null;
 
     // si no existe la crea
     public static VentanaRecurso getInstancia(Sistema pSistema) {
-        if (instancia == null)
+        if (instancia == null) {
             instancia = new VentanaRecurso(pSistema);
+        }
         return instancia;
     }
 
@@ -132,8 +134,8 @@ public class VentanaRecurso extends javax.swing.JFrame implements Observer{
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBorrarRecurso, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMensaje)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -142,19 +144,17 @@ public class VentanaRecurso extends javax.swing.JFrame implements Observer{
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         limpiarMensajes();
         String nombre = tfNombre.getText();
-        if(!faltanDatos(nombre)){
+        if (!faltanDatos(nombre)) {
             Recurso r = new Recurso(nombre);
-            if(sis.agregarRecurso(r)){
+            if (sis.agregarRecurso(r)) {
                 lblMensaje.setText("Recurso agregado exitosamente!");
                 listarRecursos();
                 limpiar();
-            }
-            else{
+            } else {
                 lblMensaje.setText("Error: Ya existe un recurso con el nombre ingresado");
                 tfNombre.setForeground(Color.RED);
             }
-        }
-        else{
+        } else {
             lblMensaje.setText("Error: el nombre del recurso no debe ser vacio");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -165,15 +165,18 @@ public class VentanaRecurso extends javax.swing.JFrame implements Observer{
 
     private void btnBorrarRecursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarRecursoActionPerformed
         Recurso r = (Recurso) lstRecursos.getSelectedValue();
-        if(r != null){
-            sis.borrarRecurso(r);
-            lblMensaje.setText("El recurso "+ r.toString() + " fue eliminado del sistema exitosamente!" );
-            listarRecursos();
-            limpiar();
-        }
-        else{
+        if (r != null) {
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Al eliminar este recurso se destruirán todos los procesos bloquedados por el e instrucciones asociadas, ¿deseas continuar?", "Warning", dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                sis.borrarRecurso(r);
+                lblMensaje.setText("El recurso " + r.toString() + " fue eliminado del sistema exitosamente!");
+                listarRecursos();
+                limpiar();
+            }
+        } else {
             lstRecursos.setForeground(Color.RED);
-            lblMensaje.setText("Error: Debe seleccionar el recurso a eliminar" );
+            lblMensaje.setText("Error: Debe seleccionar el recurso a eliminar");
         }
     }//GEN-LAST:event_btnBorrarRecursoActionPerformed
 
@@ -182,15 +185,15 @@ public class VentanaRecurso extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_lstRecursosMouseReleased
 
     //AUX
-    private void listarRecursos(){
+    private void listarRecursos() {
         lstRecursos.setListData(sis.getRecursos().toArray());
     }
-    
-    private void limpiar(){
+
+    private void limpiar() {
         tfNombre.setText("");
         tfNombre.setForeground(Color.BLACK);
     }
-    
+
     private boolean faltanDatos(String nombre) {
         boolean ret = false;
         if (nombre.equals("")) {
@@ -199,15 +202,12 @@ public class VentanaRecurso extends javax.swing.JFrame implements Observer{
         }
         return ret;
     }
-    
-     private void limpiarMensajes() {
+
+    private void limpiarMensajes() {
         lblMensaje.setText("");
     }
-    
-    
-    
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBorrarRecurso;
