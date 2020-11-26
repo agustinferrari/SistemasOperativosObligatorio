@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 public class VentanaInstruccion extends javax.swing.JFrame implements Observer {
@@ -226,7 +227,7 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer {
 
         Recurso recurso = (Recurso) lstRecursos.getSelectedValue();
         if (!faltanDatos(nombre, min, max)) {
-            Instruccion i = new Instruccion(nombre, min,max, recurso);
+            Instruccion i = new Instruccion(nombre, min, max, recurso);
             if (sis.agregarInstruccion(i)) {
                 lblMensaje.setText("Instruccion agregada exitosamente!");
                 listarInstrucciones();
@@ -244,10 +245,14 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer {
         int idIntstruccion = tblInstrucciones.getSelectedRow();
         Instruccion i = (Instruccion) sis.getInstrucciones().values().toArray()[idIntstruccion];
         if (i != null && i.pideRecurso() == null & i.devuelveRecurso() == null) {
-            sis.borrarInstruccion(i);
-            lblMensaje.setText("La instruccion " + i.toString() + " fue eliminada del sistema exitosamente!");
-            listarInstrucciones();
-            limpiar();
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Al eliminar esta instrucción se destruirán los procesos que intenten ejecutarla, ¿deseas continuar?", "Warning", dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                sis.borrarInstruccion(i);
+                lblMensaje.setText("La instruccion " + i.toString() + " fue eliminada del sistema exitosamente!");
+                listarInstrucciones();
+                limpiar();
+            }
         } else {
             tblInstrucciones.setForeground(Color.RED);
             lblMensaje.setText("Error: Debe seleccionar la instruccion a eliminar, no se pueden borrar instrucciones de pedir o devolver recursos");

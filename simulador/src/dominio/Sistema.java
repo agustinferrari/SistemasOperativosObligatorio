@@ -353,11 +353,17 @@ public class Sistema extends Observable {
         for (Recurso r : this.recursos) {
             boolean liberado = r.avanzarUnTick();
             if (liberado) {
-                Iterator<Proceso> bloqueados = procesosBloqueados.iterator();
-                while (bloqueados.hasNext()) {
-                    Proceso p = bloqueados.next();
-                    if (ProcesoBloqueadoPor(p, r)) {
-                        bloqueados.remove();
+                Iterator<Proceso> itBloqueados = procesosBloqueados.iterator();
+                while (itBloqueados.hasNext()) {
+                    Proceso p = itBloqueados.next();
+                    if (conseguirSiguienteInstruccion(p) == null) {
+                        log("La instruccion por la que estaba bloqueado " + p.toString() + " ha sido borrada, se mata el proceso");
+                        itBloqueados.remove();
+                        devolverMemoria(p);
+                        devolverTodosLosRecursos(p);
+                    }
+                    else if (ProcesoBloqueadoPor(p, r)) {
+                        itBloqueados.remove();
                         despertarProceso(p);
                     }
                 }
