@@ -29,6 +29,7 @@ public class VentanaPruebas extends javax.swing.JFrame {
         btnPruebaCompleta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         btnPruebaMutuaExcl.setText("Prueba Mutua Excl.");
         btnPruebaMutuaExcl.addActionListener(new java.awt.event.ActionListener() {
