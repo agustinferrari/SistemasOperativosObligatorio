@@ -123,7 +123,7 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer {
         ));
         jScrollPane1.setViewportView(tblInstrucciones);
 
-        jLabel2.setText("Tabla de Instricuiones");
+        jLabel2.setText("Tabla de Instrucciones");
 
         tfMax.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {

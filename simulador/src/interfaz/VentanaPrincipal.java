@@ -152,7 +152,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
 
         jLabel1.setText("Lista de usuarios");
 
-        abrirSesion.setText("Abrir Sesion");
+        abrirSesion.setText("Abrir Sesión");
         abrirSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abrirSesionActionPerformed(evt);
@@ -183,11 +183,11 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
 
         panelOpciones.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel5.setText("Cuantos ciclos avanzar:");
+        jLabel5.setText("Cantidad de ciclos a avanzar:");
 
         ticks.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
-        jLabel2.setText("Quantum:");
+        jLabel2.setText("Quántum:");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setText("Ejecución");
@@ -436,7 +436,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         VentanaLog vent = VentanaLog.getInstancia(sis);
-        vent.setMinimumSize(new Dimension(1600, 800));
+        vent.setMinimumSize(new Dimension(1366, 720));
         vent.setVisible(true);
 //        sis.addObserver(vent);
     }//GEN-LAST:event_jButton1ActionPerformed

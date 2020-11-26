@@ -47,7 +47,7 @@ public class VentanaPruebas extends javax.swing.JFrame {
             }
         });
 
-        btnPruebaBasica.setText("Prueba Basica");
+        btnPruebaBasica.setText("Prueba Básica");
         btnPruebaBasica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPruebaBasicaActionPerformed(evt);
@@ -65,7 +65,7 @@ public class VentanaPruebas extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("SELECCIONE PRUEBA ");
 
-        btnPruebaVacio.setText("Sistema Vacio");
+        btnPruebaVacio.setText("Sistema Vacío");
         btnPruebaVacio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPruebaVacioActionPerformed(evt);
@@ -179,7 +179,7 @@ public class VentanaPruebas extends javax.swing.JFrame {
         //borrar si existe archivo Log.txt
         borrarArchivoLog();
         ventanaActual = new VentanaPrincipal(sistema);
-        ventanaActual.setMinimumSize(new Dimension(920, 600));
+        ventanaActual.setMinimumSize(new Dimension(1366, 720));
         ventanaActual.setVisible(true);
         sistema.addObserver(ventanaActual);
     }

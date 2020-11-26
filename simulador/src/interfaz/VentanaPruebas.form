@@ -77,7 +77,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPruebaBasica">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Prueba Basica"/>
+        <Property name="text" type="java.lang.String" value="Prueba B&#xe1;sica"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPruebaBasicaActionPerformed"/>
@@ -102,7 +102,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPruebaVacio">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Sistema Vacio"/>
+        <Property name="text" type="java.lang.String" value="Sistema Vac&#xed;o"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPruebaVacioActionPerformed"/>

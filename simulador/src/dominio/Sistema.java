@@ -119,7 +119,7 @@ public class Sistema extends Observable {
             procesosListos.add(miProceso);
         } else {
             procesosSuspendidos.add(miProceso);
-            log("El proceso " + Arrays.toString(miProceso.getInstrucciones()) + " se suspende, no hay lugar suficiente para alojarlo en memoria");
+            log("El proceso " + Arrays.toString(miProceso.getInstrucciones()) + " entra a la lista de espera, no hay lugar suficiente para alojarlo en memoria");
         }
         actualizarVentanas();
     }
