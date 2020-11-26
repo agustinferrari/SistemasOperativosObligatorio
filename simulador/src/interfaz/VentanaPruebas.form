@@ -34,6 +34,7 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnPruebaMutuaExcl" max="32767" attributes="0"/>
                   <Component id="btnPruebaMemoria" max="32767" attributes="0"/>
+                  <Component id="btnPruebaCompleta" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -48,14 +49,24 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel3" min="-2" pref="86" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnPruebaMutuaExcl" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="btnPruebaBasica" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="btnPruebaDeadlock" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="jLabel3" min="-2" pref="32" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnPruebaBasica" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="btnPruebaDeadlock" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnPruebaCompleta" min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnPruebaMutuaExcl" min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnPruebaPermisos" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="btnPruebaVacio" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
@@ -122,6 +133,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPruebaMemoriaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPruebaCompleta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prueba Completa"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPruebaCompletaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
