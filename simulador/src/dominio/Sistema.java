@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -151,6 +152,32 @@ public class Sistema extends Observable {
 
     public void borrarRecurso(Recurso miRecurso) {
         recursos.remove(miRecurso);
+        Iterator<Instruccion> itInstruccion = this.instrucciones.values().iterator();
+        while (itInstruccion.hasNext()) {
+            Instruccion instAux = itInstruccion.next();
+            Iterator<Proceso> itProceso = this.procesosBloqueados.iterator();
+            while (itProceso.hasNext()) {
+                Proceso procesoAux = itProceso.next();
+                if (conseguirSiguienteInstruccion(procesoAux) == null) {
+                    log("La instruccion por la que estaba bloqueado " + procesoAux.toString() + " ha sido borrada, se mata el proceso");
+                    itProceso.remove();
+                    devolverMemoria(procesoAux);
+                    devolverTodosLosRecursos(procesoAux);
+                }
+            }
+            if (instAux.getRecurso() != null && instAux.getRecurso().equals(miRecurso)) {
+                itInstruccion.remove();
+            }
+        }
+
+        Proceso p = miRecurso.proximoProcesoEsperando();
+        while (p != null) {
+            log("El Recurso por el que estaba bloqueado " + p.toString() + " ha sido borrado, se mata el proceso");
+            this.procesosBloqueados.remove(p);
+            devolverMemoria(p);
+            devolverTodosLosRecursos(p);
+            p = miRecurso.proximoProcesoEsperando();
+        }
         actualizarVentanas();
     }
 
@@ -165,14 +192,23 @@ public class Sistema extends Observable {
         }
 
         usuarios.remove(miUsuario);
-        for (Proceso p : procesosListos) {
+        for (Proceso p : this.procesosListos) {
             if (p.getUsuario().equals(miUsuario)) {
-                procesosListos.remove(p);
+                this.procesosListos.remove(p);
+                devolverMemoria(p);
+                devolverTodosLosRecursos(p);
             }
         }
-        for (Proceso p : procesosBloqueados) {
+        for (Proceso p : this.procesosBloqueados) {
             if (p.getUsuario().equals(miUsuario)) {
-                procesosBloqueados.remove(p);
+                this.procesosBloqueados.remove(p);
+                devolverMemoria(p);
+                devolverTodosLosRecursos(p);
+            }
+        }
+        for (Proceso p : this.procesosSuspendidos) {
+            if (p.getUsuario().equals(miUsuario)) {
+                this.procesosSuspendidos.remove(p);
             }
         }
         actualizarVentanas();
@@ -396,18 +432,20 @@ public class Sistema extends Observable {
     private void devolverTodosLosRecursos(Proceso p) {
         ArrayList<Recurso> recursosADevolver = p.getRecursosActuales();
         for (Recurso recursoDevuelto : recursosADevolver) {
-            log("El proceso " + Arrays.toString(p.getInstrucciones()) + " devuelve el recurso " + recursoDevuelto.getNombre());
-            Proceso proximo = recursoDevuelto.proximoProcesoEsperando();
-            if (proximo != null && this.procesosBloqueados.contains(proximo)) {
-                log("El recurso " + recursoDevuelto.getNombre() + " es asignado al proceso " + Arrays.toString(proximo.getInstrucciones()));
-                proximo.agregarRecurso(recursoDevuelto);
-                this.procesosBloqueados.remove(proximo);
-                this.procesosListos.add(proximo);
-                log("Se despierta el proceso " + proximo);
+            if (this.recursos.contains(recursoDevuelto)) {
+                log("El proceso " + Arrays.toString(p.getInstrucciones()) + " devuelve el recurso " + recursoDevuelto.getNombre());
+                Proceso proximo = recursoDevuelto.proximoProcesoEsperando();
+                if (proximo != null && this.procesosBloqueados.contains(proximo)) {
+                    log("El recurso " + recursoDevuelto.getNombre() + " es asignado al proceso " + Arrays.toString(proximo.getInstrucciones()));
+                    proximo.agregarRecurso(recursoDevuelto);
+                    this.procesosBloqueados.remove(proximo);
+                    this.procesosListos.add(proximo);
+                    log("Se despierta el proceso " + proximo);
 
-            } else {
-                log("El recurso se libera");
-                recursoDevuelto.desocupar();
+                } else {
+                    log("El recurso se libera");
+                    recursoDevuelto.desocupar();
+                }
             }
         }
         this.actualizarVentanas();

@@ -193,17 +193,17 @@ public class VentanaUsuario extends javax.swing.JFrame implements Observer {
         if (u != null) {
             if (u.getNombre().equals("admin")) {
                 lblMensaje.setText("Error: No se puede eliminar el usuario admin");
-            }else{
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Al eliminar este usuario se destruirán todos los procesos asociados, ¿deseas continuar?", "Warning", dialogButton);
-            if (dialogResult == JOptionPane.YES_OPTION) {
-                sis.borrarUsuario(u);
-                lblMensaje.setText("El usuario " + u.toString() + " fue eliminado del sistema exitosamente!");
-                listarUsuarios();
-                limpiar();
+            } else {
+                int dialogButton = JOptionPane.YES_NO_OPTION;
+                int dialogResult = JOptionPane.showConfirmDialog(null, "Al eliminar este usuario se destruirán todos los procesos asociados, ¿deseas continuar?", "Warning", dialogButton);
+                if (dialogResult == JOptionPane.YES_OPTION) {
+                    sis.borrarUsuario(u);
+                    lblMensaje.setText("El usuario " + u.toString() + " fue eliminado del sistema exitosamente!");
+                    listarUsuarios();
+                    limpiar();
+                }
             }
-            }
-            
+
         } else {
             lstUsuarios.setForeground(Color.RED);
             lblMensaje.setText("Error: Debe seleccionar el usuario a eliminar");
