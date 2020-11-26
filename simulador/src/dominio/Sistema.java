@@ -191,7 +191,7 @@ public class Sistema extends Observable {
             int t = 0;
             perdioCPU = false;
             Proceso proceso = this.procesosListos.remove();
-            this.log("-------------- El Proceso " + proceso + " entro a ejecución -------------- ");
+            this.log("-------------- El Proceso " + proceso + " entro a ejecución. Usuario: "+proceso.getUsuario().getNombre() +" -------------- ");
             while (((t <= this.timeout) && (!proceso.termino() && !perdioCPU))) {
                 Instruccion nuevaInst = conseguirSiguienteInstruccion(proceso);
                 if (nuevaInst != null) {
@@ -261,7 +261,7 @@ public class Sistema extends Observable {
                 recurso.esperar(instruccion.getTiempoEjecucion());
                 this.procesosBloqueados.add(proceso);
             } else {
-                log("El proceso " + Arrays.toString(proceso.getInstrucciones()) + " no tiene permiso para usar " + recurso.getNombre());
+                log("El proceso " + Arrays.toString(proceso.getInstrucciones()) + " no tiene permiso para usar " + recurso.getNombre() + ", se mata el proceso" );
                 devolverMemoria(proceso);
                 devolverTodosLosRecursos(proceso);
             }
