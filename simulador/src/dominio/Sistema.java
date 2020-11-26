@@ -338,7 +338,12 @@ public class Sistema extends Observable {
             }
             FileWriter f = new FileWriter(flog, true);
             BufferedWriter bufferedWriter = new BufferedWriter(f);
-            bufferedWriter.write("# [" + this.numeroLinea + "] " + l + "\n");
+            if ("".equals(l)) {
+                bufferedWriter.write("\n");
+            }
+            else{
+                bufferedWriter.write("# [" + this.numeroLinea + "] " + l + "\n");
+            }
             bufferedWriter.close();
         } catch (IOException e) {
             System.out.println("Ocurrió un error en el log.");

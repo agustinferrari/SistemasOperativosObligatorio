@@ -52,6 +52,7 @@ public class VentanaLog extends javax.swing.JFrame implements Observer{
 
         textLog.setEditable(false);
         textLog.setColumns(20);
+        textLog.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         textLog.setRows(5);
         jScrollPane1.setViewportView(textLog);
 
