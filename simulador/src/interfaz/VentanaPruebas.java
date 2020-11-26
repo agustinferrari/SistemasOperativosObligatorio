@@ -30,32 +30,34 @@ public class VentanaPruebas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnPrueba1 = new javax.swing.JButton();
-        btnPrueba2 = new javax.swing.JButton();
-        btnPrueba3 = new javax.swing.JButton();
+        btnPruebaMutuaExcl = new javax.swing.JButton();
+        btnPruebaBasica = new javax.swing.JButton();
+        btnPruebaDeadlock = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        btnPrueba4 = new javax.swing.JButton();
+        btnPruebaVacio = new javax.swing.JButton();
+        btnPruebaPermisos = new javax.swing.JButton();
+        btnPruebaMemoria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnPrueba1.setText("Prueba 3");
-        btnPrueba1.addActionListener(new java.awt.event.ActionListener() {
+        btnPruebaMutuaExcl.setText("Prueba Mutua Excl.");
+        btnPruebaMutuaExcl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrueba1ActionPerformed(evt);
+                btnPruebaMutuaExclActionPerformed(evt);
             }
         });
 
-        btnPrueba2.setText("Prueba 1");
-        btnPrueba2.addActionListener(new java.awt.event.ActionListener() {
+        btnPruebaBasica.setText("Prueba Basica");
+        btnPruebaBasica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrueba2ActionPerformed(evt);
+                btnPruebaBasicaActionPerformed(evt);
             }
         });
 
-        btnPrueba3.setText("Prueba 3");
-        btnPrueba3.addActionListener(new java.awt.event.ActionListener() {
+        btnPruebaDeadlock.setText("Prueba Deadlock");
+        btnPruebaDeadlock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrueba3ActionPerformed(evt);
+                btnPruebaDeadlockActionPerformed(evt);
             }
         });
 
@@ -63,10 +65,24 @@ public class VentanaPruebas extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("SELECCIONE PRUEBA ");
 
-        btnPrueba4.setText("Sistema Vacio");
-        btnPrueba4.addActionListener(new java.awt.event.ActionListener() {
+        btnPruebaVacio.setText("Sistema Vacio");
+        btnPruebaVacio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrueba4ActionPerformed(evt);
+                btnPruebaVacioActionPerformed(evt);
+            }
+        });
+
+        btnPruebaPermisos.setText("Prueba Permisos");
+        btnPruebaPermisos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPruebaPermisosActionPerformed(evt);
+            }
+        });
+
+        btnPruebaMemoria.setText("Prueba Memoria");
+        btnPruebaMemoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPruebaMemoriaActionPerformed(evt);
             }
         });
 
@@ -77,15 +93,18 @@ public class VentanaPruebas extends javax.swing.JFrame {
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPrueba2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPruebaBasica, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPruebaPermisos, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnPruebaMutuaExcl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPruebaMemoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPrueba4, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnPrueba1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPrueba3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(btnPruebaVacio, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPruebaDeadlock, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,35 +113,49 @@ public class VentanaPruebas extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPrueba1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPrueba2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPrueba3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPruebaMutuaExcl, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPruebaBasica, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPruebaDeadlock, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnPrueba4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPruebaPermisos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPruebaVacio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPruebaMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPrueba1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrueba1ActionPerformed
+    private void btnPruebaMutuaExclActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaMutuaExclActionPerformed
+        sistema = Prueba.inicializarMutuaExclusion();
+        CargarVentanaPrincipal();
+    }//GEN-LAST:event_btnPruebaMutuaExclActionPerformed
+
+    private void btnPruebaBasicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaBasicaActionPerformed
         sistema = Prueba.inicializar();
         CargarVentanaPrincipal();
-    }//GEN-LAST:event_btnPrueba1ActionPerformed
+    }//GEN-LAST:event_btnPruebaBasicaActionPerformed
 
-    private void btnPrueba2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrueba2ActionPerformed
-        sistema = Prueba.inicializar2();
-        CargarVentanaPrincipal();
-    }//GEN-LAST:event_btnPrueba2ActionPerformed
-
-    private void btnPrueba3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrueba3ActionPerformed
+    private void btnPruebaDeadlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaDeadlockActionPerformed
         sistema = Prueba.inicializarDeadlock();
         CargarVentanaPrincipal();
-    }//GEN-LAST:event_btnPrueba3ActionPerformed
+    }//GEN-LAST:event_btnPruebaDeadlockActionPerformed
 
-    private void btnPrueba4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrueba4ActionPerformed
+    private void btnPruebaVacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaVacioActionPerformed
         sistema = Prueba.inicializarVacio();
         CargarVentanaPrincipal();
-    }//GEN-LAST:event_btnPrueba4ActionPerformed
+    }//GEN-LAST:event_btnPruebaVacioActionPerformed
+
+    private void btnPruebaPermisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaPermisosActionPerformed
+        sistema = Prueba.inicializarPermisos();
+        CargarVentanaPrincipal();
+    }//GEN-LAST:event_btnPruebaPermisosActionPerformed
+
+    private void btnPruebaMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaMemoriaActionPerformed
+        sistema = Prueba.inicializarMemoria();
+        CargarVentanaPrincipal();
+    }//GEN-LAST:event_btnPruebaMemoriaActionPerformed
 
     private static void borrarArchivoLog() {
         try {
@@ -168,10 +201,12 @@ public class VentanaPruebas extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPrueba1;
-    private javax.swing.JButton btnPrueba2;
-    private javax.swing.JButton btnPrueba3;
-    private javax.swing.JButton btnPrueba4;
+    private javax.swing.JButton btnPruebaBasica;
+    private javax.swing.JButton btnPruebaDeadlock;
+    private javax.swing.JButton btnPruebaMemoria;
+    private javax.swing.JButton btnPruebaMutuaExcl;
+    private javax.swing.JButton btnPruebaPermisos;
+    private javax.swing.JButton btnPruebaVacio;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

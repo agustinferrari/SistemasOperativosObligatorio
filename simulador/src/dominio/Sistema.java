@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Stack;
 
 public class Sistema extends Observable {
 
@@ -191,7 +192,7 @@ public class Sistema extends Observable {
             int t = 0;
             perdioCPU = false;
             Proceso proceso = this.procesosListos.remove();
-            this.log("-------------- El Proceso " + proceso + " entro a ejecución. Usuario: "+proceso.getUsuario().getNombre() +" -------------- ");
+            this.log("-------------- El Proceso " + proceso + " entro a ejecución. Usuario: " + proceso.getUsuario().getNombre() + " -------------------------------------------------------------- ");
             while (((t <= this.timeout) && (!proceso.termino() && !perdioCPU))) {
                 Instruccion nuevaInst = conseguirSiguienteInstruccion(proceso);
                 if (nuevaInst != null) {
@@ -216,8 +217,7 @@ public class Sistema extends Observable {
                             }
                         }
                     }
-                }
-                else{
+                } else {
                     log("Instruccion " + proceso.getInstruccion() + " invalida, se mata el proceso " + proceso);
                     perdioCPU = true;
                     devolverMemoria(proceso);
@@ -237,19 +237,25 @@ public class Sistema extends Observable {
         }
 
         try {
-            while (!this.procesosBloqueados.isEmpty() && this.procesosListos.isEmpty() && (cantidadCiclos > 0 || cantidadCiclos == -1)) {
+            int i = 0;
+            while (!this.procesosBloqueados.isEmpty() && this.procesosListos.isEmpty() && (cantidadCiclos > 0 || cantidadCiclos == -1) && Thread.currentThread().getStackTrace().length < 1024) {
                 avanzarUnTick();
                 ejecutar(cantidadCiclos);
+                i++;
+            }
+            if (this.procesosListos.isEmpty() && !this.procesosBloqueados.isEmpty()) {
+                this.log("+++++++++++++++++++++++++++++++++++++++++ DEADLOCK +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                while (!this.procesosBloqueados.isEmpty() && this.procesosListos.isEmpty()) {
+                    Proceso procesoAMatar = this.procesosBloqueados.poll();
+                    this.log("Se libera la memoria y recursos de " + procesoAMatar);
+                    devolverMemoria(procesoAMatar);
+                    devolverTodosLosRecursos(procesoAMatar);
+                    this.log("Se mata el proceso " + procesoAMatar);
+                }
+                this.actualizarVentanas();
             }
         } catch (StackOverflowError e) {
             this.log("Deadlock");
-            for (Proceso proceso : this.procesosBloqueados) {
-                this.log("Se mata el proceso " + proceso);
-                devolverTodosLosRecursos(proceso);
-                devolverMemoria(proceso);
-            }
-            this.procesosBloqueados.removeAll(this.procesosBloqueados);
-            this.actualizarVentanas();
         }
     }
 
@@ -261,7 +267,7 @@ public class Sistema extends Observable {
                 recurso.esperar(instruccion.getTiempoEjecucion());
                 this.procesosBloqueados.add(proceso);
             } else {
-                log("El proceso " + Arrays.toString(proceso.getInstrucciones()) + " no tiene permiso para usar " + recurso.getNombre() + ", se mata el proceso" );
+                log("El proceso " + Arrays.toString(proceso.getInstrucciones()) + " no tiene permiso para usar " + recurso.getNombre() + ", se mata el proceso");
                 devolverMemoria(proceso);
                 devolverTodosLosRecursos(proceso);
             }
@@ -379,7 +385,7 @@ public class Sistema extends Observable {
                 this.procesosListos.add(proximo);
                 log("Se despierta el proceso " + proximo);
             } else {
-                log("El recurso se libera");
+                log("El recurso " + recursoDevuelto.getNombre() + " se libera");
                 recursoDevuelto.desocupar();
             }
             return true;
@@ -424,7 +430,6 @@ public class Sistema extends Observable {
             }
         }
         this.actualizarVentanas();
-
     }
 
     public int getMaximaInstruccion() {

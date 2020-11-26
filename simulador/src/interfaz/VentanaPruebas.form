@@ -26,17 +26,21 @@
           <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnPrueba2" min="-2" pref="137" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnPruebaBasica" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="btnPruebaPermisos" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnPruebaMutuaExcl" max="32767" attributes="0"/>
+                  <Component id="btnPruebaMemoria" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnPrueba4" min="-2" pref="137" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="btnPrueba1" min="-2" pref="137" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnPrueba3" min="-2" pref="137" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnPruebaVacio" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="btnPruebaDeadlock" min="-2" pref="137" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="16" max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,39 +51,44 @@
               <Component id="jLabel3" min="-2" pref="86" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnPrueba1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="btnPrueba2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="btnPrueba3" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnPruebaMutuaExcl" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnPruebaBasica" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnPruebaDeadlock" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnPrueba4" min="-2" pref="32" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnPruebaPermisos" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnPruebaVacio" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnPruebaMemoria" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnPrueba1">
+    <Component class="javax.swing.JButton" name="btnPruebaMutuaExcl">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Prueba 3"/>
+        <Property name="text" type="java.lang.String" value="Prueba Mutua Excl."/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrueba1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPruebaMutuaExclActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnPrueba2">
+    <Component class="javax.swing.JButton" name="btnPruebaBasica">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Prueba 1"/>
+        <Property name="text" type="java.lang.String" value="Prueba Basica"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrueba2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPruebaBasicaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnPrueba3">
+    <Component class="javax.swing.JButton" name="btnPruebaDeadlock">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Prueba 3"/>
+        <Property name="text" type="java.lang.String" value="Prueba Deadlock"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrueba3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPruebaDeadlockActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -91,12 +100,28 @@
         <Property name="text" type="java.lang.String" value="SELECCIONE PRUEBA "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnPrueba4">
+    <Component class="javax.swing.JButton" name="btnPruebaVacio">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sistema Vacio"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrueba4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPruebaVacioActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPruebaPermisos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prueba Permisos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPruebaPermisosActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPruebaMemoria">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prueba Memoria"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPruebaMemoriaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
