@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominio;
 
 import java.util.ArrayList;
@@ -42,7 +37,6 @@ public class Usuario {
     
     @Override
     public String toString(){
-        //return ("\u001B[36m" + this.getNombre() + "\u001B[0m"); // cyan
         return (this.getNombre()); 
 
     }

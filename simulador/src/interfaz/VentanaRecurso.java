@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package interfaz;
 
 import dominio.Recurso;
@@ -12,10 +7,6 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author ivanm
- */
 public class VentanaRecurso extends javax.swing.JFrame implements Observer {
 
     Sistema sis;

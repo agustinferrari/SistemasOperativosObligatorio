@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package interfaz;
 
 import dominio.Proceso;
@@ -16,10 +11,6 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.ListSelectionModel;
 
-/**
- *
- * @author ivanm
- */
 public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
 
     Sistema sis;
@@ -40,7 +31,6 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
         listarProcesos();
         listarProcesosSuspendidos();
 
-        
         lstProcesos.setCellRenderer(new Colores());
         lstBloqueados.setCellRenderer(new Colores());
         lstSuspendidos.setCellRenderer(new Colores());
@@ -404,13 +394,12 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
 
     private void btnCorrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorrerActionPerformed
         int valorTimeout = (Integer) timeout.getValue();
-        if(valorTimeout >= sis.getMaximaInstruccion()){
+        if (valorTimeout >= sis.getMaximaInstruccion()) {
             this.lblError.setText("");
             sis.setTimeout(valorTimeout);
             sis.ejecutar((Integer) ticks.getValue());
             sis.actualizarVentanas();
-        }
-        else{
+        } else {
             this.lblError.setText("Error el quantum no puede ser mayor a el tiempo maximo de ninguna instrucción");
         }
     }//GEN-LAST:event_btnCorrerActionPerformed
@@ -418,8 +407,8 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
     private void abrirSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirSesionActionPerformed
         Usuario u = (Usuario) lstUsuarios.getSelectedValue();
         this.lblError.setText("");
-          if(u != null){
-            SesionUsuario vent = SesionUsuario.getInstancia(sis,u);
+        if (u != null) {
+            SesionUsuario vent = SesionUsuario.getInstancia(sis, u);
             vent.setMinimumSize(new Dimension(477, 456));
             vent.setVisible(true);
             this.sis.addObserver(vent);
@@ -438,18 +427,16 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Observer {
         VentanaLog vent = VentanaLog.getInstancia(sis);
         vent.setMinimumSize(new Dimension(1366, 720));
         vent.setVisible(true);
-//        sis.addObserver(vent);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCorrer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorrer1ActionPerformed
         int valorTimeout = (Integer) timeout.getValue();
-        if(valorTimeout >= sis.getMaximaInstruccion()){
+        if (valorTimeout >= sis.getMaximaInstruccion()) {
             this.lblError.setText("");
             sis.setTimeout(valorTimeout);
             sis.ejecutar(-1);
             sis.actualizarVentanas();
-        }
-        else{
+        } else {
             this.lblError.setText("Error el quantum no puede ser mayor a el tiempo maximo de ninguna instrucción");
         }
     }//GEN-LAST:event_btnCorrer1ActionPerformed

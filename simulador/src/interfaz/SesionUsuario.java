@@ -220,7 +220,7 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer {
         tfEspacioNecesario.setText("");
     }
 
-    public static int PedirNumero(String texto, int min, int max) { //Funcion generica que verifica si el numero ingresado es valido
+    public static int PedirNumero(String texto, int min, int max) { 
         int numeroIngresado = -1;
         try {
             numeroIngresado = Integer.parseInt(texto);

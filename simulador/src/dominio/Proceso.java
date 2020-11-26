@@ -3,9 +3,6 @@ package dominio;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 import utlilidades.GeneradorColor;
 
 public class Proceso {
@@ -26,21 +23,6 @@ public class Proceso {
         this.color = GeneradorColor.getColorRandom();
     }
 
-    /*private Color getColorRandom() {
-        int R = (int) (Math.random() * 256);
-        int G = (int) (Math.random() * 256);
-        int B = (int) (Math.random() * 256);
-        Color randomColor = new Color(R, G, B, 60);
-        randomColor.brighter();
-
-        Random random = new Random();
-        final float hue = random.nextFloat();
-        final float saturation = 0.3f;//1.0 for brilliant, 0.0 for dull
-        final float luminance = 1.0f; //1.0 for brighter, 0.0 for black
-        randomColor = Color.getHSBColor(hue, saturation, luminance);
-        
-        return randomColor;
-    }*/
     public Color getColor() {
         return color;
     }
@@ -95,8 +77,6 @@ public class Proceso {
 
     @Override
     public String toString() {
-        //return ( "\u001B[35m" + this.getInstrucciones()+  "\u001B[0m" ); //violeta
         return Arrays.toString(this.getInstrucciones()) + " - " + this.espacioEnMemoria + "KB";
     }
-
 }

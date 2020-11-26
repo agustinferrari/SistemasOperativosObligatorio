@@ -1,6 +1,5 @@
 package simulador;
 
-import interfaz.VentanaPrincipal;
 import interfaz.VentanaPruebas;
 import java.awt.Dimension;
 import javax.swing.UIManager;

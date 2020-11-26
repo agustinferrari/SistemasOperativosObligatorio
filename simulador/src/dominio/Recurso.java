@@ -1,7 +1,6 @@
 
 package dominio;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -60,17 +59,11 @@ public class Recurso {
     
     @Override
     public String toString(){
-        //return ("\u001B[32m" + this.getNombre() + "\u001B[0m" ); // verde
         return (this.getNombre());
-
     }
     
     @Override
     public boolean equals(Object o) {
         return ((Recurso) o).getNombre().equals(this.nombre);
     }
-
-    
 }
-
-

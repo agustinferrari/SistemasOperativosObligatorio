@@ -9,12 +9,10 @@ import java.util.List;
 import java.util.Queue;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Observable;
-import java.util.Stack;
 
 public class Sistema extends Observable {
 
@@ -392,8 +390,6 @@ public class Sistema extends Observable {
     }
 
     private void despertarProceso(Proceso p) {
-        // https://stackoverflow.com/questions/1655362/concurrentmodificationexception-despite-using-synchronized
-        //procesosBloqueados.remove(p);
         p.avanzar();
         procesosListos.add(p);
         log("Se desperto el proceso " + p);
@@ -497,5 +493,4 @@ public class Sistema extends Observable {
         }
         return max;
     }
-
 }

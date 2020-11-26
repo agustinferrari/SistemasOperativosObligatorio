@@ -1,12 +1,7 @@
-
 package dominio;
 
 import java.util.Random;
 
-/**
- *
- * @author ivanm
- */
 public class Instruccion {
 
     private String nombre;
@@ -47,7 +42,7 @@ public class Instruccion {
         Random rand = new Random();
         int min = tiempoEjecucionMin;
         int max = tiempoEjecucionMax;
-        int res = rand.nextInt((max - min) + 1 ) + min;
+        int res = rand.nextInt((max - min) + 1) + min;
         return res;
     }
 
@@ -75,13 +70,6 @@ public class Instruccion {
 
     @Override
     public String toString() {
-        return nombre + ", " + "[" + this.tiempoEjecucionMin + "," + this.tiempoEjecucionMax+ "]t, " + ((recurso != null) ? (recurso.toString()) : "sin recurso asociado");
+        return nombre + ", " + "[" + this.tiempoEjecucionMin + "," + this.tiempoEjecucionMax + "]t, " + ((recurso != null) ? (recurso.toString()) : "sin recurso asociado");
     }
-
-    /*
-    @Override
-    public String toString(){
-        return ("\u001B[33m" + this.nombre + "\u001B[0m");
-    }
-     */
 }

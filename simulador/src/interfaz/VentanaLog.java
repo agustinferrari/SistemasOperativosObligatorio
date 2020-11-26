@@ -1,26 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package interfaz;
-import dominio.Recurso;
+
 import dominio.Sistema;
-import dominio.Usuario;
-import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import static java.lang.System.in;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+public class VentanaLog extends javax.swing.JFrame implements Observer {
 
-public class VentanaLog extends javax.swing.JFrame implements Observer{
+    private Sistema sis;
 
-   private Sistema sis;
-   
     public VentanaLog(Sistema miSistema) {
         initComponents();
         sis = miSistema;
@@ -82,13 +73,12 @@ public class VentanaLog extends javax.swing.JFrame implements Observer{
         borrar();
     }//GEN-LAST:event_formWindowClosing
 
-    
 //Patron singleton
     private static VentanaLog instancia = null;
 
     // si no existe la crea
     public static VentanaLog getInstancia(Sistema pSistema) {
-        if (instancia == null){
+        if (instancia == null) {
             instancia = new VentanaLog(pSistema);
         }
         return instancia;
@@ -100,30 +90,34 @@ public class VentanaLog extends javax.swing.JFrame implements Observer{
     private javax.swing.JTextArea textLog;
     // End of variables declaration//GEN-END:variables
 
-private void metodoEscribirLog (){
-  BufferedReader buff = null;
-  try {
-       borrar();
-       buff = new BufferedReader(new FileReader("Log.txt"));
-       String str;
-       while ((str = buff.readLine()) != null) {
-       textLog.append(str + "\n");
-   }
- } catch (IOException e) {
-//      sis.log("Aca es donde se cae linea 102 ventanaLog");
-  } finally {
-    try { in.close(); } catch (Exception ex) {sis.log("Se cae en escribir"); }
-    }
-}
+    private void metodoEscribirLog() {
+        BufferedReader buff = null;
+        try {
+            borrar();
+            buff = new BufferedReader(new FileReader("Log.txt"));
+            String str;
+            while ((str = buff.readLine()) != null) {
+                textLog.append(str + "\n");
+            }
+        } catch (IOException e) {
+        } finally {
+            try {
+                in.close();
+            } catch (Exception ex) {
 
-private  void borrar(){
-    textLog.selectAll();
-    textLog.replaceSelection("");
-}
+            }
+        }
+    }
+
+    private void borrar() {
+        textLog.selectAll();
+        textLog.replaceSelection("");
+    }
+
     @Override
-   public void update(Observable o, Object o1) {
-      borrar();
-      metodoEscribirLog();
+    public void update(Observable o, Object o1) {
+        borrar();
+        metodoEscribirLog();
     }
 
 }

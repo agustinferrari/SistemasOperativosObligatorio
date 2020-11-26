@@ -5,10 +5,9 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
-public class ColoresMemoria extends JLabel implements TableCellRenderer {///extends DefaultTableCellRenderer {
+public class ColoresMemoria extends JLabel implements TableCellRenderer {
 
     public ColoresMemoria() {
         super.setOpaque(true);
@@ -25,8 +24,6 @@ public class ColoresMemoria extends JLabel implements TableCellRenderer {///exte
         String texto = o.toString();
         Proceso p = (Proceso) o;
 
-
-        
         super.setBackground(p.getColor());
         //super.setText(texto);
         return this;

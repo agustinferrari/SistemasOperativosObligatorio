@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package interfaz;
 
 import dominio.Instruccion;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-/**
- *
- * @author Agustin
- */
 public class ModeloTblInstruccion extends AbstractTableModel {
 
     private static final int CANT_COLS = 3;
@@ -36,10 +27,10 @@ public class ModeloTblInstruccion extends AbstractTableModel {
             case 0:
                 return inst.getNombre();
             case 1:
-                return "[" +inst.getTiempoEjecucionMin() + "," + inst.getTiempoEjecucionMax() + "]";
+                return "[" + inst.getTiempoEjecucionMin() + "," + inst.getTiempoEjecucionMax() + "]";
             case 2:
-                
-                return (inst.getRecurso()!=null)?inst.getRecurso().getNombre():null;
+
+                return (inst.getRecurso() != null) ? inst.getRecurso().getNombre() : null;
         }
         return null;
     }
