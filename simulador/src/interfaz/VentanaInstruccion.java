@@ -226,7 +226,7 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer {
         int min = PedirNumero(tfMin.getText(), 1, max);
 
         Recurso recurso = (Recurso) lstRecursos.getSelectedValue();
-        if (!faltanDatos(nombre, min, max)) {
+        if (!faltanDatos(nombre.toUpperCase(), min, max)) {
             Instruccion i = new Instruccion(nombre, min, max, recurso);
             if (sis.agregarInstruccion(i)) {
                 lblMensaje.setText("Instruccion agregada exitosamente!");
@@ -292,7 +292,7 @@ public class VentanaInstruccion extends javax.swing.JFrame implements Observer {
 
     private boolean faltanDatos(String nombre, int min, int max) {
         boolean ret = false;
-        if (nombre.equals("")) {
+        if (nombre.equals("") || nombre.equals("D")|| nombre.equals("P")) {
             tfNombre.setForeground(Color.RED);
             ret = true;
         }

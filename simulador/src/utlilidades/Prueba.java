@@ -27,7 +27,6 @@ public class Prueba {
         Instruccion i1 = new Instruccion("A", 5, 7, r1);
         Instruccion i2 = new Instruccion("B", 1, 3, null);
         Instruccion i3 = new Instruccion("C", 7, 10, r1);
-        Instruccion i4 = new Instruccion("D", 3, 5, r3);
         Instruccion i5 = new Instruccion("E", 4, 8, r2);
 
         Usuario u1 = new Usuario("Pepe");
@@ -38,8 +37,8 @@ public class Prueba {
         u2.agregarPermiso(r2);
 
 
-        Proceso p1 = new Proceso("PRec1 A B D D A DRec1", u1, 15);
-        Proceso p2 = new Proceso("PRec1 B D A DRec1 PRec2 C DRec2", u2, 11);
+        Proceso p1 = new Proceso("PRec1 A B E E A DRec1", u1, 15);
+        Proceso p2 = new Proceso("PRec1 B E A DRec1 PRec2 C DRec2", u2, 11);
         Proceso p3 = new Proceso("PRec2 PRec1 PRec3 C A E E DRec1 DRec2 DRec3", u1, 13);
 
         Sistema sistema = new Sistema();
@@ -50,7 +49,6 @@ public class Prueba {
         sistema.agregarInstruccion(i1);
         sistema.agregarInstruccion(i2);
         sistema.agregarInstruccion(i3);
-        sistema.agregarInstruccion(i4);
         sistema.agregarInstruccion(i5);
         sistema.agregarInstruccion(ir1p);
         sistema.agregarInstruccion(ir1d);
@@ -188,14 +186,13 @@ public class Prueba {
         Instruccion i1 = new Instruccion("A", 5, 7, null);
         Instruccion i2 = new Instruccion("B", 1, 3, null);
         Instruccion i3 = new Instruccion("C", 7, 10, null);
-        Instruccion i4 = new Instruccion("D", 3, 5, null);
         Instruccion i5 = new Instruccion("E", 4, 8, null);
 
         Usuario u1 = new Usuario("Pepe");
         Usuario u2 = new Usuario("Juan");
 
 
-        Proceso p1 = new Proceso("A B D D A ", u1, 15);
+        Proceso p1 = new Proceso("A B E E A ", u1, 15);
         Proceso p2 = new Proceso("B", u2, 5);
         Proceso p3 = new Proceso("C A E E ", u1, 10);
 
@@ -207,7 +204,6 @@ public class Prueba {
         sistema.agregarInstruccion(i1);
         sistema.agregarInstruccion(i2);
         sistema.agregarInstruccion(i3);
-        sistema.agregarInstruccion(i4);
         sistema.agregarInstruccion(i5);
 
         sistema.agregarProcesosListos(p1);
