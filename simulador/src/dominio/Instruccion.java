@@ -75,7 +75,7 @@ public class Instruccion {
 
     @Override
     public String toString() {
-        return nombre + ", " + "min:" + this.tiempoEjecucionMin + " max: " + this.tiempoEjecucionMax+ "t, " + ((recurso != null) ? (recurso.toString()) : " sin recurso asociado");
+        return nombre + ", " + "[" + this.tiempoEjecucionMin + "," + this.tiempoEjecucionMax+ "]t, " + ((recurso != null) ? (recurso.toString()) : "sin recurso asociado");
     }
 
     /*

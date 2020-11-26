@@ -89,7 +89,7 @@ public class Sistema extends Observable {
                 while (++i < this.memoria.length && this.memoria[i] == null) {
                     finalHueco++;
                 }
-                if (finalHueco - inicioHueco >= espacioNecesario) {
+                if (finalHueco - inicioHueco + 1 >= espacioNecesario) {
                     for (int j = 0; j < espacioNecesario; j++) {
                         this.memoria[inicioHueco++] = p;
                     }
@@ -202,13 +202,13 @@ public class Sistema extends Observable {
                             perdioCPU = true;
                         } else {//Instruccion puramente de CPU
                             if (t + nuevaInst.getTiempoEjecucionMax() <= timeout) {
-                                log("Se ejecuto la instruccion: " + nuevaInst + " del Proceso " + proceso + " Demoro: " + tiempoToString(nuevaInst.getTiempoEjecucion()));
+                                log("Se ejecuto la instruccion: " + nuevaInst + " del Proceso " + proceso + " Demoró: " + tiempoToString(nuevaInst.getTiempoEjecucion()));
                                 proceso.avanzar();
                                 int tInstruccion = nuevaInst.getTiempoEjecucion();
                                 t += tInstruccion;
                                 avanzarNTicks(tInstruccion);
                             } else {
-                                log("Salio por TimeOut el proceso: " + proceso + " en la instruccion Nro:" + proceso.getPosicion());
+                                log("Salio por TimeOut el proceso: " + proceso + " en la instruccion nro: " + proceso.getPosicion());
                                 avanzarNTicks(timeout - t);
                                 t = 0;
                                 perdioCPU = true;
@@ -243,7 +243,7 @@ public class Sistema extends Observable {
                 ejecutar(cantidadCiclos);
                 i++;
             }
-            if (this.procesosListos.isEmpty() && !this.procesosBloqueados.isEmpty()) {
+            if (this.procesosListos.isEmpty() && !this.procesosBloqueados.isEmpty() && (cantidadCiclos > 0 || cantidadCiclos == -1)) {
                 this.log("+++++++++++++++++++++++++++++++++++++++++ DEADLOCK +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 while (!this.procesosBloqueados.isEmpty() && this.procesosListos.isEmpty()) {
                     Proceso procesoAMatar = this.procesosBloqueados.poll();
@@ -426,7 +426,7 @@ public class Sistema extends Observable {
             if (guardarEnMemoria(pSuspendido)) {
                 this.procesosSuspendidos.remove(pSuspendido);
                 this.procesosListos.add(pSuspendido);
-                log("El proceso " + Arrays.toString(pSuspendido.getInstrucciones()) + " se resume, alojando " + pSuspendido.getEspacioEnMemoria() + " KB en memoria");
+                log("El proceso " + Arrays.toString(pSuspendido.getInstrucciones()) + " se agrega a la lista de ejecución, alojando " + pSuspendido.getEspacioEnMemoria() + " KB en memoria");
             }
         }
         this.actualizarVentanas();

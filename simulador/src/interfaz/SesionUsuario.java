@@ -224,6 +224,7 @@ public class SesionUsuario extends javax.swing.JFrame implements Observer {
 
     private void limpiarMensajes() {
         lblMensaje.setText("");
+        tfEspacioNecesario.setText("");
     }
 
     public static int PedirNumero(String texto, int min, int max) { //Funcion generica que verifica si el numero ingresado es valido

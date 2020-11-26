@@ -38,9 +38,9 @@ public class Prueba {
         u2.agregarPermiso(r2);
 
 
-        Proceso p1 = new Proceso("PRec1 A B D D A DRec1", u1, 8);
-        Proceso p2 = new Proceso("PRec1 B D A DRec1 PRec2 C DRec2", u2, 6);
-        Proceso p3 = new Proceso("PRec2 PRec1 PRec3 C A E E DRec1 DRec2 DRec3", u1, 5);
+        Proceso p1 = new Proceso("PRec1 A B D D A DRec1", u1, 15);
+        Proceso p2 = new Proceso("PRec1 B D A DRec1 PRec2 C DRec2", u2, 11);
+        Proceso p3 = new Proceso("PRec2 PRec1 PRec3 C A E E DRec1 DRec2 DRec3", u1, 13);
 
         Sistema sistema = new Sistema();
 
@@ -115,7 +115,7 @@ public class Prueba {
 
         Instruccion i1 = new Instruccion("A", 5, 8, r1);
         Instruccion i2 = new Instruccion("B", 1, 9, null);
-        Instruccion i3 = new Instruccion("C", 7, 14, r2);
+        Instruccion i3 = new Instruccion("C", 7, 10, r2);
 
         Usuario u1 = new Usuario("Alice");
         Usuario u2 = new Usuario("Bob");

@@ -38,7 +38,7 @@ public class VentanaPruebas extends javax.swing.JFrame {
         btnPruebaPermisos = new javax.swing.JButton();
         btnPruebaMemoria = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnPruebaMutuaExcl.setText("Prueba Mutua Excl.");
         btnPruebaMutuaExcl.addActionListener(new java.awt.event.ActionListener() {
@@ -130,31 +130,37 @@ public class VentanaPruebas extends javax.swing.JFrame {
     private void btnPruebaMutuaExclActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaMutuaExclActionPerformed
         sistema = Prueba.inicializarMutuaExclusion();
         CargarVentanaPrincipal();
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_btnPruebaMutuaExclActionPerformed
 
     private void btnPruebaBasicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaBasicaActionPerformed
         sistema = Prueba.inicializar();
         CargarVentanaPrincipal();
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_btnPruebaBasicaActionPerformed
 
     private void btnPruebaDeadlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaDeadlockActionPerformed
         sistema = Prueba.inicializarDeadlock();
         CargarVentanaPrincipal();
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_btnPruebaDeadlockActionPerformed
 
     private void btnPruebaVacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaVacioActionPerformed
         sistema = Prueba.inicializarVacio();
         CargarVentanaPrincipal();
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_btnPruebaVacioActionPerformed
 
     private void btnPruebaPermisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaPermisosActionPerformed
         sistema = Prueba.inicializarPermisos();
         CargarVentanaPrincipal();
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_btnPruebaPermisosActionPerformed
 
     private void btnPruebaMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaMemoriaActionPerformed
         sistema = Prueba.inicializarMemoria();
         CargarVentanaPrincipal();
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_btnPruebaMemoriaActionPerformed
 
     private static void borrarArchivoLog() {
@@ -166,33 +172,12 @@ public class VentanaPruebas extends javax.swing.JFrame {
         }
     }
 
-    private void borrarVentanas() {
-        for (Usuario u : this.sistema.getUsuarios()) {
-            SesionUsuario vent3 = SesionUsuario.getInstancia(sistema, u);
-            limpiarVentana(vent3);
-        }
-        VentanaRecurso vent1 = VentanaRecurso.getInstancia(sistema);
-        VentanaUsuario vent2 = VentanaUsuario.getInstancia(sistema);
-        VentanaLog vent4 = VentanaLog.getInstancia(sistema);
-        VentanaInstruccion vent5 = VentanaInstruccion.getInstancia(sistema);
-        limpiarVentana(vent1);
-        limpiarVentana(vent2);
-        limpiarVentana(vent4);
-        limpiarVentana(vent5);
-    }
 
-    private void limpiarVentana(JFrame vent) {
-        if (vent != null) {
-            vent.dispatchEvent(new WindowEvent(vent, WindowEvent.WINDOW_CLOSING));
-        }
-    }
+
 
     private void CargarVentanaPrincipal() {
         //borrar si existe archivo Log.txt
         borrarArchivoLog();
-        borrarVentanas();
-        limpiarVentana(ventanaActual);
-        sistema.log("Log test sistema");
         ventanaActual = new VentanaPrincipal(sistema);
         ventanaActual.setMinimumSize(new Dimension(920, 600));
         ventanaActual.setVisible(true);

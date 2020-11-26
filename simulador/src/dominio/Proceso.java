@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Random;
 import utlilidades.GeneradorColor;
 
-
 public class Proceso {
 
     private String[] instrucciones;
@@ -27,7 +26,6 @@ public class Proceso {
         this.color = GeneradorColor.getColorRandom();
     }
 
-    
     /*private Color getColorRandom() {
         int R = (int) (Math.random() * 256);
         int G = (int) (Math.random() * 256);
@@ -43,7 +41,6 @@ public class Proceso {
         
         return randomColor;
     }*/
-
     public Color getColor() {
         return color;
     }
@@ -99,7 +96,7 @@ public class Proceso {
     @Override
     public String toString() {
         //return ( "\u001B[35m" + this.getInstrucciones()+  "\u001B[0m" ); //violeta
-        return Arrays.toString(this.getInstrucciones());
+        return Arrays.toString(this.getInstrucciones()) + " - " + this.espacioEnMemoria + "KB";
     }
 
 }

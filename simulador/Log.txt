@@ -1,37 +1,63 @@
-# [1] Se abre ventana usuario
-# [2] Log test sistema
-# [3] -------------- El Proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B] entro a ejecución. Usuario: Alice -------------------------------------------------------------- 
-# [4] El proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B] pide el recurso Rec1
-# [5] El recurso Rec1 es asignado al proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B]
-# [6] Se ejecuto la instruccion: B, min:1 max: 9t,  sin recurso asociado del Proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B] Demoro: 3t
-# [7] Se ejecuto la instruccion: B, min:1 max: 9t,  sin recurso asociado del Proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B] Demoro: 6t
-# [8] Salio por TimeOut el proceso: [PRec1, B, B, B, B, B, PRec2, B, B, B, B] en la instruccion Nro:3
-# [9] -------------- El Proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B] entro a ejecución. Usuario: Bob -------------------------------------------------------------- 
-# [10] El proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B] pide el recurso Rec2
-# [11] El recurso Rec2 es asignado al proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B]
-# [12] Se ejecuto la instruccion: B, min:1 max: 9t,  sin recurso asociado del Proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B] Demoro: 9t
-# [13] Salio por TimeOut el proceso: [PRec2, B, B, B, B, B, PRec1, B, B, B, B] en la instruccion Nro:2
-# [14] -------------- El Proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B] entro a ejecución. Usuario: Alice -------------------------------------------------------------- 
-# [15] Se ejecuto la instruccion: B, min:1 max: 9t,  sin recurso asociado del Proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B] Demoro: 3t
-# [16] Se ejecuto la instruccion: B, min:1 max: 9t,  sin recurso asociado del Proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B] Demoro: 7t
-# [17] Salio por TimeOut el proceso: [PRec1, B, B, B, B, B, PRec2, B, B, B, B] en la instruccion Nro:5
-# [18] -------------- El Proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B] entro a ejecución. Usuario: Bob -------------------------------------------------------------- 
-# [19] Se ejecuto la instruccion: B, min:1 max: 9t,  sin recurso asociado del Proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B] Demoro: 3t
-# [20] Se ejecuto la instruccion: B, min:1 max: 9t,  sin recurso asociado del Proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B] Demoro: 5t
-# [21] Salio por TimeOut el proceso: [PRec2, B, B, B, B, B, PRec1, B, B, B, B] en la instruccion Nro:4
-# [22] -------------- El Proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B] entro a ejecución. Usuario: Alice -------------------------------------------------------------- 
-# [23] Se ejecuto la instruccion: B, min:1 max: 9t,  sin recurso asociado del Proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B] Demoro: 5t
-# [24] El proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B] pide el recurso Rec2
-# [25] El recurso Rec2 esta ocupado, se bloquea el proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B]
-# [26] -------------- El Proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B] entro a ejecución. Usuario: Bob -------------------------------------------------------------- 
-# [27] Se ejecuto la instruccion: B, min:1 max: 9t,  sin recurso asociado del Proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B] Demoro: 2t
-# [28] Se ejecuto la instruccion: B, min:1 max: 9t,  sin recurso asociado del Proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B] Demoro: 3t
-# [29] El proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B] pide el recurso Rec1
-# [30] El recurso Rec1 esta ocupado, se bloquea el proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B]
-# [31] +++++++++++++++++++++++++++++++++++++++++ DEADLOCK +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# [32] Se libera la memoria y recursos de [PRec1, B, B, B, B, B, PRec2, B, B, B, B]
-# [33] Se libera 15 KB de memoria
-# [34] El proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B] devuelve el recurso Rec1
-# [35] El recurso Rec1 es asignado al proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B]
-# [36] Se despierta el proceso [PRec2, B, B, B, B, B, PRec1, B, B, B, B]
-# [37] Se mata el proceso [PRec1, B, B, B, B, B, PRec2, B, B, B, B]
+# [2] -------------- El Proceso [PRec1, A, B, D, D, A, DRec1] - 15KB entro a ejecución. Usuario: Pepe -------------------------------------------------------------- 
+# [3] El proceso [PRec1, A, B, D, D, A, DRec1] pide el recurso Rec1
+# [4] El recurso Rec1 es asignado al proceso [PRec1, A, B, D, D, A, DRec1]
+# [5] Se utiliza el recurso Rec1 con la instruccion A, [5,7]t, Rec1 || Se bloquea el proceso [PRec1, A, B, D, D, A, DRec1] - 15KB por 5t
+# [6] -------------- El Proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] - 11KB entro a ejecución. Usuario: Juan -------------------------------------------------------------- 
+# [7] El proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] pide el recurso Rec1
+# [8] El recurso Rec1 esta ocupado, se bloquea el proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2]
+# [9] Se desperto el proceso [PRec1, A, B, D, D, A, DRec1] - 15KB
+# [10] -------------- El Proceso [PRec1, A, B, D, D, A, DRec1] - 15KB entro a ejecución. Usuario: Pepe -------------------------------------------------------------- 
+# [11] Se ejecuto la instruccion: B, [1,3]t, sin recurso asociado del Proceso [PRec1, A, B, D, D, A, DRec1] - 15KB Demoró: 1t
+# [12] El proceso [PRec1, A, B, D, D, A, DRec1] devuelve el recurso Rec3
+# [13] El recurso Rec3 se libera
+# [14] El proceso [PRec1, A, B, D, D, A, DRec1] devuelve el recurso Rec3
+# [15] El recurso Rec3 se libera
+# [16] Se utiliza el recurso Rec1 con la instruccion A, [5,7]t, Rec1 || Se bloquea el proceso [PRec1, A, B, D, D, A, DRec1] - 15KB por 6t
+# [17] Se desperto el proceso [PRec1, A, B, D, D, A, DRec1] - 15KB
+# [18] -------------- El Proceso [PRec1, A, B, D, D, A, DRec1] - 15KB entro a ejecución. Usuario: Pepe -------------------------------------------------------------- 
+# [19] El proceso [PRec1, A, B, D, D, A, DRec1] devuelve el recurso Rec1
+# [20] El recurso Rec1 es asignado al proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2]
+# [21] Se despierta el proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] - 11KB
+# [22] Termino el proceso: [PRec1, A, B, D, D, A, DRec1] - 15KB
+# [23] Se libera 15 KB de memoria
+# [24] El proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] se agrega a la lista de ejecución, alojando 13 KB en memoria
+# [25] -------------- El Proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] - 11KB entro a ejecución. Usuario: Juan -------------------------------------------------------------- 
+# [26] Se ejecuto la instruccion: B, [1,3]t, sin recurso asociado del Proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] - 11KB Demoró: 2t
+# [27] El proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] devuelve el recurso Rec3
+# [28] El recurso Rec3 se libera
+# [29] Se utiliza el recurso Rec1 con la instruccion A, [5,7]t, Rec1 || Se bloquea el proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] - 11KB por 7t
+# [30] -------------- El Proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] - 13KB entro a ejecución. Usuario: Pepe -------------------------------------------------------------- 
+# [31] El proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] pide el recurso Rec2
+# [32] El recurso Rec2 es asignado al proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3]
+# [33] El proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] pide el recurso Rec1
+# [34] El recurso Rec1 esta ocupado, se bloquea el proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3]
+# [35] Se desperto el proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] - 11KB
+# [36] -------------- El Proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] - 11KB entro a ejecución. Usuario: Juan -------------------------------------------------------------- 
+# [37] El proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] devuelve el recurso Rec1
+# [38] El recurso Rec1 es asignado al proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3]
+# [39] Se despierta el proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] - 13KB
+# [40] El proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] pide el recurso Rec2
+# [41] El recurso Rec2 esta ocupado, se bloquea el proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2]
+# [42] -------------- El Proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] - 13KB entro a ejecución. Usuario: Pepe -------------------------------------------------------------- 
+# [43] El proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] pide el recurso Rec3
+# [44] El recurso Rec3 es asignado al proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3]
+# [45] Se utiliza el recurso Rec1 con la instruccion C, [7,10]t, Rec1 || Se bloquea el proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] - 13KB por 7t
+# [46] Se desperto el proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] - 13KB
+# [47] -------------- El Proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] - 13KB entro a ejecución. Usuario: Pepe -------------------------------------------------------------- 
+# [48] Se utiliza el recurso Rec1 con la instruccion A, [5,7]t, Rec1 || Se bloquea el proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] - 13KB por 7t
+# [49] Se desperto el proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] - 13KB
+# [50] -------------- El Proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] - 13KB entro a ejecución. Usuario: Pepe -------------------------------------------------------------- 
+# [51] El usuario Pepe no tiene permiso para usar Rec2, se mata el proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3]
+# [52] Se libera 13 KB de memoria
+# [53] El proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] devuelve el recurso Rec2
+# [54] El recurso Rec2 es asignado al proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2]
+# [55] Se despierta el proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] - 11KB
+# [56] El proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] devuelve el recurso Rec1
+# [57] El recurso se libera
+# [58] El proceso [PRec2, PRec1, PRec3, C, A, E, E, DRec1, DRec2, DRec3] devuelve el recurso Rec3
+# [59] El recurso se libera
+# [60] -------------- El Proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] - 11KB entro a ejecución. Usuario: Juan -------------------------------------------------------------- 
+# [61] El proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] no tiene permiso para usar Rec1, se mata el proceso
+# [62] Se libera 11 KB de memoria
+# [63] El proceso [PRec1, B, D, A, DRec1, PRec2, C, DRec2] devuelve el recurso Rec2
+# [64] El recurso se libera
