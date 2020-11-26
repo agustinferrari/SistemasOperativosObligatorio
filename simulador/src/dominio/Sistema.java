@@ -228,6 +228,7 @@ public class Sistema extends Observable {
             int t = 0;
             perdioCPU = false;
             Proceso proceso = this.procesosListos.remove();
+            this.log("");
             this.log("-------------- El Proceso " + proceso + " entro a ejecución. Usuario: " + proceso.getUsuario().getNombre() + " -------------------------------------------------------------- ");
             while (((t <= this.timeout) && (!proceso.termino() && !perdioCPU))) {
                 Instruccion nuevaInst = conseguirSiguienteInstruccion(proceso);
@@ -280,7 +281,9 @@ public class Sistema extends Observable {
                 i++;
             }
             if (this.procesosListos.isEmpty() && !this.procesosBloqueados.isEmpty() && (cantidadCiclos > 0 || cantidadCiclos == -1)) {
+                this.log("");
                 this.log("+++++++++++++++++++++++++++++++++++++++++ DEADLOCK +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                this.log("");
                 while (!this.procesosBloqueados.isEmpty() && this.procesosListos.isEmpty()) {
                     Proceso procesoAMatar = this.procesosBloqueados.poll();
                     this.log("Se libera la memoria y recursos de " + procesoAMatar);
@@ -321,8 +324,12 @@ public class Sistema extends Observable {
     }
 
     public void log(String l) {
-        System.out.println("# [" + this.numeroLinea + "] " + l);
-        this.numeroLinea++;
+        if ("".equals(l)) {
+            System.out.println(l);
+        } else {
+            System.out.println("# [" + this.numeroLinea + "] " + l);
+            this.numeroLinea++;
+        }
         File flog = new File("Log.txt");
 
         try {
@@ -361,8 +368,7 @@ public class Sistema extends Observable {
                         itBloqueados.remove();
                         devolverMemoria(p);
                         devolverTodosLosRecursos(p);
-                    }
-                    else if (ProcesoBloqueadoPor(p, r)) {
+                    } else if (ProcesoBloqueadoPor(p, r)) {
                         itBloqueados.remove();
                         despertarProceso(p);
                     }

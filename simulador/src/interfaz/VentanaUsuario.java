@@ -24,7 +24,6 @@ public class VentanaUsuario extends javax.swing.JFrame implements Observer {
         sis = pSistema;
         listarRecursos();
         listarUsuarios();
-        sis.log("Se abre ventana usuario");
 
         // permite seleccionar varios recursos solo haciendo click
         lstRecursos.setSelectionModel(new DefaultListSelectionModel() {
